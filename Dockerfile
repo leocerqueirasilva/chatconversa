@@ -11,6 +11,7 @@ RUN apt-get -qy update \
 
 # Instalar a versão específica do pnpm
 RUN npm install -g pnpm@8.15.4
+RUN groupadd -r nextjs && useradd -r -g nextjs nextjs 
 
 
 FROM base AS pruner
