@@ -43,7 +43,7 @@ export const MagicLink = ({ magicLinkUrl }: Props) => (
             marginBottom: '24px',
           }}
         >
-          👉 Click here to sign in 👈
+          👉 Clique aqui para logar 👈
         </Link>
         <Text
           style={{
