@@ -43,7 +43,7 @@ export const colors = {
   blue: {
     50: '#e0edff',
     100: '#b0caff',
-    200: '#7ea6ff',
+    200: 'linear-gradient(to right, #5800AF, #944CDC)',
     300: '#4b83ff',
     400: '#944CDC',
     500: '#0042da',
