@@ -16,6 +16,9 @@ WORKDIR /app
 COPY . .
 RUN turbo prune --scope=${SCOPE} --docker
 
+ENV COREPACK_ENABLE_STRICT=0
+
+
 FROM base AS builder
 RUN apt-get -qy update && apt-get -qy --no-install-recommends install openssl git
 WORKDIR /app
