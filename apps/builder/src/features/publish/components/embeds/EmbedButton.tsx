@@ -105,6 +105,7 @@ export const integrationsList = [
     return (
       <ParentModalProvider>
         <EmbedButton
+          style={{ display: 'none' }}
           logo={
             <WhatsAppLogo
               height={100}
