@@ -53,7 +53,7 @@ export const MagicLink = ({ magicLinkUrl }: Props) => (
             marginBottom: '16px',
           }}
         >
-          If you didn&apos;t try to login, you can safely ignore this email.
+          Se você não esperava esse e-mail, ignore.
         </Text>
         <Text style={footer}>
           <Link
