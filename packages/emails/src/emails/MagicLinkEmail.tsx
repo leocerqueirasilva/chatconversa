@@ -35,11 +35,11 @@ export const MagicLinkEmail = ({ url }: Props) => (
             Clique aqui para entrar
           </Button>
           <Text>
-            If you didn&apos;t request this, please ignore this email.
+            Se você não esperava esse e-mail, ignore.
           </Text>
           <Text>
             Best,
-            <br />- Typebot Team.
+            <br />- ChatResponde Team.
           </Text>
         </MjmlColumn>
       </MjmlSection>

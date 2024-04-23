@@ -29,7 +29,7 @@ test.describe.parallel('Theme page', () => {
       await page.getByRole('button', { name: 'Global' }).click()
       await expect(
         page.locator('a:has-text("Made with ChatResponde")')
-      ).toHaveAttribute('href', 'https://www.typebot.io/?utm_source=litebadge')
+      ).toHaveAttribute('href', 'https://www.chatresponde.site')
       await page.click('text="Show Typebot brand"')
       await expect(page.locator('a:has-text("Made with ChatResponde")')).toBeHidden()
 
