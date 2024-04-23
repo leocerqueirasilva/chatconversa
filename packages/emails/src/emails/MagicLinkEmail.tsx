@@ -29,7 +29,7 @@ export const MagicLinkEmail = ({ url }: Props) => (
       </MjmlSection>
       <MjmlSection padding="0 24px" cssClass="smooth">
         <MjmlColumn>
-          <Text>Aqui está seu link mágico👇</Text>
+          <Text>Aqui está seu link mágico 2👇</Text>
           <MjmlSpacer />
           <Button link={url} align="center">
             Clique aqui para entrar
