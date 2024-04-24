@@ -99,8 +99,7 @@ export const EmbedButton = ({
 }
 
 export const integrationsList = [
-  /* (props: Pick<ModalProps, 'publicId' | 'isPublished'>) => {
-    
+  (props: Pick<ModalProps, 'publicId' | 'isPublished'>) => {
     const { workspace } = useWorkspace()
 
     return (
@@ -122,7 +121,7 @@ export const integrationsList = [
         />
       </ParentModalProvider>
     )
-  }, */
+  },
   (props: Pick<ModalProps, 'publicId' | 'isPublished'>) => (
     <EmbedButton
       logo={<WordpressLogo height={100} width="70px" />}
