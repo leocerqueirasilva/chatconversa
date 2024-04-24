@@ -1,9 +1,9 @@
 <br />
 <p align="center">
-  <a href="https://typebot.io/#gh-light-mode-only" target="_blank">
+  <a href="https://chatresponde.site/#gh-light-mode-only" target="_blank">
     <img src="./.github/images/logo-light.png" alt="Typebot illustration" width="350px">
   </a>
-  <a href="https://typebot.io/#gh-dark-mode-only" target="_blank">
+  <a href="https://chatresponde.site/#gh-dark-mode-only" target="_blank">
     <img src="./.github/images/logo-dark.png" alt="Typebot illustration" width="350px">
   </a>
 </p>
@@ -25,7 +25,7 @@ Chatconversa 2 is an open-source chatbot builder. It allows you to create advanc
 <a href="https://github.com/baptisteArno/typebot.io/issues/new"><img src="https://img.shields.io/badge/Report a bug-Github-%231F80C0" alt="Report a bug"></a>
 <a href="https://github.com/baptisteArno/typebot.io/discussions/new?category=q-a"><img src="https://img.shields.io/badge/Ask a question-Github-%231F80C0" alt="Ask a question"></a>
 <a href="https://console.algora.io/org/typebot/bounties?status=open"><img src="https://img.shields.io/endpoint?url=https%3A%2F%2Fconsole.algora.io%2Fapi%2Fshields%2Ftypebot%2Fbounties%3Fstatus%3Dopen" alt="Ask a question"></a>
-<a href="https://typebot.io/discord"><img src="https://img.shields.io/badge/Join community-Discord-%23404EED" alt="Ask a question"></a>
+<a href="https://chatresponde.site/discord"><img src="https://img.shields.io/badge/Join community-Discord-%23404EED" alt="Ask a question"></a>
 
 </p>
 
@@ -85,7 +85,7 @@ So you’ll be supporting open source software and getting a great service! 💙
 
 You'll find a lot of resources to help you get started with Typebot in the [documentation](https://docs.typebot.io/).
 
-- Have a question? Join the [Discord server](https://typebot.io/discord) and get instant help.
+- Have a question? Join the [Discord server](https://chatresponde.site/discord) and get instant help.
 - Found a bug? [Create an issue](https://github.com/baptisteArno/typebot.io/issues/new)
 
 ## Self-hosting

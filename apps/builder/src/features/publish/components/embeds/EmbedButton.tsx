@@ -99,13 +99,13 @@ export const EmbedButton = ({
 }
 
 export const integrationsList = [
-  (props: Pick<ModalProps, 'publicId' | 'isPublished'>) => {
+  /* (props: Pick<ModalProps, 'publicId' | 'isPublished'>) => {
+    
     const { workspace } = useWorkspace()
 
     return (
       <ParentModalProvider>
         <EmbedButton
-          style={{ display: 'none' }}
           logo={
             <WhatsAppLogo
               height={100}
@@ -122,7 +122,7 @@ export const integrationsList = [
         />
       </ParentModalProvider>
     )
-  },
+  }, */
   (props: Pick<ModalProps, 'publicId' | 'isPublished'>) => (
     <EmbedButton
       logo={<WordpressLogo height={100} width="70px" />}
