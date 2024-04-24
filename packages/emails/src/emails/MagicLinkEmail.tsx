@@ -23,7 +23,7 @@ export const MagicLinkEmail = ({ url }: Props) => (
       <MjmlSection padding="0">
         <MjmlColumn>
           <HeroImage
-            src={`${env.NEXTAUTH_URL}/images/yourMagicLinkBanner.png`}
+            src={`${env.NEXTAUTH_URL}/images/null.png`}
           />
         </MjmlColumn>
       </MjmlSection>
