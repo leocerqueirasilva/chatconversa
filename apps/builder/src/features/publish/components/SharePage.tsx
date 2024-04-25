@@ -97,7 +97,7 @@ export const SharePage = () => {
         <Stack maxW="1000px" w="full" pt="10" spacing={10}>
           <Stack spacing={4} align="flex-start">
             <Heading fontSize="2xl" as="h1">
-              Your typebot link
+              Your chatbot link
             </Heading>
             {typebot && (
               <EditableUrl
