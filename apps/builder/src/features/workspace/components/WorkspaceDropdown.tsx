@@ -44,9 +44,8 @@ export const WorkspaceDropdown = ({
           {currentWorkspace && (
             <>
               <Text noOfLines={1} maxW="200px">
-                {currentWorkspace.name}
+                {t('dashboard.header.dropdownButton.label')}
               </Text>
-              <PlanTag plan={currentWorkspace.plan} />
             </>
           )}
           <ChevronLeftIcon transform="rotate(-90deg)" />
