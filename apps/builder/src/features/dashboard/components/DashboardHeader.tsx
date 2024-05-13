@@ -13,14 +13,24 @@ import { isNotDefined } from '@typebot.io/lib'
 import { useTranslate } from '@tolgee/react'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDropdown'
-import { WorkspaceSettingsModal } from '@/features/workspace/components/WorkspaceSettingsModal'
+import { MyProfileModal } from '@/features/account/components/MyProfileModal'
+import { MembersListModal } from '@/features/workspace/components/MembersListModal'
 
 export const DashboardHeader = () => {
   const { t } = useTranslate()
   const { user, logOut } = useUser()
   const { workspace, switchWorkspace, createWorkspace } = useWorkspace()
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const {
+    isOpen: isMembersListModalOpen,
+    onOpen: onMembersListModalOpen,
+    onClose: onMembersListModalClose,
+  } = useDisclosure()
+  const {
+    isOpen: isMyProfileModalOpen,
+    onOpen: onMyProfileModalOpen,
+    onClose: onMyProfileModalClose,
+  } = useDisclosure()
 
   const handleCreateNewWorkspace = () =>
     createWorkspace(user?.name ?? undefined)
@@ -34,26 +44,31 @@ export const DashboardHeader = () => {
         maxW="1000px"
         flex="1"
       >
-        <HStack>
+        <HStack onClick={onMyProfileModalOpen} cursor="pointer">
+          {user && workspace && !workspace.isPastDue && (
+            <MyProfileModal
+              isOpen={isMyProfileModalOpen}
+              onClose={onMyProfileModalClose}
+            />
+          )}
           <Avatar
             name={user?.name ?? undefined}
             src={user?.image ?? undefined}
+            onClick={onMyProfileModalOpen}
           />
-          <Text>{user?.name}</Text>
+          <Text onClick={onMyProfileModalOpen}>{user?.name}</Text>
         </HStack>
         <HStack>
           {user && workspace && !workspace.isPastDue && (
-            <WorkspaceSettingsModal
-              isOpen={isOpen}
-              onClose={onClose}
-              user={user}
-              workspace={workspace}
+            <MembersListModal
+              isOpen={isMembersListModalOpen}
+              onClose={onMembersListModalClose}
             />
           )}
           {!workspace?.isPastDue && (
             <Button
               leftIcon={<UsersIcon />}
-              onClick={onOpen}
+              onClick={onMembersListModalOpen}
               isLoading={isNotDefined(workspace)}
             >
               {t('dashboard.header.settingsButton.label')}
