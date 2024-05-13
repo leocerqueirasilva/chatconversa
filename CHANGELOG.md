@@ -1,6 +1,7 @@
 # Changelog
 
 <a name="2.24.1"></a>
+
 ## 2.24.1 (2024-04-03)
 
 ### Fixed
@@ -12,8 +13,8 @@
 
 - 📝 Add v2.24 newsletter [[af4dd95](https://github.com/baptisteArno/typebot.io/commit/af4dd956633bef2961395bd7b45a242e40985cab)]
 
-
 <a name="2.24.0"></a>
+
 ## 2.24.0 (2024-04-02)
 
 ### Added
@@ -122,7 +123,6 @@
 - 📝 Improve get help doc [[14022fe](https://github.com/baptisteArno/typebot.io/commit/14022fe92f224361fb82ae74b21aefc53f736408)]
 - 🛂 Disable direct support for Free users [[6d8a007](https://github.com/baptisteArno/typebot.io/commit/6d8a007f090616f394c41176e62d15ea050c1d9d)]
 - 📝 Add v2.23 newsletter [[ef69b5b](https://github.com/baptisteArno/typebot.io/commit/ef69b5b77cf7ad569b326adc0b3166fea0c06bd4)]
-
 
 <a name="2.23.0"></a>
 

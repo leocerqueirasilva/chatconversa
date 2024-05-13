@@ -53,7 +53,9 @@ export const SignInPage = ({ type }: Props) => {
           <T
             keyName="auth.register.aggreeToTerms"
             params={{
-              terms: <TextLink href={'https://chatresponde.site/terms-of-service'} />,
+              terms: (
+                <TextLink href={'https://chatresponde.site/terms-of-service'} />
+              ),
               privacy: (
                 <TextLink href={'https://chatresponde.site/privacy-policies'} />
               ),

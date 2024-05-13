@@ -22,9 +22,7 @@ export const MagicLinkEmail = ({ url }: Props) => (
     <MjmlBody width={600}>
       <MjmlSection padding="0">
         <MjmlColumn>
-          <HeroImage
-            src={`${env.NEXTAUTH_URL}/images/null.png`}
-          />
+          <HeroImage src={`${env.NEXTAUTH_URL}/images/null.png`} />
         </MjmlColumn>
       </MjmlSection>
       <MjmlSection padding="0 24px" cssClass="smooth">
@@ -34,9 +32,7 @@ export const MagicLinkEmail = ({ url }: Props) => (
           <Button link={url} align="center">
             Clique aqui para entrar
           </Button>
-          <Text>
-            Se você não esperava esse e-mail, ignore.
-          </Text>
+          <Text>Se você não esperava esse e-mail, ignore.</Text>
           <Text>
             Best,
             <br />- ChatResponde Team.
