@@ -150,10 +150,16 @@ const Button = defineStyleConfig({
         },
       }
     },
-    outline: {
-      bg: 'transparent',
-      color: 'white',
-      borderColor: 'blue.400',
+    outline: ({ colorScheme }) => {
+      if (colorScheme !== 'blue')
+        return {
+          bg: 'transparent',
+        }
+      return {
+        bg: 'transparent',
+        color: 'white',
+        borderColor: 'blue.400',
+      }
     },
     ghost: {
       bg: 'transparent',

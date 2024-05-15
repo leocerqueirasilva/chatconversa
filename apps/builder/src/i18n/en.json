@@ -365,6 +365,8 @@
   "rename": "Rename",
   "save": "Save",
   "select": "Select",
+  "share.heading": "Your ChatResponde link",
+  "share.embed": "Embed your ChatResponde",
   "share.button.label": "Share",
   "share.button.popover.ariaLabel": "Open share popover",
   "share.button.popover.collaboratorsFetch.error.label": "Couldn't fetch collaborators",

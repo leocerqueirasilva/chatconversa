@@ -365,6 +365,8 @@
   "rename": "Renomear",
   "save": "Salvar",
   "select": "Selecionar",
+  "share.heading": "Seu link do ChatResponde",
+  "share.embed": "Incorpore seu ChatResponde",
   "share.button.label": "Compartilhar",
   "share.button.popover.ariaLabel": "Abrir popover de compartilhamento",
   "share.button.popover.collaboratorsFetch.error.label": "Falha ao buscar os colaboradores",
