@@ -75,10 +75,11 @@ export const ChangePlanForm = ({
   const handlePayClick = async (plan: 'STARTER' | 'PRO') => {
     if (!user) return
 
+    const data = { subscription: { currency: "usd" as Currency } }; // Exemplo de dados
     const newSubscription: NewSubscription = {
       plan,
       workspaceId: workspace.id,
-      currency: data?.subscription?.currency ?? (guessIfUserIsEuropean() ? 'eur' : 'usd'),
+      currency: (data?.subscription?.currency ?? (guessIfUserIsEuropean() ? 'eur' : 'usd')) as Currency,
     };
     
     if (workspace.stripeId) {
