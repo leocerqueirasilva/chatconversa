@@ -6,7 +6,7 @@ import {
   Alert,
   AlertIcon,
 } from '@chakra-ui/react'
-//import { Plan } from '@typebot.io/prisma'
+import { Plan } from '@typebot.io/prisma'
 import React from 'react'
 import { PlanTag } from './PlanTag'
 import { BillingPortalButton } from './BillingPortalButton'
@@ -25,9 +25,9 @@ export const CurrentSubscriptionSummary = ({ workspace }: Props) => {
     workspaceId: workspace.id,
   })
 
-  const isSubscribed = true
-  // (workspace.plan === Plan.STARTER || workspace.plan === Plan.PRO) &&
-  // workspace.stripeId
+  const isSubscribed =
+    (workspace.plan === Plan.STARTER || workspace.plan === Plan.PRO) &&
+    workspace.stripeId
 
   return (
     <Stack spacing="4">
@@ -40,7 +40,7 @@ export const CurrentSubscriptionSummary = ({ workspace }: Props) => {
         {data?.subscription?.cancelDate && (
           <Text fontSize="sm">
             ({t('billing.currentSubscription.cancelDate')}{' '}
-            {data?.subscription?.cancelDate?.toDateString()})
+            {data.subscription.cancelDate.toDateString()})
           </Text>
         )}
       </HStack>
