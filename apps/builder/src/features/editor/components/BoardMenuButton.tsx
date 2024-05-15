@@ -12,8 +12,8 @@ import {
 import assert from 'assert'
 import {
   BookIcon,
+  ChevronDownIcon,
   DownloadIcon,
-  MoreVerticalIcon,
   SettingsIcon,
 } from '@/components/icons'
 import { useTypebot } from '../providers/TypebotProvider'
@@ -65,7 +65,7 @@ export const BoardMenuButton = (props: FlexProps) => {
       <Menu>
         <MenuButton
           as={IconButton}
-          icon={<MoreVerticalIcon transform={'rotate(90deg)'} />}
+          icon={<ChevronDownIcon />}
           isLoading={isDownloading}
           size="sm"
           shadow="lg"
