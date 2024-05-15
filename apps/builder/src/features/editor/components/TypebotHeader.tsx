@@ -320,15 +320,6 @@ const TypebotNav = ({
       </Button>
       <Button
         as={Link}
-        href={`/typebots/${typebotId}/settings`}
-        colorScheme={router.pathname.endsWith('settings') ? 'blue' : 'gray'}
-        variant={router.pathname.endsWith('settings') ? 'outline' : 'ghost'}
-        size="sm"
-      >
-        {t('editor.header.settingsButton.label')}
-      </Button>
-      <Button
-        as={Link}
         href={`/typebots/${typebotId}/share`}
         colorScheme={router.pathname.endsWith('share') ? 'blue' : 'gray'}
         variant={router.pathname.endsWith('share') ? 'outline' : 'ghost'}
