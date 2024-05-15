@@ -23,7 +23,6 @@ export const ApiTokensModal = ({ isOpen, onClose }: Props) => {
       <ModalContent>
         <ModalHeader />
         <ModalBody>
-           
           <ApiTokensList user={user} />
         </ModalBody>
         <ModalFooter />
