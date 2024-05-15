@@ -20,6 +20,17 @@ type Props = {
   excludedPlans?: ('STARTER' | 'PRO')[]
 }
 
+type SubscriptionPlan = "STARTER" | "PRO";
+type Currency = "usd" | "eur";
+
+interface NewSubscription {
+  plan: SubscriptionPlan;
+  workspaceId: string;
+  currency: Currency;
+  returnUrl?: string;
+}
+
+
 export const ChangePlanForm = ({
   workspace,
   currentRole,
@@ -64,21 +75,21 @@ export const ChangePlanForm = ({
   const handlePayClick = async (plan: 'STARTER' | 'PRO') => {
     if (!user) return
 
-    const newSubscription = {
+    const newSubscription: NewSubscription = {
       plan,
       workspaceId: workspace.id,
-      currency:
-        data?.subscription?.currency ??
-        (guessIfUserIsEuropean() ? 'eur' : 'usd'),
-    } as const
+      currency: data?.subscription?.currency ?? (guessIfUserIsEuropean() ? 'eur' : 'usd'),
+    };
+    
     if (workspace.stripeId) {
       updateSubscription({
         ...newSubscription,
         returnUrl: window.location.href,
-      })
+      });
     } else {
-      setPreCheckoutPlan(newSubscription)
+      setPreCheckoutPlan(newSubscription);
     }
+    
   }
 
   if (
