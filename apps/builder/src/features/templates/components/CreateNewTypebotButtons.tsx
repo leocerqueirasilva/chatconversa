@@ -1,12 +1,5 @@
-import {
-  VStack,
-  Heading,
-  Stack,
-  Button,
-  useDisclosure,
-  useColorModeValue,
-} from '@chakra-ui/react'
-import { ToolIcon, TemplateIcon, DownloadIcon } from '@/components/icons'
+import { VStack, Heading, Stack, Button, useDisclosure } from '@chakra-ui/react'
+import { DownloadIcon, FlagIcon, TableIcon } from '@/components/icons'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { ImportTypebotFromFileButton } from './ImportTypebotFromFileButton'
@@ -111,13 +104,7 @@ export const CreateNewTypebotButtons = () => {
           w="full"
           py="8"
           fontSize="lg"
-          leftIcon={
-            <ToolIcon
-              color={useColorModeValue('blue.500', 'blue.300')}
-              boxSize="25px"
-              mr="2"
-            />
-          }
+          leftIcon={<FlagIcon color="blue.100" boxSize="25px" mr="2" />}
           onClick={() => handleCreateSubmit()}
           isLoading={isLoading}
         >
@@ -128,13 +115,7 @@ export const CreateNewTypebotButtons = () => {
           w="full"
           py="8"
           fontSize="lg"
-          leftIcon={
-            <TemplateIcon
-              color={useColorModeValue('orange.500', 'orange.300')}
-              boxSize="25px"
-              mr="2"
-            />
-          }
+          leftIcon={<TableIcon color="blue.100" boxSize="25px" mr="2" />}
           onClick={onOpen}
           isLoading={isLoading}
         >
@@ -145,13 +126,7 @@ export const CreateNewTypebotButtons = () => {
           w="full"
           py="8"
           fontSize="lg"
-          leftIcon={
-            <DownloadIcon
-              color={useColorModeValue('purple.500', 'purple.300')}
-              boxSize="25px"
-              mr="2"
-            />
-          }
+          leftIcon={<DownloadIcon color="blue.100" boxSize="25px" mr="2" />}
           isLoading={isLoading}
           onNewTypebot={handleCreateSubmit}
         >
