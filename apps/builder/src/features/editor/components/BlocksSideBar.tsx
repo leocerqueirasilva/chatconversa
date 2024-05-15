@@ -101,6 +101,19 @@ export const BlocksSideBar = () => {
         spacing={6}
         userSelect="none"
         overflowY="auto"
+        sx={{
+          '&::-webkit-scrollbar': {
+            width: '10px',
+          },
+          '&::-webkit-scrollbar-track': {
+            background: 'gray.800',
+            borderRadius: '8px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: 'gray.600',
+            borderRadius: '8px',
+          },
+        }}
       >
         <Stack>
           <Text fontSize="sm" fontWeight="semibold">
