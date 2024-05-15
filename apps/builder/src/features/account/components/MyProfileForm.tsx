@@ -1,5 +1,5 @@
-import { Stack, HStack, Avatar, Text, Tooltip } from '@chakra-ui/react'
-import { UploadIcon } from '@/components/icons'
+import { Stack, HStack, Avatar, Tooltip } from '@chakra-ui/react'
+import { EditIcon } from '@/components/icons'
 import React, { useState } from 'react'
 import { UploadButton } from '@/components/ImageUploadContent/UploadButton'
 import { useUser } from '../hooks/useUser'
@@ -28,9 +28,9 @@ export const MyProfileForm = () => {
 
   return (
     <Stack spacing="6" w="full" overflowY="auto">
-      <HStack spacing={6}>
+      <HStack spacing={3}>
         <Avatar
-          size="lg"
+          size="md"
           src={user?.image ?? undefined}
           name={user?.name ?? undefined}
         />
@@ -43,15 +43,12 @@ export const MyProfileForm = () => {
                 userId: user.id,
                 fileName: 'avatar',
               }}
-              leftIcon={<UploadIcon />}
+              leftIcon={<EditIcon />}
               onFileUploaded={handleFileUploaded}
             >
               {t('account.myAccount.changePhotoButton.label')}
             </UploadButton>
           )}
-          <Text color="gray.500" fontSize="sm">
-            {t('account.myAccount.changePhotoButton.specification')}
-          </Text>
         </Stack>
       </HStack>
 

@@ -33,10 +33,10 @@ export const colors = {
     200: '#e4e4e7',
     300: '#d4d4d8',
     400: '#a1a1aa',
-    500: '#71717a',
-    600: '#52525b',
+    500: '#707070',
+    600: '#505050',
     700: '#3f3f46',
-    800: '#27272a',
+    800: '#303030',
     850: '#1f1f23',
     900: '#18181b',
   },
@@ -45,7 +45,7 @@ export const colors = {
     100: '#944CDC',
     200: '#c68dff',
     300: '#4b83ff',
-    400: '#944CDC',
+    400: '#5800AF',
     500: '#761DCF',
     600: '#0036b4',
     700: '#002782',
@@ -135,7 +135,10 @@ const Button = defineStyleConfig({
   }),
   variants: {
     solid: ({ colorMode, colorScheme }) => {
-      if (colorScheme !== 'blue') return {}
+      if (colorScheme !== 'blue')
+        return {
+          bg: colorMode === 'dark' ? 'gray.600' : 'white',
+        }
       return {
         bg: colorMode === 'dark' ? 'blue.400' : 'blue.500',
         color: 'white',
@@ -152,6 +155,25 @@ const Button = defineStyleConfig({
     },
     ghost: {
       bg: 'transparent',
+    },
+    gradient: ({ colorMode, colorScheme }) => {
+      if (colorScheme !== 'blue') return {}
+      return {
+        bgGradient:
+          colorMode === 'dark'
+            ? 'linear(to-r, blue.400, blue.100)'
+            : 'linear(to-r, blue.500, blue.200)',
+        color: 'white',
+        _hover: {
+          bgGradient:
+            colorMode === 'dark'
+              ? 'linear(to-r, blue.100, blue.400)'
+              : 'linear(to-r, blue.200, blue.500)',
+        },
+        _active: {
+          bg: colorMode === 'dark' ? 'blue.500' : 'blue.600',
+        },
+      }
     },
   },
 })

@@ -11,6 +11,7 @@ import {
   MenuItem,
   useDisclosure,
   ButtonProps,
+  Box,
 } from '@chakra-ui/react'
 import {
   ChevronLeftIcon,
@@ -200,26 +201,29 @@ export const PublishButton = ({
         }
         isDisabled={isNotDefined(publishedTypebot) || isPublished}
       >
-        <Button
-          colorScheme="blue"
-          isLoading={isPublishing || isUnpublishing}
-          isDisabled={isPublished || isSavingLoading}
-          onClick={() => {
-            publishedTypebot && publishedTypebotVersion !== typebot?.version
-              ? onNewEngineWarningOpen()
-              : handlePublishClick()
-          }}
-          borderRightRadius={
-            publishedTypebot && !isMoreMenuDisabled ? 0 : undefined
-          }
-          {...props}
-        >
-          {isPublished
-            ? typebot?.isClosed
-              ? t('publishButton.closed.label')
-              : t('publishButton.published.label')
-            : t('publishButton.label')}
-        </Button>
+        <Box bg="blue.100" p={'1px'} borderRadius="md">
+          <Button
+            colorScheme="blue"
+            variant="gradient"
+            isLoading={isPublishing || isUnpublishing}
+            isDisabled={isPublished || isSavingLoading}
+            onClick={() => {
+              publishedTypebot && publishedTypebotVersion !== typebot?.version
+                ? onNewEngineWarningOpen()
+                : handlePublishClick()
+            }}
+            borderRightRadius={
+              publishedTypebot && !isMoreMenuDisabled ? 0 : undefined
+            }
+            {...props}
+          >
+            {isPublished
+              ? typebot?.isClosed
+                ? t('publishButton.closed.label')
+                : t('publishButton.published.label')
+              : t('publishButton.label')}
+          </Button>
+        </Box>
       </Tooltip>
 
       {!isMoreMenuDisabled && publishedTypebot && (

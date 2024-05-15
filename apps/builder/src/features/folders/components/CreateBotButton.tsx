@@ -33,14 +33,14 @@ export const CreateBotButton = ({
       opacity={draggedTypebot ? 0.3 : 1}
       {...props}
     >
-      <VStack spacing="6">
+      <VStack spacing="1">
         <PlusIcon fontSize="40px" />
         <Text
           fontSize={18}
-          fontWeight="medium"
+          fontWeight="bold"
           maxW={40}
           textAlign="center"
-          mt="6"
+          mt="1"
         >
           {t('folders.createTypebotButton.label')}
         </Text>
