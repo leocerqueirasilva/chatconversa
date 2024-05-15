@@ -1,5 +1,6 @@
 {
   "extends": "@typebot.io/tsconfig/nextjs.json",
+  "suppressImplicitAnyIndexErrors": true,
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

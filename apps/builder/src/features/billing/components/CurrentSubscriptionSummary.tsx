@@ -25,9 +25,9 @@ export const CurrentSubscriptionSummary = ({ workspace }: Props) => {
     workspaceId: workspace.id,
   })
 
-  const isSubscribed =
-    (workspace.plan === Plan.STARTER || workspace.plan === Plan.PRO) &&
-    workspace.stripeId
+  const isSubscribed = true
+  // (workspace.plan === Plan.STARTER || workspace.plan === Plan.PRO) &&
+  // workspace.stripeId
 
   return (
     <Stack spacing="4">
@@ -40,7 +40,7 @@ export const CurrentSubscriptionSummary = ({ workspace }: Props) => {
         {data?.subscription?.cancelDate && (
           <Text fontSize="sm">
             ({t('billing.currentSubscription.cancelDate')}{' '}
-            {data.subscription.cancelDate.toDateString()})
+            {data?.subscription?.cancelDate?.toDateString()})
           </Text>
         )}
       </HStack>

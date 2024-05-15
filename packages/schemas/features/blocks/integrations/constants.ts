@@ -1,4 +1,5 @@
 export enum IntegrationBlockType {
+  WHATSAPP = 'WhatsApp',
   GOOGLE_SHEETS = 'Google Sheets',
   OPEN_AI = 'OpenAI',
   GOOGLE_ANALYTICS = 'Google Analytics',
