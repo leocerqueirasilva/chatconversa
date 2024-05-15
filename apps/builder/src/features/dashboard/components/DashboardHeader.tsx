@@ -15,6 +15,7 @@ import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDropdown'
 import { MyProfileModal } from '@/features/account/components/MyProfileModal'
 import { MembersListModal } from '@/features/workspace/components/MembersListModal'
+import ThemeSwitcher from '@/features/dashboard/components/ThemeSwitcher'
 
 export const DashboardHeader = () => {
   const { t } = useTranslate()
@@ -80,6 +81,7 @@ export const DashboardHeader = () => {
             onCreateNewWorkspaceClick={handleCreateNewWorkspace}
             onWorkspaceSelected={switchWorkspace}
           />
+          <ThemeSwitcher />
         </HStack>
       </Flex>
     </Flex>
