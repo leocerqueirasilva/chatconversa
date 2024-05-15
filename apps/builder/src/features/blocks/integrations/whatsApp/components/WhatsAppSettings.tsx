@@ -14,7 +14,7 @@ import { MoreInfoTooltip } from '@/components/MoreInfoTooltip'
 import { WhatsAppAuthModal } from './WhatsAppAuthModal'
 
 type Props = {
-  options: any
+  options: whatsAppBlock['options'];
   onOptionsChange: (options: whatsAppBlock['options']) => void
 }
 

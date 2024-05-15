@@ -6,7 +6,7 @@ import {
   Alert,
   AlertIcon,
 } from '@chakra-ui/react'
-import { Plan } from '@typebot.io/prisma'
+//import { Plan } from '@typebot.io/prisma'
 import React from 'react'
 import { PlanTag } from './PlanTag'
 import { BillingPortalButton } from './BillingPortalButton'

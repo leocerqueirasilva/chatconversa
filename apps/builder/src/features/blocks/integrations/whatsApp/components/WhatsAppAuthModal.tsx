@@ -9,7 +9,7 @@ import {
   Button,
   Spinner,
 } from '@chakra-ui/react'
-import { useUser } from '@/features/account/hooks/useUser'
+//import { useUser } from '@/features/account/hooks/useUser'
 import React, { useState, useEffect } from 'react'
 import { useToast } from '@/hooks/useToast'
 
@@ -21,7 +21,7 @@ type Props = {
 }
 
 export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
-  const { user } = useUser()
+  //const { user } = useUser()
   const [isLoading, setIsLoading] = useState(true)
   // buffer qr code
   const [qrCode, setQrCode] = useState(null)
