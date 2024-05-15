@@ -31,7 +31,7 @@ export const ThemeTemplates = ({
       <HStack>
         <Button
           flex="1"
-          variant="outline"
+          variant={selectedTab === 'my-templates' ? 'outline' : 'solid'}
           colorScheme={selectedTab === 'my-templates' ? 'blue' : 'gray'}
           onClick={() => setSelectedTab('my-templates')}
         >
@@ -39,7 +39,7 @@ export const ThemeTemplates = ({
         </Button>
         <Button
           flex="1"
-          variant="outline"
+          variant={selectedTab === 'gallery' ? 'outline' : 'solid'}
           colorScheme={selectedTab === 'gallery' ? 'blue' : 'gray'}
           onClick={() => setSelectedTab('gallery')}
         >

@@ -1,6 +1,5 @@
-import { SaveIcon } from '@/components/icons'
 import { trpc } from '@/lib/trpc'
-import { Button, SimpleGrid, Stack, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, SimpleGrid, Stack, useDisclosure } from '@chakra-ui/react'
 import { ThemeTemplate } from '@typebot.io/schemas'
 import { areThemesEqual } from '../helpers/areThemesEqual'
 import { SaveThemeModal } from './SaveThemeModal'
@@ -42,9 +41,17 @@ export const MyTemplates = ({
     <Stack spacing={4}>
       {(!selectedTemplate ||
         !areThemesEqual(selectedTemplate?.theme, currentTheme)) && (
-        <Button leftIcon={<SaveIcon />} onClick={onOpen} colorScheme="blue">
-          {t('theme.sideMenu.template.myTemplates.saveTheme')}
-        </Button>
+        <Box bg="blue.100" p={'1px'} borderRadius="md">
+          <Button
+            onClick={onOpen}
+            colorScheme="blue"
+            variant="gradient"
+            textAlign="center"
+            width="full"
+          >
+            {t('theme.sideMenu.template.myTemplates.saveTheme')}
+          </Button>
+        </Box>
       )}
       <SaveThemeModal
         workspaceId={workspaceId}
