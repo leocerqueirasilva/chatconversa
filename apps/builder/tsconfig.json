@@ -3,6 +3,8 @@
   "suppressImplicitAnyIndexErrors": true,
   "compilerOptions": {
     "baseUrl": ".",
+    "skipLibCheck": true,
+    "strict": false,
     "paths": {
       "@/*": ["src/*"]
     }

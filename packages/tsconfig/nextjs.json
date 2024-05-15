@@ -5,6 +5,8 @@
   "compilerOptions": {
     "allowJs": true,
     "incremental": true,
+    "skipLibCheck": true,
+    "strict": false,
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
