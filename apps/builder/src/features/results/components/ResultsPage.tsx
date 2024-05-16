@@ -1,64 +1,87 @@
 import { Seo } from '@/components/Seo'
-import { AnalyticsGraphContainer } from '@/features/analytics/components/AnalyticsGraphContainer'
 import { TypebotHeader } from '@/features/editor/components/TypebotHeader'
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
-import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
-import { useToast } from '@/hooks/useToast'
 import {
   Flex,
   HStack,
-  Button,
-  Tag,
   Text,
-  useColorModeValue,
+  Box,
+  VStack,
+  Heading,
+  Input,
 } from '@chakra-ui/react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useMemo, useState } from 'react'
-import { ResultsProvider } from '../ResultsProvider'
-import { ResultsTableContainer } from './ResultsTableContainer'
+import { useState } from 'react'
 import { TypebotNotFoundPage } from '@/features/editor/components/TypebotNotFoundPage'
-import { trpc } from '@/lib/trpc'
 import {
-  defaultTimeFilter,
-  timeFilterValues,
+  periodFilterLabels,
+  defaultPeriodFilter,
 } from '@/features/analytics/constants'
-
-const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+import {
+  AreaChart,
+  Area,
+  // XAxis,
+  // YAxis,
+  // CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts'
+import { useTranslate } from '@tolgee/react'
+import { ChevronRightIcon } from '@/components/icons'
+import { DropdownList } from '@/components/DropdownList'
 
 export const ResultsPage = () => {
+  const { t } = useTranslate()
   const router = useRouter()
-  const { workspace } = useWorkspace()
-  const { typebot, publishedTypebot, is404 } = useTypebot()
-  const isAnalytics = useMemo(
-    () => router.pathname.endsWith('analytics'),
-    [router.pathname]
-  )
-  const bgColor = useColorModeValue(
-    router.pathname.endsWith('analytics') ? '#f4f5f8' : 'white',
-    router.pathname.endsWith('analytics') ? 'gray.850' : 'gray.900'
-  )
+  const { typebot, is404 } = useTypebot()
+
   const [timeFilter, setTimeFilter] =
-    useState<(typeof timeFilterValues)[number]>(defaultTimeFilter)
+    useState<(typeof periodFilterLabels)[number]>(defaultPeriodFilter)
 
-  const { showToast } = useToast()
-
-  const { data: { stats } = {}, refetch } = trpc.analytics.getStats.useQuery(
+  const data = [
     {
-      typebotId: publishedTypebot?.typebotId as string,
-      timeFilter,
-      timeZone,
+      name: 'Page A',
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
     },
     {
-      enabled: !!publishedTypebot,
-      onError: (err) => showToast({ description: err.message }),
-    }
-  )
-
-  const handleDeletedResults = () => {
-    if (!stats) return
-    refetch()
-  }
+      name: 'Page B',
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: 'Page C',
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: 'Page D',
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: 'Page E',
+      uv: 1890,
+      pv: 4800,
+      amt: 2181,
+    },
+    {
+      name: 'Page F',
+      uv: 2390,
+      pv: 3800,
+      amt: 2500,
+    },
+    {
+      name: 'Page G',
+      uv: 3490,
+      pv: 4300,
+      amt: 2100,
+    },
+  ]
 
   if (is404) return <TypebotNotFoundPage />
   return (
@@ -75,64 +98,95 @@ export const ResultsPage = () => {
         }
       />
       <TypebotHeader />
-      <Flex h="full" w="full" bgColor={bgColor}>
-        <Flex
-          pos="absolute"
-          zIndex={2}
-          w="full"
-          justifyContent="center"
-          h="60px"
-          display={['none', 'flex']}
+
+      <Flex w="full" h="500px" gap={10} maxW="1600px" px="4" mx="auto" mt={20}>
+        <Box
+          w="70%"
+          bg="gray.800"
+          p={10}
+          borderRadius="lg"
+          border="1px"
+          borderColor="gray.600"
         >
-          <HStack maxW="1600px" w="full" px="4">
-            <Button
-              as={Link}
-              colorScheme={!isAnalytics ? 'blue' : 'gray'}
-              variant={!isAnalytics ? 'outline' : 'ghost'}
-              size="sm"
-              href={`/typebots/${typebot?.id}/results`}
-            >
-              <Text>Submissions</Text>
-              {(stats?.totalStarts ?? 0) > 0 && (
-                <Tag size="sm" colorScheme="blue" ml="1">
-                  {stats?.totalStarts}
-                </Tag>
-              )}
-            </Button>
-            <Button
-              as={Link}
-              colorScheme={isAnalytics ? 'blue' : 'gray'}
-              variant={isAnalytics ? 'outline' : 'ghost'}
-              href={`/typebots/${typebot?.id}/results/analytics`}
-              size="sm"
-            >
-              Analytics
-            </Button>
-          </HStack>
-        </Flex>
-        <Flex pt={['10px', '60px']} w="full" justify="center">
-          {workspace &&
-            publishedTypebot &&
-            (isAnalytics ? (
-              <AnalyticsGraphContainer
-                stats={stats}
-                timeFilter={timeFilter}
-                onTimeFilterChange={setTimeFilter}
+          <HStack justifyContent="space-between">
+            <Heading fontSize="2xl" as="h1">
+              {t('results.graph.label')}
+            </Heading>
+            <HStack>
+              <Input
+                placeholder="Select Date and Time"
+                size="md"
+                type="datetime-local"
               />
-            ) : (
-              <ResultsProvider
-                timeFilter={timeFilter}
-                typebotId={publishedTypebot.typebotId}
-                totalResults={stats?.totalStarts ?? 0}
-                onDeleteResults={handleDeletedResults}
+              <ChevronRightIcon />
+              <Input
+                placeholder="Select Date and Time"
+                size="md"
+                type="datetime-local"
+              />
+              <DropdownList
+                items={Object.entries(periodFilterLabels).map(
+                  ([value, label]) => ({
+                    label,
+                    value,
+                  })
+                )}
+                currentItem={timeFilter}
+                onItemSelect={(val) =>
+                  setTimeFilter(val as (typeof periodFilterLabels)[number])
+                }
+              />
+            </HStack>
+          </HStack>
+
+          <Box w="full" h="full">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart
+                width={500}
+                height={400}
+                data={data}
+                margin={{
+                  top: 10,
+                  right: 30,
+                  left: 0,
+                  bottom: 0,
+                }}
               >
-                <ResultsTableContainer
-                  timeFilter={timeFilter}
-                  onTimeFilterChange={setTimeFilter}
+                <Tooltip />
+                <Area
+                  type="monotone"
+                  dataKey="uv"
+                  stroke="#944CDC"
+                  fill="#8884d8"
                 />
-              </ResultsProvider>
-            ))}
-        </Flex>
+              </AreaChart>
+            </ResponsiveContainer>
+          </Box>
+        </Box>
+
+        <Box
+          w="30%"
+          bg="gray.800"
+          p={10}
+          borderRadius="lg"
+          border="1px"
+          borderColor="gray.600"
+          h="fit-content"
+        >
+          <VStack alignItems="start" h="fit-content">
+            <Heading fontSize="2xl" as="h1">
+              {t('results.statistics.general')}
+            </Heading>
+            <Text mt={4}>{t('results.statistics.contacts')}</Text>
+            <Heading fontSize="4xl" as="h1">
+              249
+            </Heading>
+            <Text mt={4}>{t('results.statistics.messages')}</Text>
+            <Heading fontSize="4xl" as="h1">
+              473
+            </Heading>
+          </VStack>
+        </Box>
       </Flex>
     </Flex>
   )
