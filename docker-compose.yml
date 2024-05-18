@@ -20,6 +20,7 @@ services:
       - typebot-db
     ports:
       - '8080:3000'
+      - '3010:3010'
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     env_file: .env
