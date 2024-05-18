@@ -14,7 +14,7 @@ import {
 import { Logo } from 'assets/icons/Logo'
 import { TextLink } from './TextLink'
 
-const discordServerUrl = 'https://typebot.io/discord'
+const discordServerUrl = 'https://chatresponde.site/discord'
 const typebotLinkedInUrl = 'https://www.linkedin.com/company/typebot'
 const typebotTwitterUrl = 'https://twitter.com/Typebot_io'
 const baptisteTwitterUrl = 'https://twitter.com/baptisteArno'

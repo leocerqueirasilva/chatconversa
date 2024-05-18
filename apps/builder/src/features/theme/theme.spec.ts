@@ -28,10 +28,10 @@ test.describe.parallel('Theme page', () => {
       // Branding
       await page.getByRole('button', { name: 'Global' }).click()
       await expect(
-        page.locator('a:has-text("Made with Typebot")')
-      ).toHaveAttribute('href', 'https://www.typebot.io/?utm_source=litebadge')
+        page.locator('a:has-text("Made with ChatResponde")')
+      ).toHaveAttribute('href', 'https://www.chatresponde.site')
       await page.click('text="Show Typebot brand"')
-      await expect(page.locator('a:has-text("Made with Typebot")')).toBeHidden()
+      await expect(page.locator('a:has-text("Made with ChatResponde")')).toBeHidden()
 
       // Font
       await page.getByRole('button', { name: 'Font' }).click()

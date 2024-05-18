@@ -23,6 +23,7 @@ import { RatingInputSettings } from '@/features/blocks/inputs/rating/components/
 import { TextInputSettings } from '@/features/blocks/inputs/textInput/components/TextInputSettings'
 import { GoogleAnalyticsSettings } from '@/features/blocks/integrations/googleAnalytics/components/GoogleAnalyticsSettings'
 import { SendEmailSettings } from '@/features/blocks/integrations/sendEmail/components/SendEmailSettings'
+import { WhatsAppSettings } from '@/features/blocks/integrations/whatsApp/components/WhatsAppSettings'
 import { HttpRequestSettings } from '@/features/blocks/integrations/webhook/components/HttpRequestSettings'
 import { ZapierSettings } from '@/features/blocks/integrations/zapier/components/ZapierSettings'
 import { RedirectSettings } from '@/features/blocks/logic/redirect/components/RedirectSettings'
@@ -295,6 +296,14 @@ export const BlockSettings = ({
     case IntegrationBlockType.EMAIL: {
       return (
         <SendEmailSettings
+          options={block.options}
+          onOptionsChange={updateOptions}
+        />
+      )
+    }
+    case IntegrationBlockType.WHATSAPP: {
+      return (
+        <WhatsAppSettings
           options={block.options}
           onOptionsChange={updateOptions}
         />

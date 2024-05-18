@@ -53,7 +53,7 @@
     {
       "name": "Community",
       "icon": "discord",
-      "url": "https://typebot.io/discord"
+      "url": "https://chatresponde.site/discord"
     }
   ],
   "navigation": [
@@ -324,7 +324,7 @@
   ],
   "footerSocials": {
     "website": "https://typebot.io",
-    "discord": "https://typebot.io/discord",
+    "discord": "https://chatresponde.site/discord",
     "twitter": "https://twitter.com/Typebot_io",
     "github": "https://github.com/baptisteArno/typebot.io"
   }

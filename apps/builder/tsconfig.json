@@ -1,7 +1,10 @@
 {
   "extends": "@typebot.io/tsconfig/nextjs.json",
+  "suppressImplicitAnyIndexErrors": true,
   "compilerOptions": {
     "baseUrl": ".",
+    "skipLibCheck": true,
+    "strict": false,
     "paths": {
       "@/*": ["src/*"]
     }

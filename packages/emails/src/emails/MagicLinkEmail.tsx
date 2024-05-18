@@ -23,23 +23,23 @@ export const MagicLinkEmail = ({ url }: Props) => (
       <MjmlSection padding="0">
         <MjmlColumn>
           <HeroImage
-            src={`${env.NEXTAUTH_URL}/images/yourMagicLinkBanner.png`}
+            src={`${env.NEXTAUTH_URL}/images/null.png`}
           />
         </MjmlColumn>
       </MjmlSection>
       <MjmlSection padding="0 24px" cssClass="smooth">
         <MjmlColumn>
-          <Text>Here is your magic link 👇</Text>
+          <Text>Aqui está seu link mágico 2👇</Text>
           <MjmlSpacer />
           <Button link={url} align="center">
-            Click here to sign in
+            Clique aqui para entrar
           </Button>
           <Text>
-            If you didn&apos;t request this, please ignore this email.
+            Se você não esperava esse e-mail, ignore.
           </Text>
           <Text>
             Best,
-            <br />- Typebot Team.
+            <br />- ChatResponde Team.
           </Text>
         </MjmlColumn>
       </MjmlSection>
@@ -53,6 +53,6 @@ export const sendMagicLinkEmail = ({
 }: Pick<SendMailOptions, 'to'> & ComponentProps<typeof MagicLinkEmail>) =>
   sendEmail({
     to,
-    subject: 'Sign in to Typebot',
+    subject: 'Sign in to ChatResponde',
     html: render(<MagicLinkEmail {...props} />).html,
   })
