@@ -10,7 +10,7 @@
 <br />
 
 <p align="center">
-Chatconversa is an open-source chatbot builder. It allows you to create advanced chatbots visually, embed them anywhere on your web/mobile apps, and collect results in real-time
+Chatconversa 3 is an open-source chatbot builder. It allows you to create advanced chatbots visually, embed them anywhere on your web/mobile apps, and collect results in real-time
 </p>
 
 <p align="center">
