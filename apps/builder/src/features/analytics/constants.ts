@@ -21,24 +21,4 @@ export const timeFilterLabels: Record<
   allTime: 'All time',
 }
 
-export const periodFilterValues = [
-  'newContacts',
-  'totalConversations',
-  'openConversations',
-  'conversationsEnded',
-  'hangTags',
-]
-
-export const periodFilterLabels: Record<
-  (typeof periodFilterValues)[number],
-  string
-> = {
-  newContacts: 'Novos contatos',
-  totalConversations: 'Total de conversas',
-  openConversations: 'Conversas abertas',
-  conversationsEnded: 'Conversas encerradas',
-  hangTags: 'Etiquetas',
-}
-
 export const defaultTimeFilter = 'last7Days' as const
-export const defaultPeriodFilter = 'newContacts' as const

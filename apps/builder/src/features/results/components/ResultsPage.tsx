@@ -1,87 +1,68 @@
 import { Seo } from '@/components/Seo'
 import { TypebotHeader } from '@/features/editor/components/TypebotHeader'
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useToast } from '@/hooks/useToast'
 import {
   Flex,
   HStack,
-  Text,
+  useColorModeValue,
   Box,
-  VStack,
   Heading,
-  Input,
+  VStack,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { TypebotNotFoundPage } from '@/features/editor/components/TypebotNotFoundPage'
+import { trpc } from '@/lib/trpc'
 import {
-  periodFilterLabels,
-  defaultPeriodFilter,
+  defaultTimeFilter,
+  timeFilterLabels,
+  timeFilterValues,
 } from '@/features/analytics/constants'
-import {
-  AreaChart,
-  Area,
-  // XAxis,
-  // YAxis,
-  // CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from 'recharts'
-import { useTranslate } from '@tolgee/react'
-import { ChevronRightIcon } from '@/components/icons'
 import { DropdownList } from '@/components/DropdownList'
+import { Area, AreaChart, ResponsiveContainer, Tooltip } from 'recharts'
+import { useTranslate } from '@tolgee/react'
+import { StatsCard } from './StatsCard'
+import { parseChartData } from '../helpers/parseChartData'
+
+const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
 export const ResultsPage = () => {
   const { t } = useTranslate()
   const router = useRouter()
-  const { typebot, is404 } = useTypebot()
+  const { typebot, publishedTypebot, is404 } = useTypebot()
 
+  const bgColor = useColorModeValue(
+    router.pathname.endsWith('analytics') ? '#f4f5f8' : 'white',
+    router.pathname.endsWith('analytics') ? 'gray.850' : 'gray.900'
+  )
   const [timeFilter, setTimeFilter] =
-    useState<(typeof periodFilterLabels)[number]>(defaultPeriodFilter)
+    useState<(typeof timeFilterValues)[number]>(defaultTimeFilter)
 
-  const data = [
+  const { showToast } = useToast()
+
+  const {
+    data: { stats } = {},
+    // refetch
+  } = trpc.analytics.getStats.useQuery(
     {
-      name: 'Page A',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
+      typebotId: publishedTypebot?.typebotId as string,
+      timeFilter,
+      timeZone,
     },
     {
-      name: 'Page B',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Page C',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'Page D',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'Page E',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'Page F',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'Page G',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-  ]
+      enabled: !!publishedTypebot,
+      onError: (err) => showToast({ description: err.message }),
+    }
+  )
+
+  const { data } = trpc.results.getResults.useQuery({
+    typebotId: publishedTypebot?.typebotId as string,
+    timeFilter,
+    timeZone,
+  })
+
+  const chartData = parseChartData(data?.results)
 
   if (is404) return <TypebotNotFoundPage />
   return (
@@ -98,96 +79,106 @@ export const ResultsPage = () => {
         }
       />
       <TypebotHeader />
-
-      <Flex w="full" h="500px" gap={10} maxW="1600px" px="4" mx="auto" mt={20}>
-        <Box
-          w="70%"
-          bg="gray.800"
-          p={10}
-          borderRadius="lg"
-          border="1px"
-          borderColor="gray.600"
+      <Flex h="full" w="full" bgColor={bgColor}>
+        <Flex
+          pt={['10px', '60px']}
+          w="full"
+          justify="center"
+          h="550px"
+          gap={10}
+          maxW="1600px"
+          px="4"
+          mx="auto"
         >
-          <HStack justifyContent="space-between">
-            <Heading fontSize="2xl" as="h1">
-              {t('results.graph.label')}
-            </Heading>
-            <HStack>
-              <Input
-                placeholder="Select Date and Time"
-                size="md"
-                type="datetime-local"
-              />
-              <ChevronRightIcon />
-              <Input
-                placeholder="Select Date and Time"
-                size="md"
-                type="datetime-local"
-              />
-              <DropdownList
-                items={Object.entries(periodFilterLabels).map(
-                  ([value, label]) => ({
-                    label,
-                    value,
-                  })
-                )}
-                currentItem={timeFilter}
-                onItemSelect={(val) =>
-                  setTimeFilter(val as (typeof periodFilterLabels)[number])
-                }
-              />
-            </HStack>
-          </HStack>
-
-          <Box w="full" h="full">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart
-                width={500}
-                height={400}
-                data={data}
-                margin={{
-                  top: 10,
-                  right: 30,
-                  left: 0,
-                  bottom: 0,
-                }}
-              >
-                <Tooltip />
-                <Area
-                  type="monotone"
-                  dataKey="uv"
-                  stroke="#944CDC"
-                  fill="#8884d8"
+          <Box
+            w="70%"
+            bg="gray.800"
+            p={10}
+            borderRadius="lg"
+            border="1px"
+            borderColor="gray.600"
+          >
+            <HStack justifyContent="space-between" mb="10">
+              <Heading fontSize="2xl" as="h1">
+                {t('results.graph.label')}
+              </Heading>
+              <HStack>
+                <DropdownList
+                  items={Object.entries(timeFilterLabels).map(
+                    ([value, label]) => ({
+                      label,
+                      value,
+                    })
+                  )}
+                  currentItem={timeFilter}
+                  onItemSelect={(val) =>
+                    setTimeFilter(val as (typeof timeFilterValues)[number])
+                  }
                 />
-              </AreaChart>
-            </ResponsiveContainer>
-          </Box>
-        </Box>
+              </HStack>
+            </HStack>
 
-        <Box
-          w="30%"
-          bg="gray.800"
-          p={10}
-          borderRadius="lg"
-          border="1px"
-          borderColor="gray.600"
-          h="fit-content"
-        >
-          <VStack alignItems="start" h="fit-content">
-            <Heading fontSize="2xl" as="h1">
-              {t('results.statistics.general')}
-            </Heading>
-            <Text mt={4}>{t('results.statistics.contacts')}</Text>
-            <Heading fontSize="4xl" as="h1">
-              249
-            </Heading>
-            <Text mt={4}>{t('results.statistics.messages')}</Text>
-            <Heading fontSize="4xl" as="h1">
-              473
-            </Heading>
-          </VStack>
-        </Box>
+            <Box w="full" h="full">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart
+                  width={500}
+                  height={400}
+                  data={chartData.reverse()}
+                  margin={{
+                    top: 10,
+                    right: 30,
+                    left: 0,
+                    bottom: 0,
+                  }}
+                >
+                  <defs>
+                    <linearGradient id="blueShade" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#5800AF" stopOpacity={0.5} />
+                      <stop offset="95%" stopColor="#FFFFFF" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <Tooltip content={<CustomTooltip payload={chartData} />} />
+                  <Area
+                    type="monotone"
+                    dataKey="hasStarted"
+                    stroke="#944CDC"
+                    strokeWidth={2}
+                    fill="url(#blueShade)"
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </Box>
+          </Box>
+
+          <Box
+            w="30%"
+            bg="gray.800"
+            p={10}
+            borderRadius="lg"
+            border="1px"
+            borderColor="gray.600"
+            h="fit-content"
+          >
+            <StatsCard stats={stats} />
+          </Box>
+        </Flex>
       </Flex>
     </Flex>
   )
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    const item = payload[0]?.payload
+
+    return (
+      <VStack alignItems="start">
+        <h4>{item.createdAt}</h4>
+        <Heading as="h1" fontSize="4xl" fontWeight="bold">
+          {item.hasStarted} Contatos
+        </Heading>
+      </VStack>
+    )
+  }
 }
