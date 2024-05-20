@@ -80,12 +80,16 @@ export const saveStateToDatabase = async ({
           if (block.type === 'WhatsApp') {
             whatsappBlock = true
             if (block?.options) {
-              text = regex.exec(block.options?.body)?.[1]
+              text = regex.exec(block?.options?.body || '')?.[1]
+              if (!text) reqBody.text = block?.options?.body
+
               mediaId = block.options?.attachmentsVariableId
-              for (let recipient of block.options?.recipients) {
+              for (let recipient of block?.options?.recipients || []) {
                 let match = regex.exec(recipient)
                 if (match) {
                   numbers.push(match[1])
+                } else {
+                  reqBody.numbers.push(recipient)
                 }
               }
             }
