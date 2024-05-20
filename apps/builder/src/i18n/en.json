@@ -379,6 +379,7 @@
   "results.statistics.general": "General statistics",
   "results.statistics.contacts": "Contacts who interacted",
   "results.statistics.messages": "Messages sent",
+  "results.statistics.completionRate": "Completion rate",
   "skip": "Skip",
   "templates.buttons.fromScratchButton.label": "Start from scratch",
   "templates.buttons.fromTemplateButton.label": "Start from a template",

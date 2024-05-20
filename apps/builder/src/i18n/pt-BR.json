@@ -379,6 +379,7 @@
   "results.statistics.general": "Estatísticas gerais",
   "results.statistics.contacts": "Contatos que interagiram",
   "results.statistics.messages": "Mensagens enviadas",
+  "results.statistics.completionRate": "Taxa de conclusao",
   "skip": "Pular",
   "templates.buttons.fromScratchButton.label": "Comece do zero",
   "templates.buttons.fromTemplateButton.label": "Comece a partir de um modelo",
