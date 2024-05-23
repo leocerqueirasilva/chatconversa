@@ -100,7 +100,7 @@ export const saveStateToDatabase = async ({
       if (whatsappBlock) {
         for (let variable of variables) {
           if (variable.id === mediaId) {
-            reqBody.mediaLink = variable.value
+            reqBody.mediaLink = variable.value ? variable.value : variable.name
           }
 
           if (variable.name === text) {

@@ -142,17 +142,12 @@ app.post('/send-message', async (req, res) => {
       })
     }
 
-    let number = numbers[0]
-
-    const formattedNumber = number?.substring(1) + '@c.us'
+    let number =
+      numbers[0]?.charAt(0) === '+' ? numbers[0].substring(1) : numbers[0]
     const client = await whatsAppClient.getClient()
 
-    console.log(formattedNumber)
-    console.log(text)
-    console.log(mediaLink)
-
     if (text) {
-      await client.sendMessage(formattedNumber, text)
+      await client.sendMessage(number, text)
     }
     if (mediaLink) {
       const media = await axios.get(mediaLink, {
@@ -169,7 +164,7 @@ app.post('/send-message', async (req, res) => {
         mediaDataBase64,
         mediaFilename
       )
-      await client.sendMessage(formattedNumber, mediaMessage, {
+      await client.sendMessage(number, mediaMessage, {
         sendMediaAsDocument: true,
       })
     }
