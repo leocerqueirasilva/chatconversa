@@ -8,10 +8,9 @@ export const timeFilterValues = [
   'allTime',
 ] as const
 
-export const timeFilterLabels: Record<
-  (typeof timeFilterValues)[number],
-  string
-> = {
+export type TimeFilter = (typeof timeFilterValues)[number]
+
+export const timeFilterLabels: Record<TimeFilter, string> = {
   today: 'Today',
   last7Days: 'Last 7 days',
   last30Days: 'Last 30 days',

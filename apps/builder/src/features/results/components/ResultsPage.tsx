@@ -62,7 +62,7 @@ export const ResultsPage = () => {
     timeZone,
   })
 
-  const chartData = parseChartData(data?.results)
+  const chartData = parseChartData(data?.results || [], timeFilter)
 
   if (is404) return <TypebotNotFoundPage />
   return (
@@ -128,7 +128,7 @@ export const ResultsPage = () => {
                     top: 10,
                     right: 30,
                     left: 0,
-                    bottom: 0,
+                    bottom: 80,
                   }}
                 >
                   <defs>
