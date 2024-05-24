@@ -143,7 +143,8 @@ app.post('/send-message', async (req, res) => {
     }
 
     let number =
-      numbers[0]?.charAt(0) === '+' ? numbers[0].substring(1) : numbers[0]
+      numbers[0]?.charAt(0) === '+' ? numbers[0].substring(1) : numbers[0];
+    number = number + '@c.us';
     const client = await whatsAppClient.getClient()
 
     if (text) {
