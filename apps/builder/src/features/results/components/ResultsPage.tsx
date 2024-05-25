@@ -15,6 +15,7 @@ import { useState } from 'react'
 import { TypebotNotFoundPage } from '@/features/editor/components/TypebotNotFoundPage'
 import { trpc } from '@/lib/trpc'
 import {
+  TimeFilter,
   defaultTimeFilter,
   timeFilterLabels,
   timeFilterValues,
@@ -28,7 +29,6 @@ import { parseChartData } from '../helpers/parseChartData'
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
 export const ResultsPage = () => {
-  const { t } = useTranslate()
   const router = useRouter()
   const { typebot, publishedTypebot, is404 } = useTypebot()
 
@@ -56,14 +56,6 @@ export const ResultsPage = () => {
     }
   )
 
-  const { data } = trpc.results.getResults.useQuery({
-    typebotId: publishedTypebot?.typebotId as string,
-    timeFilter,
-    timeZone,
-  })
-
-  const chartData = parseChartData(data?.results || [], timeFilter)
-
   if (is404) return <TypebotNotFoundPage />
   return (
     <Flex overflow="hidden" h="100vh" flexDir="column">
@@ -90,80 +82,94 @@ export const ResultsPage = () => {
           px="4"
           mx="auto"
         >
-          <Box
-            w="70%"
-            bg="gray.800"
-            p={10}
-            borderRadius="lg"
-            border="1px"
-            borderColor="gray.600"
-          >
-            <HStack justifyContent="space-between" mb="10">
-              <Heading fontSize="2xl" as="h1">
-                {t('results.graph.label')}
-              </Heading>
-              <HStack>
-                <DropdownList
-                  items={Object.entries(timeFilterLabels).map(
-                    ([value, label]) => ({
-                      label,
-                      value,
-                    })
-                  )}
-                  currentItem={timeFilter}
-                  onItemSelect={(val) =>
-                    setTimeFilter(val as (typeof timeFilterValues)[number])
-                  }
-                />
-              </HStack>
-            </HStack>
+          <Chart
+            timeFilter={timeFilter}
+            setTimeFilter={setTimeFilter}
+            typebotId={publishedTypebot?.typebotId as string}
+          />
 
-            <Box w="full" h="full">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart
-                  width={500}
-                  height={400}
-                  data={chartData.reverse()}
-                  margin={{
-                    top: 10,
-                    right: 30,
-                    left: 0,
-                    bottom: 80,
-                  }}
-                >
-                  <defs>
-                    <linearGradient id="blueShade" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#5800AF" stopOpacity={0.5} />
-                      <stop offset="95%" stopColor="#FFFFFF" stopOpacity={0} />
-                    </linearGradient>
-                  </defs>
-                  <Tooltip content={<CustomTooltip payload={chartData} />} />
-                  <Area
-                    type="monotone"
-                    dataKey="hasStarted"
-                    stroke="#944CDC"
-                    strokeWidth={2}
-                    fill="url(#blueShade)"
-                  />
-                </AreaChart>
-              </ResponsiveContainer>
-            </Box>
-          </Box>
-
-          <Box
-            w="30%"
-            bg="gray.800"
-            p={10}
-            borderRadius="lg"
-            border="1px"
-            borderColor="gray.600"
-            h="fit-content"
-          >
-            <StatsCard stats={stats} />
-          </Box>
+          <StatsCard stats={stats} />
         </Flex>
       </Flex>
     </Flex>
+  )
+}
+
+const Chart = ({
+  timeFilter,
+  setTimeFilter,
+  typebotId,
+}: {
+  timeFilter: TimeFilter
+  setTimeFilter: (val: TimeFilter) => void
+  typebotId: string
+}) => {
+  const { t } = useTranslate()
+
+  const { data } = trpc.results.getResults.useQuery({
+    typebotId: typebotId as string,
+    timeFilter,
+    timeZone,
+  })
+
+  const chartData = parseChartData(data?.results || [], timeFilter)
+
+  return (
+    <Box
+      w="70%"
+      bg={useColorModeValue('gray.100', 'gray.800')}
+      p={10}
+      borderRadius="lg"
+      border="1px"
+      borderColor={useColorModeValue('gray.300', 'gray.600')}
+    >
+      <HStack justifyContent="space-between" mb="10">
+        <Heading fontSize="2xl" as="h1">
+          {t('results.graph.label')}
+        </Heading>
+        <HStack>
+          <DropdownList
+            items={Object.entries(timeFilterLabels).map(([value, label]) => ({
+              label,
+              value,
+            }))}
+            currentItem={timeFilter}
+            onItemSelect={(val) => setTimeFilter(val as TimeFilter)}
+          />
+        </HStack>
+      </HStack>
+
+      <Box w="full" h="full">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            width={500}
+            height={400}
+            data={chartData.reverse()}
+            margin={{
+              top: 10,
+              right: 30,
+              left: 0,
+              bottom: 80,
+            }}
+          >
+            <defs>
+              <linearGradient id="blueShade" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#5800AF" stopOpacity={0.5} />
+                <stop offset="95%" stopColor="#FFFFFF" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <Tooltip content={<CustomTooltip payload={chartData} />} />
+            <Area
+              type="monotone"
+              dataKey="hasStarted"
+              stroke="#944CDC"
+              strokeWidth={2}
+              fill="url(#blueShade)"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </Box>
+    </Box>
   )
 }
 

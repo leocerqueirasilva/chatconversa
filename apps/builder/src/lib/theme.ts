@@ -150,14 +150,14 @@ const Button = defineStyleConfig({
         },
       }
     },
-    outline: ({ colorScheme }) => {
+    outline: ({ colorMode, colorScheme }) => {
       if (colorScheme !== 'blue')
         return {
           bg: 'transparent',
         }
       return {
         bg: 'transparent',
-        color: 'white',
+        color: colorMode === 'dark' ? 'white' : 'gray.800',
         borderColor: 'blue.400',
       }
     },

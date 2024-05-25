@@ -106,11 +106,11 @@ export const BlocksSideBar = () => {
             width: '10px',
           },
           '&::-webkit-scrollbar-track': {
-            background: 'gray.800',
+            background: useColorModeValue('gray.300', 'gray.800'),
             borderRadius: '8px',
           },
           '&::-webkit-scrollbar-thumb': {
-            background: 'gray.600',
+            background: useColorModeValue('gray.400', 'gray.600'),
             borderRadius: '8px',
           },
         }}
