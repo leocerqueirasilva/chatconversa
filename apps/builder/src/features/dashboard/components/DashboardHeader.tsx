@@ -16,11 +16,12 @@ import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDrop
 import { MyProfileModal } from '@/features/account/components/MyProfileModal'
 import { MembersListModal } from '@/features/workspace/components/MembersListModal'
 import ThemeSwitcher from '@/features/dashboard/components/ThemeSwitcher'
+import { UserPreferencesModal } from '@/features/account/components/UserPreferencesModal'
 
 export const DashboardHeader = () => {
   const { t } = useTranslate()
   const { user, logOut } = useUser()
-  const { workspace, switchWorkspace, createWorkspace } = useWorkspace()
+  const { workspace } = useWorkspace()
 
   const {
     isOpen: isMembersListModalOpen,
@@ -32,9 +33,11 @@ export const DashboardHeader = () => {
     onOpen: onMyProfileModalOpen,
     onClose: onMyProfileModalClose,
   } = useDisclosure()
-
-  const handleCreateNewWorkspace = () =>
-    createWorkspace(user?.name ?? undefined)
+  const {
+    isOpen: isPreferencesModalOpen,
+    onOpen: onPreferencesModalOpen,
+    onClose: onPreferencesModalClose,
+  } = useDisclosure()
 
   return (
     <Flex w="full" borderBottomWidth="1px" justify="center">
@@ -77,10 +80,15 @@ export const DashboardHeader = () => {
           )}
           <WorkspaceDropdown
             currentWorkspace={workspace}
+            onPreferencesModalOpen={onPreferencesModalOpen}
             onLogoutClick={logOut}
-            onCreateNewWorkspaceClick={handleCreateNewWorkspace}
-            onWorkspaceSelected={switchWorkspace}
           />
+          {user && workspace && !workspace.isPastDue && (
+            <UserPreferencesModal
+              isOpen={isPreferencesModalOpen}
+              onClose={onPreferencesModalClose}
+            />
+          )}
           <ThemeSwitcher />
         </HStack>
       </Flex>

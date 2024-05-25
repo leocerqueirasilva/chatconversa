@@ -1,12 +1,4 @@
-import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
-import {
-  HardDriveIcon,
-  ChevronLeftIcon,
-  PlusIcon,
-  LogOutIcon,
-} from '@/components/icons'
-import { PlanTag } from '@/features/billing/components/PlanTag'
-import { trpc } from '@/lib/trpc'
+import { ChevronLeftIcon, PlusIcon, LogOutIcon } from '@/components/icons'
 import { useTranslate } from '@tolgee/react'
 import {
   Menu,
@@ -21,21 +13,16 @@ import { WorkspaceInApp } from '../WorkspaceProvider'
 
 type Props = {
   currentWorkspace?: WorkspaceInApp
-  onWorkspaceSelected: (workspaceId: string) => void
-  onCreateNewWorkspaceClick: () => void
+  onPreferencesModalOpen: () => void
   onLogoutClick: () => void
 }
 
 export const WorkspaceDropdown = ({
   currentWorkspace,
-  onWorkspaceSelected,
+  onPreferencesModalOpen,
   onLogoutClick,
-  onCreateNewWorkspaceClick,
 }: Props) => {
   const { t } = useTranslate()
-  const { data } = trpc.workspace.listWorkspaces.useQuery()
-
-  const workspaces = data?.workspaces ?? []
 
   return (
     <Menu placement="bottom-end">
@@ -52,26 +39,8 @@ export const WorkspaceDropdown = ({
         </HStack>
       </MenuButton>
       <MenuList>
-        {workspaces
-          ?.filter((workspace) => workspace.id !== currentWorkspace?.id)
-          .map((workspace) => (
-            <MenuItem
-              key={workspace.id}
-              onClick={() => onWorkspaceSelected(workspace.id)}
-            >
-              <HStack>
-                <EmojiOrImageIcon
-                  icon={workspace.icon}
-                  boxSize="16px"
-                  defaultIcon={HardDriveIcon}
-                />
-                <Text>{workspace.name}</Text>
-                <PlanTag plan={workspace.plan} />
-              </HStack>
-            </MenuItem>
-          ))}
-        <MenuItem onClick={onCreateNewWorkspaceClick} icon={<PlusIcon />}>
-          {t('workspace.dropdown.newButton.label')}
+        <MenuItem onClick={onPreferencesModalOpen} icon={<PlusIcon />}>
+          {t('workspace.dropdown.preferencesButton.label')}
         </MenuItem>
         <MenuItem
           onClick={onLogoutClick}
