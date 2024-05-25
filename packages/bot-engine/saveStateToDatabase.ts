@@ -9,6 +9,7 @@ import * as Sentry from '@sentry/nextjs'
 import { saveVisitedEdges } from './queries/saveVisitedEdges'
 import { Prisma, VisitedEdge } from '@typebot.io/prisma'
 import prisma from '@typebot.io/lib/prisma'
+import ky from 'ky'
 
 type Props = {
   session: Pick<ChatSession, 'state'> & { id?: string }
@@ -31,7 +32,7 @@ export const saveStateToDatabase = async ({
     (action) => action.expectsDedicatedReply
   )
 
-  const isCompleted = Boolean(
+  let isCompleted = Boolean(
     !input && !containsSetVariableClientSideAction && !hasCustomEmbedBubble
   )
 
@@ -55,13 +56,78 @@ export const saveStateToDatabase = async ({
 
   const answers = state.typebotsQueue[0].answers
 
+  const typebot = state.typebotsQueue[0].typebot
+  isCompleted = Boolean(
+    !input && !containsSetVariableClientSideAction && answers.length > 0
+  )
+
+  if (isCompleted) {
+    try {
+      const { groups, variables } = typebot
+      let whatsappBlock: any
+      let mediaId: any
+      let text: any
+      let numbers = []
+      const regex = /{{(.*?)}}/
+      let reqBody: any = {
+        numbers: [],
+        text: null,
+        mediaLink: null,
+      }
+
+      for (const group of groups) {
+        for (const block of group.blocks) {
+          if (block.type === 'WhatsApp') {
+            whatsappBlock = true
+            if (block?.options) {
+              text = regex.exec(block?.options?.body || '')?.[1]
+              if (!text) reqBody.text = block?.options?.body
+
+              mediaId = block.options?.attachmentsVariableId
+              for (let recipient of block?.options?.recipients || []) {
+                let match = regex.exec(recipient)
+                if (match) {
+                  numbers.push(match[1])
+                } else {
+                  reqBody.numbers.push(recipient)
+                }
+              }
+            }
+          }
+        }
+      }
+
+      if (whatsappBlock) {
+        for (let variable of variables) {
+          if (variable.id === mediaId) {
+            reqBody.mediaLink = variable.value ? variable.value : variable.name
+          }
+
+          if (variable.name === text) {
+            reqBody.text = variable.value
+          }
+
+          if (numbers.includes(variable.name)) {
+            reqBody.numbers.push(variable.value)
+          }
+        }
+      }
+
+      if (reqBody.numbers.length > 0) {
+        ky.post('http://localhost:3010/send-message', {
+          json: reqBody,
+        })
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   queries.push(
     upsertResult({
       resultId,
-      typebot: state.typebotsQueue[0].typebot,
-      isCompleted: Boolean(
-        !input && !containsSetVariableClientSideAction && answers.length > 0
-      ),
+      typebot,
+      isCompleted,
       hasStarted: answers.length > 0,
     })
   )

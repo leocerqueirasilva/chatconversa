@@ -10,6 +10,7 @@ import { zapierBlockSchemas } from './zapier'
 import { httpBlockSchemas } from './webhook'
 import { makeComBlockSchemas } from './makeCom'
 import { pabblyConnectBlockSchemas } from './pabblyConnect'
+import { whatsAppBlockSchema } from './whatsApp'
 
 export const integrationBlockSchemas = {
   v5: [
@@ -37,6 +38,7 @@ export const integrationBlockSchemas = {
     zapierBlockSchemas.v6,
     pixelBlockSchema,
     zemanticAiBlockSchema,
+    whatsAppBlockSchema,
   ],
 } as const
 

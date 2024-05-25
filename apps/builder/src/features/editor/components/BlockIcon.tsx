@@ -1,6 +1,11 @@
 import { useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
-import { FlagIcon, SendEmailIcon, WebhookIcon } from '@/components/icons'
+import {
+  FlagIcon,
+  SendEmailIcon,
+  WebhookIcon,
+  WhatsAppIcon,
+} from '@/components/icons'
 import { WaitIcon } from '@/features/blocks/logic/wait/components/WaitIcon'
 import { ScriptIcon } from '@/features/blocks/logic/script/components/ScriptIcon'
 import { JumpIcon } from '@/features/blocks/logic/jump/components/JumpIcon'
@@ -112,6 +117,8 @@ export const BlockIcon = ({ type, mt }: BlockIconProps): JSX.Element => {
       return <PabblyConnectLogo mt={mt} />
     case IntegrationBlockType.EMAIL:
       return <SendEmailIcon mt={mt} />
+    case IntegrationBlockType.WHATSAPP:
+      return <WhatsAppIcon mt={mt} />
     case IntegrationBlockType.CHATWOOT:
       return <ChatwootLogo mt={mt} />
     case IntegrationBlockType.PIXEL:

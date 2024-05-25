@@ -107,6 +107,13 @@ export const BlockCard = (
           <BlockLabel type={props.type} />
         </BlockCardLayout>
       )
+    case IntegrationBlockType.WHATSAPP:
+      return (
+        <BlockCardLayout {...props} tooltip={t('WhatsApp')}>
+          <BlockIcon type={props.type} />
+          <BlockLabel type={props.type} />
+        </BlockCardLayout>
+      )
     default:
       return (
         <BlockCardLayout {...props}>

@@ -99,6 +99,8 @@ export const BlockLabel = ({ type }: Props): JSX.Element => {
       return (
         <Text fontSize="sm">{t('editor.sidebarBlock.zemanticAi.label')}</Text>
       )
+    case IntegrationBlockType.WHATSAPP:
+      return <Text fontSize="sm">{t('WhatsApp')}</Text>
     default:
       return <ForgedBlockLabel type={type} />
   }
