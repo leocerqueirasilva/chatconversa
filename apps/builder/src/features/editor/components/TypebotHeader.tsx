@@ -23,6 +23,7 @@ import React, { useState } from 'react'
 import { isDefined, isNotDefined } from '@typebot.io/lib'
 import { EditableTypebotName } from './EditableTypebotName'
 import Link from 'next/link'
+import { EditableEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
 import { useDebouncedCallback } from 'use-debounce'
 import { PublishButton } from '@/features/publish/components/PublishButton'
 import { headerHeight } from '../constants'
@@ -103,6 +104,9 @@ const LeftElements = ({ ...props }: StackProps) => {
   const handleNameSubmit = (name: string) =>
     updateTypebot({ updates: { name } })
 
+  const handleChangeIcon = (icon: string) =>
+    updateTypebot({ updates: { icon } })
+
   useKeyboardShortcuts({
     undo: () => {
       if (!canUndo) return
@@ -146,11 +150,24 @@ const LeftElements = ({ ...props }: StackProps) => {
           size="sm"
         />
         <HStack spacing={1}>
+          {typebot && (
+            <EditableEmojiOrImageIcon
+              uploadFileProps={{
+                workspaceId: typebot.workspaceId,
+                typebotId: typebot.id,
+                fileName: 'icon',
+              }}
+              icon={typebot?.icon}
+              onChangeIcon={handleChangeIcon}
+            />
+          )}
+          (
           <EditableTypebotName
             key={`typebot-name-${typebot?.name ?? ''}`}
             defaultName={typebot?.name ?? ''}
             onNewName={handleNameSubmit}
           />
+          )
         </HStack>
 
         {currentUserMode === 'write' && (
