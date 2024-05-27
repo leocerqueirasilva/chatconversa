@@ -33,6 +33,12 @@ const inputSchema = z.object({
         workspaceId: z.string(),
         fileName: z.string(),
       })
+    )
+    .or(
+      z.object({
+        whatsapp: z.string(),
+        fileName: z.string(),
+      })
     ),
   fileType: z.string().optional(),
 })

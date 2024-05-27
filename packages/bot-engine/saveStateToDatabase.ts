@@ -65,7 +65,6 @@ export const saveStateToDatabase = async ({
     try {
       const { groups, variables } = typebot
       let whatsappBlock: any
-      let mediaId: any
       let text: any
       let numbers = []
       const regex = /{{(.*?)}}/
@@ -82,8 +81,10 @@ export const saveStateToDatabase = async ({
             if (block?.options) {
               text = regex.exec(block?.options?.body || '')?.[1]
               if (!text) reqBody.text = block?.options?.body
+              if (block?.options?.fileUrl && block?.options?.fileUrl !== '') {
+                reqBody.mediaLink = block?.options?.fileUrl
+              }
 
-              mediaId = block.options?.attachmentsVariableId
               for (let recipient of block?.options?.recipients || []) {
                 let match = regex.exec(recipient)
                 if (match) {
@@ -99,10 +100,6 @@ export const saveStateToDatabase = async ({
 
       if (whatsappBlock) {
         for (let variable of variables) {
-          if (variable.id === mediaId) {
-            reqBody.mediaLink = variable.value ? variable.value : variable.name
-          }
-
           if (variable.name === text) {
             reqBody.text = variable.value
           }
