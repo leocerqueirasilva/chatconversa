@@ -9,9 +9,12 @@ import {
   Box,
   Heading,
   VStack,
+  Button,
+  Text,
+  Tag,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { TypebotNotFoundPage } from '@/features/editor/components/TypebotNotFoundPage'
 import { trpc } from '@/lib/trpc'
 import {
@@ -25,13 +28,17 @@ import { Area, AreaChart, ResponsiveContainer, Tooltip } from 'recharts'
 import { useTranslate } from '@tolgee/react'
 import { StatsCard } from './StatsCard'
 import { parseChartData } from '../helpers/parseChartData'
+import Link from 'next/link'
 
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
 export const ResultsPage = () => {
   const router = useRouter()
   const { typebot, publishedTypebot, is404 } = useTypebot()
-
+  const isAnalytics = useMemo(
+    () => router.pathname.endsWith('analytics'),
+    [router.pathname]
+  )
   const bgColor = useColorModeValue(
     router.pathname.endsWith('analytics') ? '#f4f5f8' : 'white',
     router.pathname.endsWith('analytics') ? 'gray.850' : 'gray.900'
@@ -73,22 +80,49 @@ export const ResultsPage = () => {
       <TypebotHeader />
       <Flex h="full" w="full" bgColor={bgColor}>
         <Flex
-          pt={['10px', '60px']}
+          pos="absolute"
+          zIndex={2}
           w="full"
-          justify="center"
-          h="550px"
-          gap={10}
-          maxW="1600px"
-          px="4"
-          mx="auto"
+          justifyContent="center"
+          h="60px"
+          display={['none', 'flex']}
         >
-          <Chart
-            timeFilter={timeFilter}
-            setTimeFilter={setTimeFilter}
-            typebotId={publishedTypebot?.typebotId as string}
-          />
+          <HStack maxW="1600px" w="full" px="4">
+            <Button
+              as={Link}
+              colorScheme={!isAnalytics ? 'blue' : 'gray'}
+              variant={!isAnalytics ? 'outline' : 'ghost'}
+              size="sm"
+              href={`/typebots/${typebot?.id}/results`}
+            >
+              <Text>Submissions</Text>
+              {(stats?.totalStarts ?? 0) > 0 && (
+                <Tag size="sm" colorScheme="blue" ml="1">
+                  {stats?.totalStarts}
+                </Tag>
+              )}
+            </Button>
+          </HStack>
+        </Flex>
+        <Flex h="full" w="full" bgColor={bgColor}>
+          <Flex
+            pt={['10px', '60px']}
+            w="full"
+            justify="center"
+            h="550px"
+            gap={10}
+            maxW="1600px"
+            px="4"
+            mx="auto"
+          >
+            <Chart
+              timeFilter={timeFilter}
+              setTimeFilter={setTimeFilter}
+              typebotId={publishedTypebot?.typebotId as string}
+            />
 
-          <StatsCard stats={stats} />
+            <StatsCard stats={stats} />
+          </Flex>
         </Flex>
       </Flex>
     </Flex>
