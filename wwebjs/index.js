@@ -160,13 +160,14 @@ app.post('/send-message', async (req, res) => {
       const mediaDataBase64 = Buffer.from(media.data, 'binary').toString(
         'base64'
       )
+      const isVideo = mimeType?.includes('video')
       const mediaMessage = new MessageMedia(
         mimeType,
         mediaDataBase64,
         mediaFilename
       )
       await client.sendMessage(number, mediaMessage, {
-        sendMediaAsDocument: true,
+        sendMediaAsDocument: isVideo,
       })
     }
 
