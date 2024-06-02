@@ -21,8 +21,8 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Hey friend 👋" }] },
-              { "type": "p", "children": [{ "text": "How can I help you?" }] }
+              { "type": "p", "children": [{ "text": "Olá amigo 👋" }] },
+              { "type": "p", "children": [{ "text": "Como posso ajudá-lo?" }] }
             ]
           }
         },
@@ -33,17 +33,17 @@
             {
               "id": "fQ8oLDnKmDBuPDK7riJ2kt",
               "outgoingEdgeId": "dhniFxrsH5r54aEE5JXwK2",
-              "content": "I have a feature request ✨"
+              "content": "Tenho uma solicitação de recurso ✨"
             },
             {
               "id": "h2rFDX2UnKS4Kdu3Eyuqq3",
               "outgoingEdgeId": "2C4mhU5o2Hdm7dztR9xNE9",
-              "content": "There is a bug 🐛"
+              "content": "Há um bug 🐛"
             },
             {
               "id": "hcUFBPeQA3gSyXRprRk2v9",
               "outgoingEdgeId": "bTo6CZD1YapDDyVdvJgFDV",
-              "content": "I have a question 💭"
+              "content": "Eu tenho uma pergunta 💭"
             }
           ]
         }

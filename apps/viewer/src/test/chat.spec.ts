@@ -55,7 +55,7 @@ test('API chat execution should work on preview bot', async ({ request }) => {
     expect(resultId).toBeUndefined()
     expect(sessionId).toBeDefined()
     expect(messages[0].content.richText).toStrictEqual([
-      { children: [{ text: 'Hi there! 👋' }], type: 'p' },
+      { children: [{ text: 'Olá! 👋' }], type: 'p' },
     ])
     expect(messages[1].content.richText).toStrictEqual([
       { children: [{ text: "Welcome. What's your name?" }], type: 'p' },
@@ -133,7 +133,7 @@ test('API chat execution should work on published bot', async ({ request }) => {
     expect(result).toBeDefined()
     expect(sessionId).toBeDefined()
     expect(messages[0].content.richText).toStrictEqual([
-      { children: [{ text: 'Hi there! 👋' }], type: 'p' },
+      { children: [{ text: 'Olá! 👋' }], type: 'p' },
     ])
     expect(messages[1].content.richText).toStrictEqual([
       { children: [{ text: "Welcome. What's your name?" }], type: 'p' },

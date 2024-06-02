@@ -21,7 +21,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Hi there! 👋" }] }
+              { "type": "p", "children": [{ "text": "Olá! 👋" }] }
             ]
           }
         },
@@ -33,10 +33,10 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Sign up for the newsletter and " },
+                  { "text": "Inscreva-se na newsletter e" },
                   {
                     "bold": true,
-                    "text": "get free access to our exclusive 'Community Bundle'."
+                    "text": "tenha acesso gratuito ao nosso exclusivo 'Community Bundle'."
                   }
                 ]
               }
@@ -52,7 +52,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "This bundle helps you create the best Community possible for your project."
+                    "text": "Este pacote ajuda você a criar a melhor comunidade possível para o seu projeto."
                   }
                 ]
               }
@@ -64,7 +64,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "Qual o seu nome?" }] }
             ]
           }
         },

@@ -41,7 +41,7 @@
           "outgoingEdgeId": "cl1r0cfjt00122e6dzwtamycl",
           "type": "choice input",
           "items": [
-            { "id": "cl1r09dl9000k2e6dvf7llzkd", "content": "Send Email Out" },
+            { "id": "cl1r09dl9000k2e6dvf7llzkd", "content": "Enviar Email Out" },
             {
               "id": "cl1r0a80k000l2e6dngppwyhm",
               "content": "Serial Editorial Output"
@@ -446,7 +446,7 @@
             {
               "id": "cl1r0nt85002t2e6dvb7si7ny",
               "outgoingEdgeId": "cl1r15gko005i2e6dn6rhifwe",
-              "content": "Yes!"
+              "content": "Sim!"
             },
             { "id": "cl1r0nveb002u2e6dotjk6nuf", "content": "No, bye!" }
           ]
@@ -541,7 +541,7 @@
           "id": "cl1r16nes005z2e6d3aj23kfz",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Hi there!" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "Olá!" }] }]
           }
         },
         {
@@ -553,7 +553,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "You're about to answer a Quiz about Digital Marketing"
+                    "text": "Você está prestes a responder um teste sobre Marketing Digital"
                   }
                 ]
               }
@@ -567,7 +567,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "It is composed of only 4 questions." }]
+                "children": [{ "text": "É composto por apenas 4 questões." }]
               }
             ]
           }
@@ -577,7 +577,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "bold": true, "text": "Ready?" }] }
+              { "type": "p", "children": [{ "bold": true, "text": "Pronto?" }] }
             ]
           }
         },
@@ -588,7 +588,7 @@
             {
               "id": "cl1r176e9006a2e6dpvp0974z",
               "outgoingEdgeId": "cl1r17pzv006n2e6dpibxp9th",
-              "content": "Go!"
+              "content": "Vamos!"
             }
           ]
         }

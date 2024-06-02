@@ -20,7 +20,7 @@
           "id": "cl1sep1cc001x2e6eikrwf9jy",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Hi! 👋" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "Olá! 👋" }] }]
           }
         },
         {
@@ -31,7 +31,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "I'm glad you are intersted in our services." }
+                  { "text": "Fico feliz que você esteja interessado em nossos serviços." }
                 ]
               }
             ]
@@ -45,7 +45,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "I'll need to know a little more about you" }
+                  { "text": "Vou precisar saber um pouco mais sobre você" }
                 ]
               }
             ]
@@ -74,7 +74,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Do you work with a specific company?" }]
+                "children": [{ "text": "Você trabalha com uma empresa específica?" }]
               }
             ]
           }
@@ -86,12 +86,12 @@
             {
               "id": "cl1ses31100232e6eq3nnp2mm",
               "outgoingEdgeId": "cl1sezo4z00292e6ean8s487x",
-              "content": "Yes"
+              "content": "Sim"
             },
             {
               "id": "cl1ses3y400242e6e1qjwkhq4",
               "outgoingEdgeId": "cl1sfertf004i2e6epf68fwri",
-              "content": "No"
+              "content": "Não"
             }
           ]
         }
@@ -115,7 +115,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Which company?" }] }
+              { "type": "p", "children": [{ "text": "Qual companhia?" }] }
             ]
           }
         },
@@ -142,7 +142,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "How many employees is your team composed of?" }
+                  { "text": "Quantos funcionários sua equipe é composta?" }
                 ]
               }
             ]
@@ -344,7 +344,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your job role?" }] }
+              { "type": "p", "children": [{ "text": "Qual é a sua função?" }] }
             ]
           }
         },
@@ -463,7 +463,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "We'll still send you valuable content by email." }
+                  { "text": "We'll still Enviar you valuable content by email." }
                 ]
               }
             ]

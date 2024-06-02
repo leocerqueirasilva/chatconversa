@@ -29,7 +29,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Hi there! 👋" }] }
+              { "type": "p", "children": [{ "text": "Olá! 👋" }] }
             ]
           },
           "groupId": "clauujxdc00063b6q42ca20gj"
@@ -41,7 +41,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "Welcome. What's your name?" }]
+                "children": [{ "text": "Welcome. Qual o seu nome?" }]
               }
             ]
           },

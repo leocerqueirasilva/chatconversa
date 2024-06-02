@@ -55,7 +55,7 @@
               "id": "hQw2zbp7FDX7XYK9cFpbgC",
               "type": 0,
               "blockId": "sbjZWLJGVkHAkDqS4JQeGow",
-              "content": "Hi!"
+              "content": "Olá!"
             }
           ],
           "groupId": "kinRXxYop2X4d7F9qt8WNB",
@@ -120,7 +120,7 @@
           "groupId": "group1",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "Qual o seu nome?" }] }
             ]
           }
         },

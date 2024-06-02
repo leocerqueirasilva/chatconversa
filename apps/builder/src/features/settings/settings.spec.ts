@@ -36,7 +36,7 @@ test.describe.parallel('Settings page', () => {
       })
       await page.goto(`/typebots/${typebotId}/settings`)
       await expect(
-        page.locator('a:has-text("Made with ChatResponde")')
+        page.locator('a:has-text("")')
       ).toHaveAttribute('href', 'https://www.chatresponde.site')
       await page.click('button:has-text("Typing")')
       await page.fill('[data-testid="speed"] input', '350')

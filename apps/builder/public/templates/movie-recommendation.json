@@ -32,7 +32,7 @@
               {
                 "type": "p",
                 "children": [
-                  { "text": "Welcome to our film recommendation bot 👋" }
+                  { "text": "Bem-vindo ao nosso bot de recomendação de filmes 👋" }
                 ]
               }
             ]
@@ -52,7 +52,7 @@
             "richText": [
               {
                 "type": "p",
-                "children": [{ "text": "It is powered by The Movie DB API 🚀" }]
+                "children": [{ "text": "É desenvolvido pela API Movie DB 🚀" }]
               }
             ]
           }
@@ -69,7 +69,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "How can I we help?" }] }
+              { "type": "p", "children": [{ "text": "Como podemos ajudar?" }] }
             ]
           }
         },
@@ -80,12 +80,12 @@
             {
               "id": "kaimvzg9igdtktgou5m3s1bw",
               "outgoingEdgeId": "t8qyjpigrz7cdl8gxl1wxlwj",
-              "content": "Select a genre 💅"
+              "content": "Selecione um gênero 💅"
             },
             {
               "id": "i8ls2f8inq2ovuijj6l7rbcq",
               "outgoingEdgeId": "tjn2ljosqyd4aj9dk8mnifsu",
-              "content": "See what's trending 🔝"
+              "content": "Veja o que é tendência 🔝"
             }
           ]
         }

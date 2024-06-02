@@ -78,7 +78,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Let's determine what Näak's products suit you best. 💪"
+                    "text": "Vamos determinar quais produtos da Näak são mais adequados para você. 💪"
                   }
                 ]
               }
@@ -90,7 +90,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "Qual o seu nome?" }] }
             ]
           }
         },

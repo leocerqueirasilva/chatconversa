@@ -20,7 +20,7 @@
           "id": "sc1y8VwDabNJgiVTBi4qtif",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Hey 👋" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "OI 👋" }] }]
           }
         },
         {
@@ -39,7 +39,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Thank you for your interest in our marketing services."
+                    "text": "Obrigado pelo seu interesse em nossos serviços de marketing."
                   }
                 ]
               }
@@ -55,7 +55,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Let's have a quick chat about your current situation 🙏"
+                    "text": "Vamos bater um papo rápido sobre sua situação atual 🙏"
                   }
                 ]
               }
@@ -66,14 +66,14 @@
           "id": "vw9s76hgwu749gw15bqk4vd3",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Ready?" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "Pronto?" }] }]
           }
         },
         {
           "id": "sbjZWLJGVkHAkDqS4JQeGow",
           "outgoingEdgeId": "vgi4r3yjle17balwlhpas25t",
           "type": "choice input",
-          "items": [{ "id": "hQw2zbp7FDX7XYK9cFpbgC", "content": "Yes!" }]
+          "items": [{ "id": "hQw2zbp7FDX7XYK9cFpbgC", "content": "Sim!" }]
         }
       ]
     },
@@ -130,7 +130,7 @@
           "options": {
             "labels": {
               "placeholder": "Type your answer...",
-              "button": "Send"
+              "button": "Enviar"
             },
             "variableId": "giiLFGw5xXBCHzvp1qAbdX"
           }
@@ -269,7 +269,7 @@
           "options": {
             "labels": {
               "placeholder": "Type your answer...",
-              "button": "Send"
+              "button": "Enviar"
             },
             "variableId": "vhp0ymgwq4id82l97g0kliglf"
           }
@@ -326,7 +326,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "You need to add your OpenAI credentials to make this bot work. 🪄"
+                    "text": "Você precisa adicionar suas credenciais OpenAI para fazer este bot funcionar."
                   }
                 ]
               }
@@ -342,7 +342,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Once it's done, delete this group and connect the "
+                    "text": "Quando terminar, exclua este grupo e conecte o "
                   },
                   { "bold": true, "text": "Services" },
                   { "text": " group with " },

@@ -60,7 +60,7 @@
           "type": "text",
           "groupId": "nrFcoNFtGcGJNifcjiEFya",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Ready?" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "Pronto?" }] }]
           }
         },
         {
@@ -180,7 +180,7 @@
           "groupId": "m299Kw31LhXpxZLNNb7WT5",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "Qual o seu nome?" }] }
             ]
           }
         },
