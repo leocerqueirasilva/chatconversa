@@ -1,20 +1,25 @@
 import { Seo } from '@/components/Seo'
+import { AnalyticsGraphContainer } from '@/features/analytics/components/AnalyticsGraphContainer'
 import { TypebotHeader } from '@/features/editor/components/TypebotHeader'
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
+import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { useToast } from '@/hooks/useToast'
 import {
   Flex,
   HStack,
+  Button,
+  Tag,
+  Text,
   useColorModeValue,
   Box,
   Heading,
   VStack,
-  Button,
-  Text,
-  Tag,
 } from '@chakra-ui/react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useMemo, useState } from 'react'
+import { ResultsProvider } from '../ResultsProvider'
+import { ResultsTableContainer } from './ResultsTableContainer'
 import { TypebotNotFoundPage } from '@/features/editor/components/TypebotNotFoundPage'
 import { trpc } from '@/lib/trpc'
 import {
@@ -28,12 +33,12 @@ import { Area, AreaChart, ResponsiveContainer, Tooltip } from 'recharts'
 import { useTranslate } from '@tolgee/react'
 import { StatsCard } from './StatsCard'
 import { parseChartData } from '../helpers/parseChartData'
-import Link from 'next/link'
 
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
 export const ResultsPage = () => {
   const router = useRouter()
+  const { workspace } = useWorkspace()
   const { typebot, publishedTypebot, is404 } = useTypebot()
   const isAnalytics = useMemo(
     () => router.pathname.endsWith('analytics'),
@@ -48,10 +53,7 @@ export const ResultsPage = () => {
 
   const { showToast } = useToast()
 
-  const {
-    data: { stats } = {},
-    // refetch
-  } = trpc.analytics.getStats.useQuery(
+  const { data: { stats } = {}, refetch } = trpc.analytics.getStats.useQuery(
     {
       typebotId: publishedTypebot?.typebotId as string,
       timeFilter,
@@ -62,6 +64,11 @@ export const ResultsPage = () => {
       onError: (err) => showToast({ description: err.message }),
     }
   )
+
+  const handleDeletedResults = () => {
+    if (!stats) return
+    refetch()
+  }
 
   if (is404) return <TypebotNotFoundPage />
   return (
@@ -102,6 +109,15 @@ export const ResultsPage = () => {
                 </Tag>
               )}
             </Button>
+            <Button
+              as={Link}
+              colorScheme={isAnalytics ? 'blue' : 'gray'}
+              variant={isAnalytics ? 'outline' : 'ghost'}
+              href={`/typebots/${typebot?.id}/results/analytics`}
+              size="sm"
+            >
+              Analytics
+            </Button>
           </HStack>
         </Flex>
         <Flex h="full" w="full" bgColor={bgColor}>
@@ -115,13 +131,30 @@ export const ResultsPage = () => {
             px="4"
             mx="auto"
           >
-            <Chart
-              timeFilter={timeFilter}
-              setTimeFilter={setTimeFilter}
-              typebotId={publishedTypebot?.typebotId as string}
-            />
-
-            <StatsCard stats={stats} />
+            {workspace &&
+              publishedTypebot &&
+              (isAnalytics ? (
+                <>
+                  <Chart
+                    timeFilter={timeFilter}
+                    setTimeFilter={setTimeFilter}
+                    typebotId={publishedTypebot?.typebotId as string}
+                  />
+                  <StatsCard stats={stats} />
+                </>
+              ) : (
+                <ResultsProvider
+                  timeFilter={timeFilter}
+                  typebotId={publishedTypebot.typebotId}
+                  totalResults={stats?.totalStarts ?? 0}
+                  onDeleteResults={handleDeletedResults}
+                >
+                  <ResultsTableContainer
+                    timeFilter={timeFilter}
+                    onTimeFilterChange={setTimeFilter}
+                  />
+                </ResultsProvider>
+              ))}
           </Flex>
         </Flex>
       </Flex>
