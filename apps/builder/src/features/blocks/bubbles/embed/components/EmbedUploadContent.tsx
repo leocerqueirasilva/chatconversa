@@ -39,7 +39,7 @@ export const EmbedUploadContent = ({ content, onSubmit }: Props) => {
       </Stack>
 
       <NumberInput
-        label="Height:"
+        label="Altura:"
         defaultValue={content?.height ?? defaultEmbedBubbleContent.height}
         onValueChange={handleHeightChange}
         suffix={t('editor.blocks.bubbles.embed.settings.numberInput.unit')}
