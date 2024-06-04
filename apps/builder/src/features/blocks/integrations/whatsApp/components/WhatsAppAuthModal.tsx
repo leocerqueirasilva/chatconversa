@@ -30,7 +30,7 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
 
   const getAuth = async () => {
     try {
-      const res = await ky.get('http://localhost:3010/auth').json()
+      const res = await ky.get('http://191.101.71.208:3010/auth').json()
       setQrCode(res?.qrCode)
       setIsLogedIn(res?.isLoggedIn)
       setIsLoading(false)
@@ -46,7 +46,7 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
 
   const handleLogOut = async () => {
     try {
-      await ky.get('http://localhost:3010/logout').json()
+      await ky.get('http://191.101.71.208:3010/logout').json()
       setIsLogedIn(false)
       setIsLoading(true)
       showToast({
