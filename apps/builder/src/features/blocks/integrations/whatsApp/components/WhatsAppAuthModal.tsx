@@ -49,7 +49,7 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
     } catch (error) {
       showToast({
         title: 'Error',
-        description: 'Failed to get Wwebjs auth',
+        description: error,
         status: 'error',
       })
     }
