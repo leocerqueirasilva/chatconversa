@@ -74,11 +74,14 @@ class WhatsAppClient {
 const whatsAppClient = new WhatsAppClient()
 
 app.get('/ping', (req, res) => {
-  res.send('Pong')
+  console.log('ping called');
+  res.send('Pong');
 })
 
 app.get('/auth', async (req, res) => {
   try {
+
+    console.log('auth called');
     let { qrString, isLoggedIn } = whatsAppClient.getAuth()
 
     let counter = 0
