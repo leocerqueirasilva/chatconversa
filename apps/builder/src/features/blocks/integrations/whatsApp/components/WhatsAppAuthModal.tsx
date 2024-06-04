@@ -28,6 +28,17 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
   const [isLogedIn, setIsLogedIn] = useState(false)
   const { showToast } = useToast()
 
+  const testRequest = async () => {
+    try {
+      const res = await ky.get('http://191.101.71.208:3010/auth').json();
+      console.log('Response:', res);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
+  testRequest();
+
   const getAuth = async () => {
     try {
       const res = await ky.get('http://191.101.71.208:3010/auth').json()
