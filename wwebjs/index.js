@@ -7,8 +7,12 @@ const axios = require('axios')
 const app = express()
 const port = 3010
 
-app.use(express.json())
-app.use(cors())
+// Configurar CORS
+app.use(cors({
+  origin: '*', // Permite todas as origens. Você pode ajustar conforme necessário.
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 class WhatsAppClient {
   constructor() {
