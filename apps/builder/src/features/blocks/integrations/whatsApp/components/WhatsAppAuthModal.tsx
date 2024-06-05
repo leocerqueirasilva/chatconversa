@@ -56,13 +56,19 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
       });
   
     } catch (error) {
-      let errorMessage = 'Failed to get Wwebjs auth: Failed to fetch';
-      if (error.name === 'TypeError') {
-        errorMessage += ' - Possible network error or CORS issue';
-      } else if (error.name === 'NetworkError') {
-        errorMessage += ' - Network error occurred';
-      } else {
-        errorMessage += ` - ${error.message}`;
+      let errorMessage = 'Failed to get Wwebjs auth:';
+      if (error.name) {
+        errorMessage += ` Name: ${error.name}`;
+      }
+      if (error.message) {
+        errorMessage += ` Message: ${error.message}`;
+      }
+      if (error.stack) {
+        errorMessage += ` Stack: ${error.stack}`;
+      }
+      if (error.response) {
+        const errorResponseText = await error.response.text();
+        errorMessage += ` Response: ${errorResponseText}`;
       }
   
       showToast({
