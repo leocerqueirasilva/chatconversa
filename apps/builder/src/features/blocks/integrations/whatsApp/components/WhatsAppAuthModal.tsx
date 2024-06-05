@@ -36,26 +36,47 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
         description: 'Fetching auth...',
         status: 'info',
       });
+      
       const res = await ky.get('http://191.101.71.208:3010/auth').json();
+  
       showToast({
         title: 'Info',
         description: `Response: ${JSON.stringify(res)}`,
         status: 'info',
       });
+  
       setQrCode(res?.qrCode);
       setIsLogedIn(res?.isLoggedIn);
       setIsLoading(false);
+  
       showToast({
         title: 'Success',
         description: 'Authentication successful',
         status: 'success',
       });
+  
     } catch (error) {
+      let errorMessage = 'Failed to get Wwebjs auth';
+      if (error.response) {
+        // A response was received but the status code is not in the range of 2xx
+        errorMessage += `: ${error.response.status} - ${error.response.statusText}`;
+        const errorData = await error.response.json();
+        errorMessage += `\nDetails: ${JSON.stringify(errorData)}`;
+      } else if (error.request) {
+        // The request was made but no response was received
+        errorMessage += ': No response received';
+      } else {
+        // Something happened in setting up the request that triggered an error
+        errorMessage += `: ${error.message}`;
+      }
+  
       showToast({
         title: 'Error',
-        description: 'Failed to get Wwebjs auth',
+        description: errorMessage,
         status: 'error',
       });
+  
+      console.error('Error details:', error);
     }
   };
   
