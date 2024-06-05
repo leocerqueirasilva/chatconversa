@@ -37,24 +37,28 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
         status: 'info',
       });
       
-      const res = await ky.get('http://191.101.71.208:3010/auth').json();
-  
+      const res = await ky.get('http://191.101.71.208:3010/auth', {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).json();
+    
       showToast({
         title: 'Info',
         description: `Response: ${JSON.stringify(res)}`,
         status: 'info',
       });
-  
+    
       setQrCode(res?.qrCode);
       setIsLogedIn(res?.isLoggedIn);
       setIsLoading(false);
-  
+    
       showToast({
         title: 'Success',
         description: 'Authentication successful',
         status: 'success',
       });
-  
+    
     } catch (error) {
       let errorMessage = 'Failed to get Wwebjs auth:';
       if (error.name) {
@@ -76,7 +80,7 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
         description: errorMessage,
         status: 'error',
       });
-  
+    
       console.error('Error details:', error);
     }
   };
