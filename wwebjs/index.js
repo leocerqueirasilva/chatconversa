@@ -14,6 +14,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
+app.options('*', cors());
+
 class WhatsAppClient {
   constructor() {
     this.isLoggedIn = false

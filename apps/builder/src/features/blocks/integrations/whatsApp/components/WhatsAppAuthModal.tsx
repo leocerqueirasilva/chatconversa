@@ -37,7 +37,7 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
         status: 'info',
       });
       
-      const res = await ky.get('http://191.101.71.208:3010/auth', {
+      const res = await ky.get('https://api.chatresponde.site/auth', {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -89,7 +89,7 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
 
   const handleLogOut = async () => {
     try {
-      await ky.get('http://191.101.71.208:3010/logout').json()
+      await ky.get('https://api.chatresponde.site/logout').json()
       setIsLogedIn(false)
       setIsLoading(true)
       showToast({
