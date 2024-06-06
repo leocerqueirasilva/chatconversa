@@ -31,33 +31,18 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
 
   const getAuth = async () => {
     try {
-      showToast({
-        title: 'Info',
-        description: 'Fetching auth...',
-        status: 'info',
-      });
-      
       const res = await ky.get('https://api.chatresponde.site/auth', {
         headers: {
           'Content-Type': 'application/json'
         }
       }).json();
     
-      showToast({
-        title: 'Info',
-        description: `Response: ${JSON.stringify(res)}`,
-        status: 'info',
-      });
-    
+     
       setQrCode(res?.qrCode);
       setIsLogedIn(res?.isLoggedIn);
       setIsLoading(false);
     
-      showToast({
-        title: 'Success',
-        description: 'Authentication successful',
-        status: 'success',
-      });
+      
     
     } catch (error) {
       let errorMessage = 'Failed to get Wwebjs auth:';
