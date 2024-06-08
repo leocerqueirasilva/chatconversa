@@ -1,36 +1,42 @@
-import { VStack, Heading, Stack, Button, useDisclosure } from '@chakra-ui/react'
-import { DownloadIcon, FlagIcon, TableIcon } from '@/components/icons'
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
-import { ImportTypebotFromFileButton } from './ImportTypebotFromFileButton'
-import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
-import { useUser } from '@/features/account/hooks/useUser'
-import { useToast } from '@/hooks/useToast'
-import { trpc } from '@/lib/trpc'
-import { useTranslate } from '@tolgee/react'
-import { Typebot } from '@typebot.io/schemas'
-import { TemplatesModal } from './TemplatesModal'
+import { VStack, Heading, Stack, Button, useDisclosure } from '@chakra-ui/react';
+import { DownloadIcon, FlagIcon, TableIcon, TemplateIcon } from '@/components/icons';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { ImportTypebotFromFileButton } from './ImportTypebotFromFileButton';
+import { useWorkspace } from '@/features/workspace/WorkspaceProvider';
+import { useUser } from '@/features/account/hooks/useUser';
+import { useToast } from '@/hooks/useToast';
+import { trpc } from '@/lib/trpc';
+import { useTranslate } from '@tolgee/react';
+import { Typebot } from '@typebot.io/schemas';
+import { TemplatesModal } from './TemplatesModal';
+import { ReadyTemplatesModal } from './ReadyTemplatesModal';
 
 export const CreateNewTypebotButtons = () => {
-  const { t } = useTranslate()
-  const { workspace } = useWorkspace()
-  const { user } = useUser()
-  const router = useRouter()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { t } = useTranslate();
+  const { workspace } = useWorkspace();
+  const { user } = useUser();
+  const router = useRouter();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenReadyTemplate,
+    onOpen: onOpenReadyTemplate,
+    onClose: onCloseReadyTemplate,
+  } = useDisclosure();
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { showToast } = useToast()
+  const { showToast } = useToast();
 
   const { mutate: createTypebot } = trpc.typebot.createTypebot.useMutation({
     onMutate: () => {
-      setIsLoading(true)
+      setIsLoading(true);
     },
     onError: (error) => {
       showToast({
         title: 'Failed to create bot',
         description: error.message,
-      })
+      });
     },
     onSuccess: (data) => {
       router.push({
@@ -41,22 +47,22 @@ export const CreateNewTypebotButtons = () => {
                 isFirstBot: 'true',
               }
             : {},
-      })
+      });
     },
     onSettled: () => {
-      setIsLoading(false)
+      setIsLoading(false);
     },
-  })
+  });
 
   const { mutate: importTypebot } = trpc.typebot.importTypebot.useMutation({
     onMutate: () => {
-      setIsLoading(true)
+      setIsLoading(true);
     },
     onError: (error) => {
       showToast({
         title: 'Failed to import bot',
         description: error.message,
-      })
+      });
     },
     onSuccess: (data) => {
       router.push({
@@ -67,16 +73,16 @@ export const CreateNewTypebotButtons = () => {
                 isFirstBot: 'true',
               }
             : {},
-      })
+      });
     },
     onSettled: () => {
-      setIsLoading(false)
+      setIsLoading(false);
     },
-  })
+  });
 
   const handleCreateSubmit = async (typebot?: Typebot) => {
-    if (!user || !workspace) return
-    const folderId = router.query.folderId?.toString() ?? null
+    if (!user || !workspace) return;
+    const folderId = router.query.folderId?.toString() ?? null;
     if (typebot)
       importTypebot({
         workspaceId: workspace.id,
@@ -84,7 +90,7 @@ export const CreateNewTypebotButtons = () => {
           ...typebot,
           folderId,
         },
-      })
+      });
     else
       createTypebot({
         workspaceId: workspace.id,
@@ -92,8 +98,14 @@ export const CreateNewTypebotButtons = () => {
           name: t('typebots.defaultName'),
           folderId,
         },
-      })
-  }
+      });
+  };
+
+  const handleReadyTemplateChoose = (template: string) => {
+    // Logic for handling the selection of the specific template.
+    console.log(`Chosen template: ${template}`);
+    handleCreateSubmit();
+  };
 
   return (
     <VStack maxW="600px" w="full" flex="1" pt="20" spacing={10}>
@@ -132,6 +144,17 @@ export const CreateNewTypebotButtons = () => {
         >
           {t('templates.buttons.importFileButton.label')}
         </ImportTypebotFromFileButton>
+        <Button
+          variant="outline"
+          w="full"
+          py="8"
+          fontSize="lg"
+          leftIcon={<TemplateIcon color="blue.100" boxSize="25px" mr="2" />}
+          onClick={onOpenReadyTemplate}
+          isLoading={isLoading}
+        >
+          Template redes sociais
+        </Button>
       </Stack>
       <TemplatesModal
         isOpen={isOpen}
@@ -139,6 +162,12 @@ export const CreateNewTypebotButtons = () => {
         onTypebotChoose={handleCreateSubmit}
         isLoading={isLoading}
       />
+      <ReadyTemplatesModal
+        isOpen={isOpenReadyTemplate}
+        onClose={onCloseReadyTemplate}
+        onTypebotChoose={handleReadyTemplateChoose}
+        isLoading={isLoading}
+      />
     </VStack>
-  )
-}
+  );
+};
