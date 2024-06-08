@@ -5,7 +5,8 @@ import { IntegrationBlockType } from '../constants'
 export const whatsAppOptionsSchema = z.object({
   recipients: z.array(z.string()).optional(),
   body: z.string().optional(),
-  attachmentsVariableId: z.string().optional(),
+  fileName: z.string().optional(),
+  fileUrl: z.string().optional(),
 })
 
 export const whatsAppBlockSchema = blockBaseSchema.merge(

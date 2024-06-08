@@ -119,7 +119,7 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{'WhatsApp Authentication Check'}</ModalHeader>
+        <ModalHeader>{'Conexão com whatsapp'}</ModalHeader>
         <ModalCloseButton />
         <ModalBody
           display="flex"
@@ -135,8 +135,7 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
           {qrCode && !isLogedIn && <img src={qrCode} alt="qr code" />}
           {isLogedIn && (
             <p>
-              You are now authenticated WhatsApp. You can now use integration
-              block.
+              Você já está conectado ao seu whatsapp.
             </p>
           )}
         </ModalBody>
@@ -147,7 +146,7 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
             onClick={handleLogOut}
             isDisabled={!isLogedIn}
           >
-            Log out
+            Deslogar
           </Button>
         </ModalFooter>
       </ModalContent>
