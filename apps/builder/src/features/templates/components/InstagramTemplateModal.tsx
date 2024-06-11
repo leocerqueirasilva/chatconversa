@@ -30,7 +30,7 @@ export const InstagramTemplateModal = ({ isOpen, onClose, isLoading }: Props) =>
     const jsonTemplate = {
       "version": "5",
       "id": "clnf6b4ug0001n936au17ar85",
-      "name": "Tema Instagram",
+      "name": "INSTAGRAM",
       "groups": [
         {
           "id": "y3gpb1w4v8jf0ycp1uibryxx",

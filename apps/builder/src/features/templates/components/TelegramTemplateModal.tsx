@@ -28,7 +28,7 @@ export const TelegramTemplateModal = ({ isOpen, onClose, isLoading }: Props) => 
     const jsonTemplate = {
       version: "5",
       id: "clnv5ok770068qi1pbyp9b6s9",
-      name: "TELEGRAM - FINAL",
+      name: "TELEGRAM",
       groups: [
         {
           id: "w04g51nfueflr3xb162nl5ff",
@@ -44,32 +44,7 @@ export const TelegramTemplateModal = ({ isOpen, onClose, isLoading }: Props) => 
             },
           ],
         },
-        {
-          id: "a3x8z1tyfh7spgs364yelciv",
-          title: "fhd",
-          graphCoordinates: { x: 11, y: 178 },
-          blocks: [
-            {
-              id: "ahn6o6k0y10acorfkp2wbsbk",
-              groupId: "a3x8z1tyfh7spgs364yelciv",
-              type: "image",
-              content: { url: "https://i.postimg.cc/DZMS8BfL/fhd.jpg" },
-            },
-          ],
-        },
-        {
-          id: "jfxwddsxnusr0cn0s64th8e4",
-          title: "hd",
-          graphCoordinates: { x: 7, y: 436 },
-          blocks: [
-            {
-              id: "fnny45ho2syrgzjehj5uxw82",
-              groupId: "jfxwddsxnusr0cn0s64th8e4",
-              type: "image",
-              content: { url: "https://i.postimg.cc/xqrqP8zd/hd.jpg" },
-            },
-          ],
-        },
+        
         {
           id: "nf5a58gns1dtgspxrb7a07pu",
           title: "inicio",

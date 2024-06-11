@@ -30,7 +30,7 @@ export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading }: Props) => 
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       icon: null,
-      name: "TEMA PREMIUM WHATSAPP",
+      name: "Whatsapp",
       folderId: null,
       groups: [
         {
@@ -47,71 +47,7 @@ export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading }: Props) => 
           ],
           graphCoordinates: { x: -27, y: 337.75 },
         },
-        {
-          id: "qx0ikq4ktmknqghjk70olyb9",
-          title: "Group #1",
-          blocks: [
-            {
-              id: "ua53tquusoeco9978szbzb6n",
-              type: "text",
-              content: {
-                richText: [{ type: "p", children: [{ text: "Olá tudo bem!" }] }],
-              },
-              groupId: "qx0ikq4ktmknqghjk70olyb9",
-            },
-            {
-              id: "ma95j91hggsb1drr56z9evsp",
-              type: "Wait",
-              groupId: "qx0ikq4ktmknqghjk70olyb9",
-              options: { secondsToWaitFor: "3" },
-            },
-            {
-              id: "p51zp0j4ndnblm38ebm0r3xo",
-              type: "text",
-              content: {
-                richText: [
-                  {
-                    type: "p",
-                    children: [
-                      { text: "Esse é o Tema " },
-                      { bold: true, text: "PREMIUM" },
-                      { text: " " },
-                      { bold: true, text: "WHATSAPP " },
-                      { text: "para typebot" },
-                    ],
-                  },
-                ],
-              },
-              groupId: "qx0ikq4ktmknqghjk70olyb9",
-            },
-            {
-              id: "nslv49yghe1uzu39empdzrhc",
-              type: "Wait",
-              groupId: "qx0ikq4ktmknqghjk70olyb9",
-              options: { secondsToWaitFor: "5" },
-            },
-            {
-              id: "uxpx45gqcioonjpi0ms8f310",
-              type: "text",
-              content: {
-                richText: [
-                  {
-                    type: "p",
-                    children: [
-                      { text: "Para alterar " },
-                      { bold: true, text: "nome, imagem de Avatar " },
-                      { text: "e" },
-                      { bold: true, text: " Site Redirect" },
-                      { text: " veja as aulas por favor." },
-                    ],
-                  },
-                ],
-              },
-              groupId: "qx0ikq4ktmknqghjk70olyb9",
-            },
-          ],
-          graphCoordinates: { x: 569, y: 494.75 },
-        },
+        
       ],
       variables: [
         { id: "vgo1ou573y95pw3pedsk4iakr", name: "n" },
