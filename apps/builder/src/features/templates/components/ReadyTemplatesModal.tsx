@@ -21,6 +21,7 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   onTypebotChoose: (template: string) => void;
+  onCreateTypebot: (typebot?: any) => void;
   isLoading: boolean;
 };
 
@@ -42,7 +43,7 @@ const TemplateButton = ({ logoSrc, label, onClick, isLoading }) => (
   </Button>
 );
 
-export const ReadyTemplatesModal = ({ isOpen, onClose, onTypebotChoose, isLoading }: Props) => {
+export const ReadyTemplatesModal = ({ isOpen, onClose, onTypebotChoose, isLoading, onCreateTypebot }: Props) => {
   const { t } = useTranslate();
   const { isOpen: isOpenWhatsAppTemplate, onOpen: onOpenWhatsAppTemplate, onClose: onCloseWhatsAppTemplate } = useDisclosure();
   const { isOpen: isOpenTelegramTemplate, onOpen: onOpenTelegramTemplate, onClose: onCloseTelegramTemplate } = useDisclosure();
@@ -96,16 +97,20 @@ export const ReadyTemplatesModal = ({ isOpen, onClose, onTypebotChoose, isLoadin
       <WhatsAppTemplateModal
         isOpen={isOpenWhatsAppTemplate}
         onClose={onCloseWhatsAppTemplate}
+        onTypebotChoose={onTypebotChoose}
+        onCreateTypebot={onCreateTypebot}
         isLoading={isLoading}
       />
       <TelegramTemplateModal
         isOpen={isOpenTelegramTemplate}
         onClose={onCloseTelegramTemplate}
+        onCreateTypebot={onCreateTypebot}
         isLoading={isLoading}
       />
       <InstagramTemplateModal
         isOpen={isOpenInstagramTemplate}
         onClose={onCloseInstagramTemplate}
+        onCreateTypebot={onCreateTypebot}
         isLoading={isLoading}
       />
     </>

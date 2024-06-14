@@ -111,6 +111,18 @@ export const CreateNewTypebotButtons = () => {
     <VStack maxW="600px" w="full" flex="1" pt="20" spacing={10}>
       <Heading>{t('templates.buttons.heading')}</Heading>
       <Stack w="full" spacing={6}>
+      <Button
+          variant="outline"
+          w="full"
+          py="8"
+          fontSize="lg"
+          leftIcon={<TemplateIcon color="blue.100" boxSize="25px" mr="2" />}
+          onClick={onOpenReadyTemplate}
+          isLoading={isLoading}
+        >
+          Template redes sociais
+        </Button>
+        
         <Button
           variant="outline"
           w="full"
@@ -144,17 +156,7 @@ export const CreateNewTypebotButtons = () => {
         >
           {t('templates.buttons.importFileButton.label')}
         </ImportTypebotFromFileButton>
-        <Button
-          variant="outline"
-          w="full"
-          py="8"
-          fontSize="lg"
-          leftIcon={<TemplateIcon color="blue.100" boxSize="25px" mr="2" />}
-          onClick={onOpenReadyTemplate}
-          isLoading={isLoading}
-        >
-          Template redes sociais
-        </Button>
+        
       </Stack>
       <TemplatesModal
         isOpen={isOpen}
@@ -167,6 +169,7 @@ export const CreateNewTypebotButtons = () => {
         onClose={onCloseReadyTemplate}
         onTypebotChoose={handleReadyTemplateChoose}
         isLoading={isLoading}
+        onCreateTypebot={handleCreateSubmit}
       />
     </VStack>
   );

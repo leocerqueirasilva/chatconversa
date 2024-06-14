@@ -17,9 +17,10 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   isLoading: boolean;
+  onCreateTypebot: (typebot?: any) => void;
 };
 
-export const InstagramTemplateModal = ({ isOpen, onClose, isLoading }: Props) => {
+export const InstagramTemplateModal = ({ isOpen, onClose, isLoading, onCreateTypebot }: Props) => {
   const [name, setName] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
   const [instaUrl, setInstaUrl] = useState('');
@@ -217,7 +218,7 @@ console.log('teste 1');
       },
       "createdAt": "2023-10-06T22:23:49.575Z",
       "updatedAt": "2023-10-10T13:00:56.521Z",
-      "icon": null,
+      "icon": 'https://igorlemoes.com.br/files/instagram/icon.png',
       "folderId": null,
       "publicId": "tema-instagram",
       "customDomain": null,
@@ -228,13 +229,7 @@ console.log('teste 1');
       "whatsAppCredentialsId": null
     };
 
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(jsonTemplate));
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", `${name}_template.json`);
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
+    onCreateTypebot(jsonTemplate); // Chame onCreateTypebot com o template
     onClose();
   };
 
@@ -268,7 +263,7 @@ console.log('teste 1');
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" onClick={handleDownloadJson} isLoading={isLoading}>
-            Gerar e Baixar
+            Importar template
           </Button>
         </ModalFooter>
       </ModalContent>

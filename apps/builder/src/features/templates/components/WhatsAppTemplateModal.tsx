@@ -17,9 +17,11 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   isLoading: boolean;
+  onTypebotChoose: (template: any) => void;
+  onCreateTypebot: (typebot?: any) => void;
 };
 
-export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading }: Props) => {
+export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading, onTypebotChoose, onCreateTypebot }: Props) => {
   const [name, setName] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
 
@@ -29,7 +31,7 @@ export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading }: Props) => 
       version: "3",
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      icon: null,
+      icon: 'https://ositte.com/wp-content/uploads/2023/07/zap-png.png',
       name: "Whatsapp",
       folderId: null,
       groups: [
@@ -803,13 +805,7 @@ export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading }: Props) => 
       isClosed: false,
     };
 
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(jsonTemplate));
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", `${name}_template.json`);
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
+    onCreateTypebot(jsonTemplate); // Chame onCreateTypebot com o template
     onClose();
   };
 
@@ -831,7 +827,7 @@ export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading }: Props) => 
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" onClick={handleDownloadJson} isLoading={isLoading}>
-            Gerar e Baixar
+            Importar template
           </Button>
         </ModalFooter>
       </ModalContent>

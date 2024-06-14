@@ -17,9 +17,10 @@ type Props = {
   isOpen: boolean;
   onClose: () => void;
   isLoading: boolean;
+  onCreateTypebot: (typebot?: any) => void;
 };
 
-export const TelegramTemplateModal = ({ isOpen, onClose, isLoading }: Props) => {
+export const TelegramTemplateModal = ({ isOpen, onClose, isLoading, onCreateTypebot }: Props) => {
   const [name, setName] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
   const [telegramUrl, setTelegramUrl] = useState('');
@@ -642,13 +643,7 @@ export const TelegramTemplateModal = ({ isOpen, onClose, isLoading }: Props) => 
       whatsAppCredentialsId: null,
     };
 
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(jsonTemplate));
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", `${name}_template.json`);
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
+    onCreateTypebot(jsonTemplate); // Chame onCreateTypebot com o template
     onClose();
   };
 
@@ -674,7 +669,7 @@ export const TelegramTemplateModal = ({ isOpen, onClose, isLoading }: Props) => 
       </ModalBody>
       <ModalFooter>
         <Button colorScheme="blue" onClick={handleDownloadJson} isLoading={isLoading}>
-          Gerar e Baixar
+          Importar template
         </Button>
       </ModalFooter>
     </ModalContent>
