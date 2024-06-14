@@ -12,6 +12,7 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { useToast } from '@/hooks/useToast'
 
 type Props = {
   isOpen: boolean;
@@ -24,6 +25,42 @@ export const TelegramTemplateModal = ({ isOpen, onClose, isLoading, onCreateType
   const [name, setName] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
   const [telegramUrl, setTelegramUrl] = useState('');
+  const { showToast } = useToast()
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      try {
+        const response = await fetch('/api/upload-file', {
+          method: 'POST',
+          body: file,
+          headers: {
+            'Content-Type': file.type,
+            'X-File-Name': file.name,
+          },
+        });
+        if (response.ok) {
+          const { url } = await response.json();
+          setAvatarUrl(url); // Atualiza o avatarUrl após o upload
+          showToast({
+            description: 'Avatar image uploaded successfully.',
+            status: 'success'
+          });
+        } else {
+          throw new Error('Failed to upload file');
+        }
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        showToast({
+          description: `Error while trying to upload the file: ${error.message}`,
+          status: 'error'
+        });
+      }
+    }
+  };
 
   const handleDownloadJson = () => {
     const jsonTemplate = {
@@ -658,10 +695,10 @@ export const TelegramTemplateModal = ({ isOpen, onClose, isLoading, onCreateType
           <FormLabel>Nome</FormLabel>
           <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Digite o nome" />
         </FormControl>
-        <FormControl id="avatarUrl" mb={4}>
-          <FormLabel>URL do Avatar</FormLabel>
-          <Input value={avatarUrl} onChange={(e) => setAvatarUrl(e.target.value)} placeholder="Digite a URL do avatar" />
-        </FormControl>
+        <FormControl id="avatarFile">
+            <FormLabel>Avatar Image</FormLabel>
+            <Input type="file" accept="image/*" onChange={handleFileChange} placeholder="Upload an avatar" />
+          </FormControl>
         <FormControl id="telegramUrl">
           <FormLabel>URL do Telegram</FormLabel>
           <Input value={telegramUrl} onChange={(e) => setTelegramUrl(e.target.value)} placeholder="Digite a URL do Telegram" />

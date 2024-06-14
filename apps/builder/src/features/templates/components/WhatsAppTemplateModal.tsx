@@ -12,6 +12,9 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { uploadFileToBucket } from '@typebot.io/lib/s3/uploadFileToBucket'
+import { useToast } from '@/hooks/useToast'
+
 
 type Props = {
   isOpen: boolean;
@@ -24,6 +27,46 @@ type Props = {
 export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading, onTypebotChoose, onCreateTypebot }: Props) => {
   const [name, setName] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatarFile, setAvatarFile] = useState(null);
+  const { showToast } = useToast()
+
+
+  
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      try {
+        const response = await fetch('/api/upload-file', {
+          method: 'POST',
+          body: file,
+          headers: {
+            'Content-Type': file.type,
+            'X-File-Name': file.name,
+          },
+        });
+        if (response.ok) {
+          const { url } = await response.json();
+          setAvatarFile(url);
+          setAvatarUrl(url); // Atualiza o avatarUrl após o upload
+          showToast({
+            description: 'Avatar image uploaded successfully.',
+            status: 'success'
+          });
+        } else {
+          throw new Error('Failed to upload file');
+        }
+      } catch (error) {
+        console.error('Error uploading file:', error);
+        showToast({
+          description: `Error while trying to upload the file: ${error.message}`,
+          status: 'error'
+        });
+      }
+    }
+  };
 
   const handleDownloadJson = () => {
     const jsonTemplate = {
@@ -820,9 +863,9 @@ export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading, onTypebotCho
             <FormLabel>Nome</FormLabel>
             <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Digite o nome" />
           </FormControl>
-          <FormControl id="avatarUrl">
-            <FormLabel>URL do Avatar</FormLabel>
-            <Input value={avatarUrl} onChange={(e) => setAvatarUrl(e.target.value)} placeholder="Digite a URL do avatar" />
+          <FormControl id="avatarFile">
+            <FormLabel>Avatar Image</FormLabel>
+            <Input type="file" accept="image/*" onChange={handleFileChange} placeholder="Upload an avatar" />
           </FormControl>
         </ModalBody>
         <ModalFooter>
