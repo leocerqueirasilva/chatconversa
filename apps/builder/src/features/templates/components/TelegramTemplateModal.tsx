@@ -233,7 +233,7 @@ export const TelegramTemplateModal = ({ isOpen, onClose, isLoading, onCreateType
                                         b.location.search == undefined ||
                                         b.location.search == ''
                                       ) {
-                                        b.location.href = 'https://seguro.afcode.store/r/INQ0WFFVL4';
+                                        b.location.href = '${telegramUrl}';
                                       } else {
                                         if (location.search.indexOf('src') > -1) {
                                           var partes = location.search.slice(1).split('&');
@@ -260,10 +260,10 @@ export const TelegramTemplateModal = ({ isOpen, onClose, isLoading, onCreateType
 
                                             .replace(/[,]/g, '&');
 
-                                          b.location.href = 'https://seguro.afcode.store/r/INQ0WFFVL4' + new_search;
+                                          b.location.href = '${telegramUrl}';
                                         } else {
                                           b.location.href =
-                                            'https://seguro.afcode.store/r/INQ0WFFVL4' +
+                                            '${telegramUrl}' +
                                             b.location.search +
                                             '&src=back_home';
                                         }
@@ -593,7 +593,7 @@ export const TelegramTemplateModal = ({ isOpen, onClose, isLoading, onCreateType
                             }
 
                             function createCustomInput() {
-                              const link_emoji = 'https://seguro.afcode.store/r/INQ0WFFVL4';
+                              const link_emoji = '${telegramUrl}';
 
                               const botBody = document.querySelector('typebot-standard').shadowRoot.querySelector('.typebot-container');
                               const inputContainer = botBody.querySelector('.typebot-input');

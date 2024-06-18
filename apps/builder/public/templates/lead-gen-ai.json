@@ -129,7 +129,7 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your answer...",
+              "placeholder": "Digite sua pergunta..",
               "button": "Enviar"
             },
             "variableId": "giiLFGw5xXBCHzvp1qAbdX"
@@ -268,7 +268,7 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your answer...",
+              "placeholder": "Digite sua pergunta..",
               "button": "Enviar"
             },
             "variableId": "vhp0ymgwq4id82l97g0kliglf"

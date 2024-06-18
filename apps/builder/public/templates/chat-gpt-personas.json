@@ -478,7 +478,7 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your answer...",
+              "placeholder": "Digite sua pergunta..",
               "button": "Enviar"
             },
             "variableId": "vevnx5f5bojz0sv648x6ppcmv",
@@ -507,7 +507,7 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your answer...",
+              "placeholder": "Digite sua pergunta..",
               "button": "Enviar"
             },
             "variableId": "vevnx5f5bojz0sv648x6ppcmv",
@@ -536,7 +536,7 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your answer...",
+              "placeholder": "Digite sua pergunta..",
               "button": "Enviar"
             },
             "variableId": "vevnx5f5bojz0sv648x6ppcmv",

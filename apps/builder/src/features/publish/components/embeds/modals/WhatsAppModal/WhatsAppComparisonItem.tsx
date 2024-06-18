@@ -59,7 +59,7 @@ const parseValuePlaceholder = (
       return 'Type a value...'
     case ComparisonOperators.LESS:
     case ComparisonOperators.GREATER:
-      return 'Type a number...'
+      return 'Digite um número..'
     case ComparisonOperators.IS_SET:
     case ComparisonOperators.IS_EMPTY:
       return ''

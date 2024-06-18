@@ -106,7 +106,7 @@
             "isLong": true,
             "labels": {
               "button": "Send",
-              "placeholder": "Type your answer..."
+              "placeholder": "Digite sua pergunta.."
             },
             "variableId": "v6NeJkZ8fSEjMVUA9D51u5k"
           }

@@ -134,7 +134,7 @@ export const SendEmailSettings = ({ options, onOptionsChange }: Props) => {
         )}
       </Stack>
       <TextInput
-        label="To:"
+        label="Para:"
         onChange={handleToChange}
         defaultValue={options?.recipients?.join(', ')}
         placeholder="email1@gmail.com, email2@gmail.com"

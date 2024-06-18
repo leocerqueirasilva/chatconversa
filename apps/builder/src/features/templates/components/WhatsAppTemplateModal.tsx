@@ -10,6 +10,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  FormHelperText
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { uploadFileToBucket } from '@typebot.io/lib/s3/uploadFileToBucket'
@@ -405,7 +406,7 @@ export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading, onTypebotCho
 
         var backButton = document.createElement('div');
         backButton.className = 'back';
-        backButton.innerHTML = '<a href="https://instalartypebot.com.br/"><i class="zmdi zmdi-arrow-left"></i></a>';
+        backButton.innerHTML = '<a href=""><i class="zmdi zmdi-arrow-left"></i></a>';
 
         var avatar = document.createElement('div');
         avatar.className = 'avatar';
@@ -462,7 +463,7 @@ export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading, onTypebotCho
                 b.location.search == undefined ||
                 b.location.search == ''
               ) {
-                b.location.href = 'https://instalartypebot.com.br/';
+                b.location.href = '';
               } else {
                 if (location.search.indexOf('src') > -1) {
                   var partes = location.search.slice(1).split('&');
@@ -866,6 +867,7 @@ export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading, onTypebotCho
           <FormControl id="avatarFile">
             <FormLabel>Avatar Image</FormLabel>
             <Input type="file" accept="image/*" onChange={handleFileChange} placeholder="Upload an avatar" />
+            <FormHelperText>A imagem precisa ser na resolução 500x500.</FormHelperText>
           </FormControl>
         </ModalBody>
         <ModalFooter>
@@ -876,4 +878,5 @@ export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading, onTypebotCho
       </ModalContent>
     </Modal>
   );
+  
 };

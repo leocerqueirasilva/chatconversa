@@ -17,7 +17,7 @@ test('should be configurable', async ({ page }) => {
 
   await page.goto(`/typebots/${typebotId}/edit`)
   await page.click('text=Configure...')
-  await page.click('input[placeholder="Select a typebot"]')
+  await page.click('input[placeholder="Selecionar um chat"]')
   await page.click('text=My link typebot 2')
   await expect(page.locator('input[value="My link typebot 2"]')).toBeVisible()
   await expect(page.getByText('Jump in My link typebot 2')).toBeVisible()
@@ -56,7 +56,7 @@ test('should be configurable', async ({ page }) => {
   await page.click('text=Jump to Start in My link typebot 2')
   await page.waitForTimeout(1000)
   await page.getByTestId('selected-item-label').first().click({ force: true })
-  await page.click('button >> text=Current typebot')
+  await page.click('button >> text=Chat atual')
   await page.getByRole('textbox').nth(1).click()
   await page.click('button >> text=Hello')
 

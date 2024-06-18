@@ -59,7 +59,7 @@
             "isLong": false,
             "labels": {
               "button": "Send",
-              "placeholder": "Type your answer..."
+              "placeholder": "Digite sua pergunta.."
             },
             "variableId": "htYvG7crtdjpsZ6XKTh1PM"
           }

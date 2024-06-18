@@ -28,7 +28,7 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your answer...",
+              "placeholder": "Digite sua pergunta..",
               "button": "Send"
             },
             "isLong": false

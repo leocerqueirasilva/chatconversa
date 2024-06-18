@@ -28,7 +28,7 @@
           "groupId": "bg4QEJseUsTP496H27j5k2",
           "options": {
             "isLong": false,
-            "labels": { "button": "Send", "placeholder": "Type your answer..." }
+            "labels": { "button": "Send", "placeholder": "Digite sua pergunta.." }
           },
           "outgoingEdgeId": "aEBnubX4EMx4Cse6xPAR1m"
         }

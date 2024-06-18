@@ -24,10 +24,9 @@ export const SecurityForm = ({ security, onUpdate }: Props) => {
     <Stack spacing={6}>
       <FormControl>
         <FormLabel display="flex" flexShrink={0} gap="1" mr="0" mb="4">
-          Allowed origins
+          Permitir origins
           <MoreInfoTooltip>
-            Restrict the execution of your typebot to specific website origins.
-            By default your bot can be executed on any website.
+            Permitir execulção de um chat em um site especifico
           </MoreInfoTooltip>
         </FormLabel>
         <PrimitiveList

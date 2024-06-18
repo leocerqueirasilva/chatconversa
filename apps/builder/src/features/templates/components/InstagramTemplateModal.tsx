@@ -94,25 +94,7 @@ export const InstagramTemplateModal = ({ isOpen, onClose, isLoading, onCreateTyp
         
         
         
-        {
-          "id": "s55zoc0af1j628gnvc5xn2ex",
-          "title": "Site",
-          "graphCoordinates": {
-            "x": 1123,
-            "y": 664
-          },
-          "blocks": [
-            {
-              "id": "q8ekjonhezu4wrahu9nyz7lc",
-              "groupId": "s55zoc0af1j628gnvc5xn2ex",
-              "type": "Redirect",
-              "options": {
-                "url": "https://igorlemoes.com.br",
-                "isNewTab": true
-              }
-            }
-          ]
-        }
+        
       ],
       "edges": [
         {

@@ -119,15 +119,15 @@ export const WhatsAppSettings = ({ options, onOptionsChange }: Props) => {
       <WhatsAppAuthModal isOpen={isOpen} onClose={onClose} />
 
       <TextInput
-        label="receiver number:"
+        label="Destinatário:"
         onChange={handleToChange}
         defaultValue={options?.recipients?.join(', ')}
-        placeholder="phone number"
+        placeholder="Número do destinatário"
       />
 
       <Stack>
         <Textarea
-          label="Message:"
+          label="Mensagem:"
           data-testid="body-input"
           minH="150px"
           onChange={handleBodyChange}
@@ -136,13 +136,13 @@ export const WhatsAppSettings = ({ options, onOptionsChange }: Props) => {
         <Stack pb="4">
           <HStack>
             <FormLabel m="0" htmlFor="variable">
-              Attach file:
+              Arquivos:
             </FormLabel>
           </HStack>
           <Box>
             <InputGroup>
               <Input
-                placeholder="Upload file"
+                placeholder="Upload de arquivos"
                 readOnly
                 value={options?.fileName ?? ''}
                 display={'flex'}
@@ -191,7 +191,7 @@ export const WhatsAppSettings = ({ options, onOptionsChange }: Props) => {
               onOpen()
             }}
           >
-            Check Auth
+            Autenticar
           </Button>
         </Stack>
       </Stack>
