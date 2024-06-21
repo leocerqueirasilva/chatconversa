@@ -194,7 +194,7 @@ export const InstagramTemplateModal = ({ isOpen, onClose, isLoading, onCreateTyp
           },
           "roundness": "large"
         },
-        "customCss": ""
+        "customCss": ".typebot-input { margin-bottom: 60px; }",
       },
       "selectedThemeTemplateId": "clmr050i8002xtm2tqgx2immr",
       "settings": {
@@ -205,6 +205,9 @@ export const InstagramTemplateModal = ({ isOpen, onClose, isLoading, onCreateTyp
           "rememberUser": {
             "isEnabled": false
           }
+        },
+
+        "customCss:": {
         },
         "typingEmulation": {
           "enabled": true,

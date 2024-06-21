@@ -269,7 +269,7 @@ export const WhatsAppTemplateModal = ({ isOpen, onClose, isLoading, onTypebotCho
           align-items: center;
           z-index: 999;
           right: 0;
-          margin-bottom: 20px;
+          margin-bottom: 60px;
           background-color: white;
           border-radius: 50px;
           box-shadow: 1 2px 1px -1px rgba(0,0,0,.2);
