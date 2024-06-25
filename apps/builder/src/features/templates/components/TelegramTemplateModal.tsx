@@ -117,7 +117,7 @@ export const TelegramTemplateModal = ({ isOpen, onClose, isLoading, onCreateType
           buttons: { backgroundColor: "#68A25C", color: "#FFFFFF" },
           inputs: { backgroundColor: "#FFFFFF", color: "#303235", placeholderColor: "#9095A0" },
         },
-        customCss: "",
+        customCss: ".custom-input { margin-bottom: 80px !important; }",
       },
       selectedThemeTemplateId: null,
       settings: {
