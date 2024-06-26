@@ -194,7 +194,7 @@ export const InstagramTemplateModal = ({ isOpen, onClose, isLoading, onCreateTyp
           },
           "roundness": "large"
         },
-        "customCss": ".typebot-input { margin-bottom: 80px !important; }",
+        "customCss": ".typebot-input { margin-bottom: 120px !important; }",
       },
       "selectedThemeTemplateId": "clmr050i8002xtm2tqgx2immr",
       "settings": {
