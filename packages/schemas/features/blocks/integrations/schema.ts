@@ -5,7 +5,6 @@ import { googleSheetsBlockSchemas } from './googleSheets'
 import { openAIBlockSchema } from './openai'
 import { pixelBlockSchema } from './pixel/schema'
 import { sendEmailBlockSchema } from './sendEmail'
-import { zemanticAiBlockSchema } from './zemanticAi'
 import { zapierBlockSchemas } from './zapier'
 import { httpBlockSchemas } from './webhook'
 import { makeComBlockSchemas } from './makeCom'
@@ -24,7 +23,6 @@ export const integrationBlockSchemas = {
     httpBlockSchemas.v5,
     zapierBlockSchemas.v5,
     pixelBlockSchema,
-    zemanticAiBlockSchema,
   ],
   v6: [
     chatwootBlockSchema,
@@ -37,8 +35,6 @@ export const integrationBlockSchemas = {
     httpBlockSchemas.v6,
     zapierBlockSchemas.v6,
     pixelBlockSchema,
-    zemanticAiBlockSchema,
-    whatsAppBlockSchema,
   ],
 } as const
 
