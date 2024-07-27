@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react'
 import {
   ChevronLeftIcon,
+  CopyIcon,
   DownloadIcon,
   PlayIcon,
   RedoIcon,
@@ -50,7 +51,7 @@ export const TypebotHeader = () => {
       justify="center"
       align="center"
       h={`${headerHeight}px`}
-      zIndex={100}
+      zIndex={1}
       pos="relative"
       bgColor={headerBgColor}
       flexShrink={0}
@@ -230,7 +231,7 @@ const RightElements = ({
 }: StackProps & { isResultsDisplayed: boolean }) => {
   const router = useRouter()
   const { t } = useTranslate()
-  const { typebot, currentUserMode, save } = useTypebot()
+  const { typebot, currentUserMode, save, isSavingLoading } = useTypebot()
   const {
     setRightPanel,
     rightPanel,
@@ -243,7 +244,7 @@ const RightElements = ({
   const handlePreviewClick = async () => {
     setStartPreviewAtGroup(undefined)
     setStartPreviewAtEvent(undefined)
-    save().then()
+    await save()
     setRightPanel(RightPanel.PREVIEW)
   }
 
@@ -273,16 +274,13 @@ const RightElements = ({
       />
       {router.pathname.includes('/edit') && isNotDefined(rightPanel) && (
         <Button
-          colorScheme="gray"
-          onClick={handlePreviewClick}
+          as={Link}
+          href={`/typebots/${typebot?.id}/duplicate`}
+          leftIcon={<CopyIcon />}
           isLoading={isNotDefined(typebot)}
-          leftIcon={<PlayIcon />}
           size="sm"
-          iconSpacing={{ base: 0, xl: 2 }}
         >
-          <chakra.span display={{ base: 'none', xl: 'inline' }}>
-            {t('editor.header.previewButton.label')}
-          </chakra.span>
+          Duplicate
         </Button>
       )}
       {router.pathname.includes('/edit') && isNotDefined(rightPanel) && (

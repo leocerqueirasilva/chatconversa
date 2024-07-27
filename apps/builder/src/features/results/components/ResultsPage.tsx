@@ -1,5 +1,4 @@
 import { Seo } from '@/components/Seo'
-import { AnalyticsGraphContainer } from '@/features/analytics/components/AnalyticsGraphContainer'
 import { TypebotHeader } from '@/features/editor/components/TypebotHeader'
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
