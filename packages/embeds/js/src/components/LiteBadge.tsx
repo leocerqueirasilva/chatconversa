@@ -37,17 +37,4 @@ export const LiteBadge = (props: Props) => {
     if (observer) observer.disconnect()
   })
 
-  return (
-    <a
-      ref={liteBadge}
-      href={'https://www.chatresponde.site'}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="lite-badge"
-      id="lite-badge"
-    >
-      <TypebotLogo />
-      <span>Made with ChatResponde</span>
-    </a>
-  )
 }

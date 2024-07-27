@@ -8,16 +8,16 @@ import {
   HStack,
   Stack,
 } from '@chakra-ui/react'
-import { ChatIcon, CodeIcon, DropletIcon, TableIcon } from '@/components/icons'
+import { ChatIcon, CodeIcon, EditIcon, TableIcon } from '@/components/icons'
 import { ChatTheme, GeneralTheme, ThemeTemplate } from '@typebot.io/schemas'
 import React from 'react'
 import { CustomCssSettings } from './CustomCssSettings'
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 import { ChatThemeSettings } from './chat/ChatThemeSettings'
-import { GeneralSettings } from './general/GeneralSettings'
 import { ThemeTemplates } from './ThemeTemplates'
 import { defaultSettings } from '@typebot.io/schemas/features/typebot/settings/constants'
 import { useTranslate } from '@tolgee/react'
+import { FontsAndColorsSeetings } from './fontsAndColors/FontsAndColorsSeetings'
 
 export const ThemeSideMenu = () => {
   const { t } = useTranslate()
@@ -98,14 +98,16 @@ export const ThemeSideMenu = () => {
         <AccordionItem>
           <AccordionButton py={6}>
             <HStack flex="1" pl={2}>
-              <DropletIcon />
-              <Heading fontSize="lg">{t('theme.sideMenu.global')}</Heading>
+              <EditIcon />
+              <Heading fontSize="lg">
+                {t('theme.sideMenu.fontsAndColors')}
+              </Heading>
             </HStack>
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel pb={4}>
             {typebot && (
-              <GeneralSettings
+              <FontsAndColorsSeetings
                 key={templateId}
                 isBrandingEnabled={
                   typebot.settings.general?.isBrandingEnabled ??

@@ -12,8 +12,9 @@ import {
   chakra,
 } from '@chakra-ui/react'
 import {
-  BuoyIcon,
   ChevronLeftIcon,
+  CopyIcon,
+  DownloadIcon,
   PlayIcon,
   RedoIcon,
   UndoIcon,
@@ -25,31 +26,22 @@ import { EditableTypebotName } from './EditableTypebotName'
 import Link from 'next/link'
 import { EditableEmojiOrImageIcon } from '@/components/EditableEmojiOrImageIcon'
 import { useDebouncedCallback } from 'use-debounce'
-import { ShareTypebotButton } from '@/features/share/components/ShareTypebotButton'
 import { PublishButton } from '@/features/publish/components/PublishButton'
 import { headerHeight } from '../constants'
 import { RightPanel, useEditor } from '../providers/EditorProvider'
 import { useTypebot } from '../providers/TypebotProvider'
 import { SupportBubble } from '@/components/SupportBubble'
-import { isCloudProdInstance } from '@/helpers/isCloudProdInstance'
 import { useTranslate } from '@tolgee/react'
 import { GuestTypebotHeader } from './UnauthenticatedTypebotHeader'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
-import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
-import { Plan } from '@typebot.io/prisma'
+import assert from 'assert'
+import { parseDefaultPublicId } from '@/features/publish/helpers/parseDefaultPublicId'
 
 export const TypebotHeader = () => {
   const { typebot, publishedTypebot, currentUserMode } = useTypebot()
-  const { workspace } = useWorkspace()
 
-  const { isOpen, onOpen } = useDisclosure()
+  const { isOpen } = useDisclosure()
   const headerBgColor = useColorModeValue('white', 'gray.900')
-
-  const handleHelpClick = () => {
-    isCloudProdInstance() && workspace?.plan && workspace.plan !== Plan.FREE
-      ? onOpen()
-      : window.open('https://docs.typebot.io/guides/how-to-get-help', '_blank')
-  }
 
   if (currentUserMode === 'guest') return <GuestTypebotHeader />
   return (
@@ -59,13 +51,13 @@ export const TypebotHeader = () => {
       justify="center"
       align="center"
       h={`${headerHeight}px`}
-      zIndex={100}
+      zIndex={1}
       pos="relative"
       bgColor={headerBgColor}
       flexShrink={0}
     >
       {isOpen && <SupportBubble autoShowDelay={0} />}
-      <LeftElements pos="absolute" left="1rem" onHelpClick={handleHelpClick} />
+      <LeftElements pos="absolute" left="1rem" />
       <TypebotNav
         display={{ base: 'none', xl: 'flex' }}
         pos={{ base: 'absolute' }}
@@ -82,10 +74,7 @@ export const TypebotHeader = () => {
   )
 }
 
-const LeftElements = ({
-  onHelpClick,
-  ...props
-}: StackProps & { onHelpClick: () => void }) => {
+const LeftElements = ({ ...props }: StackProps) => {
   const { t } = useTranslate()
   const router = useRouter()
   const {
@@ -223,16 +212,6 @@ const LeftElements = ({
             </Tooltip>
           </HStack>
         )}
-        <Button
-          leftIcon={<BuoyIcon />}
-          onClick={onHelpClick}
-          size="sm"
-          iconSpacing={{ base: 0, xl: 2 }}
-        >
-          <chakra.span display={{ base: 'none', xl: 'inline' }}>
-            {t('editor.header.helpButton.label')}
-          </chakra.span>
-        </Button>
       </HStack>
       {isSavingLoading && (
         <HStack>
@@ -252,7 +231,7 @@ const RightElements = ({
 }: StackProps & { isResultsDisplayed: boolean }) => {
   const router = useRouter()
   const { t } = useTranslate()
-  const { typebot, currentUserMode, save } = useTypebot()
+  const { typebot, currentUserMode, save, isSavingLoading } = useTypebot()
   const {
     setRightPanel,
     rightPanel,
@@ -260,11 +239,30 @@ const RightElements = ({
     setStartPreviewAtEvent,
   } = useEditor()
 
+  const [isDownloading, setIsDownloading] = useState(false)
+
   const handlePreviewClick = async () => {
     setStartPreviewAtGroup(undefined)
     setStartPreviewAtEvent(undefined)
-    save().then()
+    await save()
     setRightPanel(RightPanel.PREVIEW)
+  }
+
+  const downloadFlow = () => {
+    assert(typebot)
+    setIsDownloading(true)
+    const data =
+      'data:application/json;charset=utf-8,' +
+      encodeURIComponent(JSON.stringify(typebot))
+    const fileName = `typebot-export-${parseDefaultPublicId(
+      typebot.name,
+      typebot.id
+    )}.json`
+    const linkElement = document.createElement('a')
+    linkElement.setAttribute('href', data)
+    linkElement.setAttribute('download', fileName)
+    linkElement.click()
+    setIsDownloading(false)
   }
 
   return (
@@ -274,20 +272,28 @@ const RightElements = ({
         typebotId={typebot?.id}
         isResultsDisplayed={isResultsDisplayed}
       />
-      <Flex pos="relative">
-        <ShareTypebotButton isLoading={isNotDefined(typebot)} />
-      </Flex>
+      {router.pathname.includes('/edit') && isNotDefined(rightPanel) && (
+        <Button
+          as={Link}
+          href={`/typebots/${typebot?.id}/duplicate`}
+          leftIcon={<CopyIcon />}
+          isLoading={isNotDefined(typebot)}
+          size="sm"
+        >
+          Duplicate
+        </Button>
+      )}
       {router.pathname.includes('/edit') && isNotDefined(rightPanel) && (
         <Button
           colorScheme="gray"
-          onClick={handlePreviewClick}
-          isLoading={isNotDefined(typebot)}
-          leftIcon={<PlayIcon />}
+          onClick={downloadFlow}
+          isLoading={isDownloading}
+          leftIcon={<DownloadIcon />}
           size="sm"
           iconSpacing={{ base: 0, xl: 2 }}
         >
           <chakra.span display={{ base: 'none', xl: 'inline' }}>
-            {t('editor.header.previewButton.label')}
+            {t('editor.header.exportFlowButton.label')}
           </chakra.span>
         </Button>
       )}

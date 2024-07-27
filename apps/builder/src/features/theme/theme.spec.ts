@@ -31,7 +31,9 @@ test.describe.parallel('Theme page', () => {
         page.locator('a:has-text("Made with ChatResponde")')
       ).toHaveAttribute('href', 'https://www.chatresponde.site')
       await page.click('text="Show Typebot brand"')
-      await expect(page.locator('a:has-text("Made with ChatResponde")')).toBeHidden()
+      await expect(
+        page.locator('a:has-text("Made with ChatResponde")')
+      ).toBeHidden()
 
       // Font
       await page.getByRole('button', { name: 'Font' }).click()

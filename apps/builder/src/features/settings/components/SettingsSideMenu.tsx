@@ -83,7 +83,7 @@ export const SettingsSideMenu = () => {
           <AccordionButton py={6}>
             <HStack flex="1" pl={2}>
               <ChatIcon />
-              <Heading fontSize="lg">Typing</Heading>
+              <Heading fontSize="lg">Escrita</Heading>
             </HStack>
             <AccordionIcon />
           </AccordionButton>
@@ -100,7 +100,7 @@ export const SettingsSideMenu = () => {
           <AccordionButton py={6}>
             <HStack flex="1" pl={2}>
               <LockedIcon />
-              <Heading fontSize="lg">Security</Heading>
+              <Heading fontSize="lg">Segurança</Heading>
             </HStack>
             <AccordionIcon />
           </AccordionButton>

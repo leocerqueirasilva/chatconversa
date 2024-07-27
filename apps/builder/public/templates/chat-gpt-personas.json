@@ -25,7 +25,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "You need to add your OpenAI credentials to make this bot work. 🪄"
+                    "text": "Você precisa adicionar suas credenciais OpenAI para fazer este bot funcionar."
                   }
                 ]
               }
@@ -41,7 +41,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Once it's done, delete this group and connect the "
+                    "text": "Quando terminar, exclua este grupo e conecte o "
                   },
                   { "bold": true, "text": "Start" },
                   { "text": " block with " },
@@ -478,8 +478,8 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your answer...",
-              "button": "Send"
+              "placeholder": "Digite sua pergunta..",
+              "button": "Enviar"
             },
             "variableId": "vevnx5f5bojz0sv648x6ppcmv",
             "isLong": true
@@ -507,8 +507,8 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your answer...",
-              "button": "Send"
+              "placeholder": "Digite sua pergunta..",
+              "button": "Enviar"
             },
             "variableId": "vevnx5f5bojz0sv648x6ppcmv",
             "isLong": true
@@ -536,8 +536,8 @@
           "type": "text input",
           "options": {
             "labels": {
-              "placeholder": "Type your answer...",
-              "button": "Send"
+              "placeholder": "Digite sua pergunta..",
+              "button": "Enviar"
             },
             "variableId": "vevnx5f5bojz0sv648x6ppcmv",
             "isLong": false
@@ -684,9 +684,21 @@
     }
   ],
   "variables": [
-    { "id": "vni6kwbch8zlq92dclgcivzyr", "name": "Assistant Message" },
-    { "id": "vevnx5f5bojz0sv648x6ppcmv", "name": "User Message" },
-    { "id": "vu9adij5penetej2xz89htfe6", "name": "Chat history" }
+    {
+      "id": "vni6kwbch8zlq92dclgcivzyr",
+      "name": "Assistant Message",
+      "isSessionVariable": true
+    },
+    {
+      "id": "vevnx5f5bojz0sv648x6ppcmv",
+      "name": "User Message",
+      "isSessionVariable": true
+    },
+    {
+      "id": "vu9adij5penetej2xz89htfe6",
+      "name": "Chat history",
+      "isSessionVariable": true
+    }
   ],
   "theme": {},
   "selectedThemeTemplateId": null,

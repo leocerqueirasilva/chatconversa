@@ -202,6 +202,7 @@ export const PublishButton = ({
       >
         <Button
           colorScheme="blue"
+          variant="gradient"
           isLoading={isPublishing || isUnpublishing}
           isDisabled={isPublished || isSavingLoading}
           onClick={() => {
@@ -227,6 +228,7 @@ export const PublishButton = ({
           <MenuButton
             as={IconButton}
             colorScheme={'blue'}
+            variant="gradient"
             borderLeftRadius={0}
             icon={<ChevronLeftIcon transform="rotate(-90deg)" />}
             aria-label={t('publishButton.dropdown.showMenu.label')}

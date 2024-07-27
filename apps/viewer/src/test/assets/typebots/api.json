@@ -55,7 +55,7 @@
               "id": "hQw2zbp7FDX7XYK9cFpbgC",
               "type": 0,
               "blockId": "sbjZWLJGVkHAkDqS4JQeGow",
-              "content": "Hi!"
+              "content": "Olá!"
             }
           ],
           "groupId": "kinRXxYop2X4d7F9qt8WNB",
@@ -120,7 +120,7 @@
           "groupId": "q5dAhqSTCaNdiGSJm9B9Rw",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "Qual o seu nome?" }] }
             ]
           }
         },
@@ -132,7 +132,7 @@
             "isLong": false,
             "labels": {
               "button": "Send",
-              "placeholder": "Type your answer..."
+              "placeholder": "Digite sua pergunta.."
             },
             "variableId": "giiLFGw5xXBCHzvp1qAbdX"
           },
@@ -219,7 +219,7 @@
           "groupId": "7qHBEyCMvKEJryBHzPmHjV",
           "options": {
             "isLong": true,
-            "labels": { "button": "Send", "placeholder": "Type your answer..." }
+            "labels": { "button": "Send", "placeholder": "Digite sua pergunta.." }
           },
           "outgoingEdgeId": "sH5nUssG2XQbm6ZidGv9BY"
         }

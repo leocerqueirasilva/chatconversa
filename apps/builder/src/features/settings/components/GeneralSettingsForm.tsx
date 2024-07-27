@@ -66,7 +66,7 @@ export const GeneralSettingsForm = ({
   return (
     <Stack spacing={6}>
       <SwitchWithLabel
-        label="Prefill input"
+        label="Entrada de pré-preenchimento"
         initialValue={
           generalSettings?.isInputPrefillEnabled ??
           defaultSettings.general.isInputPrefillEnabled
@@ -75,7 +75,7 @@ export const GeneralSettingsForm = ({
         moreInfoContent="Inputs are automatically pre-filled whenever their associated variable has a value"
       />
       <SwitchWithLabel
-        label="Hide query params on bot start"
+        label="Ocultar parâmetros de consulta no início do bot"
         initialValue={
           generalSettings?.isHideQueryParamsEnabled ??
           defaultSettings.general.isHideQueryParamsEnabled
@@ -84,7 +84,7 @@ export const GeneralSettingsForm = ({
         moreInfoContent="If your URL contains query params, they will be automatically hidden when the bot starts."
       />
       <SwitchWithRelatedSettings
-        label={'Remember user'}
+        label={'Lembrar usuário'}
         moreInfoContent="If enabled, the chat state will be restored if the user comes back after exiting."
         initialValue={
           generalSettings?.rememberUser?.isEnabled ??

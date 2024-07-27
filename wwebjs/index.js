@@ -7,8 +7,14 @@ const axios = require('axios')
 const app = express()
 const port = 3010
 
-app.use(express.json())
-app.use(cors())
+// Configurar CORS
+app.use(cors({
+  origin: '*', // Permite todas as origens. Você pode ajustar conforme necessário.
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.options('*', cors());
 
 class WhatsAppClient {
   constructor() {
@@ -74,11 +80,14 @@ class WhatsAppClient {
 const whatsAppClient = new WhatsAppClient()
 
 app.get('/ping', (req, res) => {
-  res.send('Pong')
+  console.log('ping called');
+  res.send('Pong');
 })
 
 app.get('/auth', async (req, res) => {
   try {
+
+    console.log('auth called');
     let { qrString, isLoggedIn } = whatsAppClient.getAuth()
 
     let counter = 0

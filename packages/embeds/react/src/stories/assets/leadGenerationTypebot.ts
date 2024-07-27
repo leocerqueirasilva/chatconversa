@@ -141,7 +141,7 @@ export const leadGenerationTypebot: StartTypebot = {
             isLong: false,
             labels: {
               button: 'Send',
-              placeholder: 'Type your answer...',
+              placeholder: 'Digite sua pergunta..',
             },
             variableId: 'giiLFGw5xXBCHzvp1qAbdX',
           },
@@ -224,7 +224,7 @@ export const leadGenerationTypebot: StartTypebot = {
           type: InputBlockType.TEXT,
           options: {
             isLong: true,
-            labels: { button: 'Send', placeholder: 'Type your answer...' },
+            labels: { button: 'Send', placeholder: 'Digite sua pergunta..' },
           },
           outgoingEdgeId: 'clckrl4q5000s3b6stx5nnqbz',
         },

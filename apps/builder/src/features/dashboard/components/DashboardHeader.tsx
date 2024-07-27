@@ -1,24 +1,43 @@
 import React from 'react'
-import { HStack, Flex, Button, useDisclosure } from '@chakra-ui/react'
-import { HardDriveIcon, SettingsIcon } from '@/components/icons'
+import {
+  HStack,
+  Flex,
+  Button,
+  useDisclosure,
+  Avatar,
+  Text,
+} from '@chakra-ui/react'
+import { UsersIcon } from '@/components/icons'
 import { useUser } from '@/features/account/hooks/useUser'
 import { isNotDefined } from '@typebot.io/lib'
-import Link from 'next/link'
-import { EmojiOrImageIcon } from '@/components/EmojiOrImageIcon'
 import { useTranslate } from '@tolgee/react'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
 import { WorkspaceDropdown } from '@/features/workspace/components/WorkspaceDropdown'
-import { WorkspaceSettingsModal } from '@/features/workspace/components/WorkspaceSettingsModal'
+import { MyProfileModal } from '@/features/account/components/MyProfileModal'
+import { MembersListModal } from '@/features/workspace/components/MembersListModal'
+import ThemeSwitcher from '@/features/dashboard/components/ThemeSwitcher'
+import { UserPreferencesModal } from '@/features/account/components/UserPreferencesModal'
 
 export const DashboardHeader = () => {
   const { t } = useTranslate()
   const { user, logOut } = useUser()
-  const { workspace, switchWorkspace, createWorkspace } = useWorkspace()
+  const { workspace } = useWorkspace()
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const handleCreateNewWorkspace = () =>
-    createWorkspace(user?.name ?? undefined)
+  const {
+    isOpen: isMembersListModalOpen,
+    onOpen: onMembersListModalOpen,
+    onClose: onMembersListModalClose,
+  } = useDisclosure()
+  const {
+    isOpen: isMyProfileModalOpen,
+    onOpen: onMyProfileModalOpen,
+    onClose: onMyProfileModalClose,
+  } = useDisclosure()
+  const {
+    isOpen: isPreferencesModalOpen,
+    onOpen: onPreferencesModalOpen,
+    onClose: onPreferencesModalClose,
+  } = useDisclosure()
 
   return (
     <Flex w="full" borderBottomWidth="1px" justify="center">
@@ -29,26 +48,31 @@ export const DashboardHeader = () => {
         maxW="1000px"
         flex="1"
       >
-        <Link href="/typebots" data-testid="typebot-logo">
-          <EmojiOrImageIcon
-            boxSize="30px"
-            icon={workspace?.icon}
-            defaultIcon={HardDriveIcon}
+        <HStack onClick={onMyProfileModalOpen} cursor="pointer">
+          {user && workspace && !workspace.isPastDue && (
+            <MyProfileModal
+              isOpen={isMyProfileModalOpen}
+              onClose={onMyProfileModalClose}
+            />
+          )}
+          <Avatar
+            name={user?.name ?? undefined}
+            src={user?.image ?? undefined}
+            onClick={onMyProfileModalOpen}
           />
-        </Link>
+          <Text onClick={onMyProfileModalOpen}>{user?.name}</Text>
+        </HStack>
         <HStack>
           {user && workspace && !workspace.isPastDue && (
-            <WorkspaceSettingsModal
-              isOpen={isOpen}
-              onClose={onClose}
-              user={user}
-              workspace={workspace}
+            <MembersListModal
+              isOpen={isMembersListModalOpen}
+              onClose={onMembersListModalClose}
             />
           )}
           {!workspace?.isPastDue && (
             <Button
-              leftIcon={<SettingsIcon />}
-              onClick={onOpen}
+              leftIcon={<UsersIcon />}
+              onClick={onMembersListModalOpen}
               isLoading={isNotDefined(workspace)}
             >
               {t('dashboard.header.settingsButton.label')}
@@ -56,10 +80,16 @@ export const DashboardHeader = () => {
           )}
           <WorkspaceDropdown
             currentWorkspace={workspace}
+            onPreferencesModalOpen={onPreferencesModalOpen}
             onLogoutClick={logOut}
-            onCreateNewWorkspaceClick={handleCreateNewWorkspace}
-            onWorkspaceSelected={switchWorkspace}
           />
+          {user && workspace && !workspace.isPastDue && (
+            <UserPreferencesModal
+              isOpen={isPreferencesModalOpen}
+              onClose={onPreferencesModalClose}
+            />
+          )}
+          <ThemeSwitcher />
         </HStack>
       </Flex>
     </Flex>

@@ -20,7 +20,7 @@
           "id": "vep990mmfbe64nqczp66xebw",
           "type": "text",
           "content": {
-            "richText": [{ "type": "p", "children": [{ "text": "Hey! 👋" }] }]
+            "richText": [{ "type": "p", "children": [{ "text": "Oi! 👋" }] }]
           }
         },
         {
@@ -32,9 +32,9 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Since you are part of our daily users, can I ask you "
+                    "text": "Como você faz parte de nossos usuários diários, posso fazer  "
                   },
-                  { "bold": true, "text": "2 questions" },
+                  { "bold": true, "text": "2 perguntas" },
                   { "text": "?" }
                 ]
               }
@@ -48,7 +48,7 @@
             {
               "id": "wvjhc2vrkqy8512y0wvmciex",
               "outgoingEdgeId": "sjeyoptun1yu805ry37je1ni",
-              "content": "Sure!"
+              "content": "Claro!"
             }
           ]
         }
@@ -575,8 +575,16 @@
     }
   ],
   "variables": [
-    { "id": "vwqc8tzl0380h30vxh07fekmm", "name": "Recommend rate" },
-    { "id": "vcgkjbh8intf2cql1oteyj4mu", "name": "Type" }
+    {
+      "id": "vwqc8tzl0380h30vxh07fekmm",
+      "name": "Recommend rate",
+      "isSessionVariable": true
+    },
+    {
+      "id": "vcgkjbh8intf2cql1oteyj4mu",
+      "name": "Type",
+      "isSessionVariable": true
+    }
   ],
   "theme": {},
   "selectedThemeTemplateId": null,
