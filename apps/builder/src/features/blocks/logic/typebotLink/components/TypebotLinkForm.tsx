@@ -70,8 +70,8 @@ export const TypebotLinkForm = ({ options, onOptionsChange }: Props) => {
       )}
       {!isCurrentTypebotSelected && (
         <SwitchWithLabel
-          label="Merge answers"
-          moreInfoContent="If enabled, the answers collected in the linked typebot will be merged with the results of the current typebot."
+          label="Juntar respostas"
+          moreInfoContent="Se habilitado, as respostas coletadas no typebot vinculado serão mescladas com os resultados do Chat atual."
           initialValue={
             options?.mergeResults ?? defaultTypebotLinkOptions.mergeResults
           }

@@ -1,12 +1,10 @@
+import { VStack, Heading, Stack, Button, useDisclosure } from '@chakra-ui/react'
 import {
-  VStack,
-  Heading,
-  Stack,
-  Button,
-  useDisclosure,
-  useColorModeValue,
-} from '@chakra-ui/react'
-import { ToolIcon, TemplateIcon, DownloadIcon } from '@/components/icons'
+  DownloadIcon,
+  FlagIcon,
+  TableIcon,
+  TemplateIcon,
+} from '@/components/icons'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { ImportTypebotFromFileButton } from './ImportTypebotFromFileButton'
@@ -17,6 +15,7 @@ import { trpc } from '@/lib/trpc'
 import { useTranslate } from '@tolgee/react'
 import { Typebot } from '@typebot.io/schemas'
 import { TemplatesModal } from './TemplatesModal'
+import { ReadyTemplatesModal } from './ReadyTemplatesModal'
 
 export const CreateNewTypebotButtons = () => {
   const { t } = useTranslate()
@@ -24,6 +23,11 @@ export const CreateNewTypebotButtons = () => {
   const { user } = useUser()
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const {
+    isOpen: isOpenReadyTemplate,
+    onOpen: onOpenReadyTemplate,
+    onClose: onCloseReadyTemplate,
+  } = useDisclosure()
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -42,12 +46,6 @@ export const CreateNewTypebotButtons = () => {
     onSuccess: (data) => {
       router.push({
         pathname: `/typebots/${data.typebot.id}/edit`,
-        query:
-          router.query.isFirstBot === 'true'
-            ? {
-                isFirstBot: 'true',
-              }
-            : {},
       })
     },
     onSettled: () => {
@@ -68,12 +66,6 @@ export const CreateNewTypebotButtons = () => {
     onSuccess: (data) => {
       router.push({
         pathname: `/typebots/${data.typebot.id}/edit`,
-        query:
-          router.query.isFirstBot === 'true'
-            ? {
-                isFirstBot: 'true',
-              }
-            : {},
       })
     },
     onSettled: () => {
@@ -102,6 +94,12 @@ export const CreateNewTypebotButtons = () => {
       })
   }
 
+  const handleReadyTemplateChoose = (template: string) => {
+    // Logic for handling the selection of the specific template.
+    console.log(`Chosen template: ${template}`)
+    handleCreateSubmit()
+  }
+
   return (
     <VStack maxW="600px" w="full" flex="1" pt="20" spacing={10}>
       <Heading>{t('templates.buttons.heading')}</Heading>
@@ -111,13 +109,19 @@ export const CreateNewTypebotButtons = () => {
           w="full"
           py="8"
           fontSize="lg"
-          leftIcon={
-            <ToolIcon
-              color={useColorModeValue('blue.500', 'blue.300')}
-              boxSize="25px"
-              mr="2"
-            />
-          }
+          leftIcon={<TemplateIcon color="blue.100" boxSize="25px" mr="2" />}
+          onClick={onOpenReadyTemplate}
+          isLoading={isLoading}
+        >
+          Template redes sociais
+        </Button>
+
+        <Button
+          variant="outline"
+          w="full"
+          py="8"
+          fontSize="lg"
+          leftIcon={<FlagIcon color="blue.100" boxSize="25px" mr="2" />}
           onClick={() => handleCreateSubmit()}
           isLoading={isLoading}
         >
@@ -128,13 +132,7 @@ export const CreateNewTypebotButtons = () => {
           w="full"
           py="8"
           fontSize="lg"
-          leftIcon={
-            <TemplateIcon
-              color={useColorModeValue('orange.500', 'orange.300')}
-              boxSize="25px"
-              mr="2"
-            />
-          }
+          leftIcon={<TableIcon color="blue.100" boxSize="25px" mr="2" />}
           onClick={onOpen}
           isLoading={isLoading}
         >
@@ -145,13 +143,7 @@ export const CreateNewTypebotButtons = () => {
           w="full"
           py="8"
           fontSize="lg"
-          leftIcon={
-            <DownloadIcon
-              color={useColorModeValue('purple.500', 'purple.300')}
-              boxSize="25px"
-              mr="2"
-            />
-          }
+          leftIcon={<DownloadIcon color="blue.100" boxSize="25px" mr="2" />}
           isLoading={isLoading}
           onNewTypebot={handleCreateSubmit}
         >
@@ -163,6 +155,13 @@ export const CreateNewTypebotButtons = () => {
         onClose={onClose}
         onTypebotChoose={handleCreateSubmit}
         isLoading={isLoading}
+      />
+      <ReadyTemplatesModal
+        isOpen={isOpenReadyTemplate}
+        onClose={onCloseReadyTemplate}
+        onTypebotChoose={handleReadyTemplateChoose}
+        isLoading={isLoading}
+        onCreateTypebot={handleCreateSubmit}
       />
     </VStack>
   )

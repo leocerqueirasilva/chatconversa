@@ -21,7 +21,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Hi there 👋" }] }
+              { "type": "p", "children": [{ "text": "Olá 👋" }] }
             ]
           }
         },
@@ -30,7 +30,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "Qual o seu nome?" }] }
             ]
           }
         },
@@ -132,7 +132,7 @@
             {
               "id": "cl3u4id67000m2e6g3x3do8kd",
               "outgoingEdgeId": "cl3u4l4do00102e6ghd9s5p3f",
-              "content": "Hell yes!"
+              "content": "Hell Sim!"
             },
             {
               "id": "cl3u4iexy000o2e6gbagmrxcc",
@@ -259,7 +259,7 @@
     },
     {
       "id": "cl3u4vnth00182e6g2hh0gewl",
-      "title": "Send email",
+      "title": "Enviar email",
       "graphCoordinates": { "x": 1683.86, "y": 346.93 },
       "blocks": [
         {
@@ -398,8 +398,16 @@
     }
   ],
   "variables": [
-    { "id": "vcl3u45hek000b2e6gkl05z1da", "name": "Name" },
-    { "id": "vcl3u4n1vk00162e6gs6x59o2k", "name": "Email" }
+    {
+      "id": "vcl3u45hek000b2e6gkl05z1da",
+      "name": "Name",
+      "isSessionVariable": true
+    },
+    {
+      "id": "vcl3u4n1vk00162e6gs6x59o2k",
+      "name": "Email",
+      "isSessionVariable": true
+    }
   ],
   "theme": {},
   "selectedThemeTemplateId": null,

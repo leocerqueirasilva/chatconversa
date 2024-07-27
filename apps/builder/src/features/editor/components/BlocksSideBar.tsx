@@ -6,15 +6,12 @@ import {
   useEventListener,
   Portal,
   Flex,
-  IconButton,
-  Tooltip,
   Fade,
   useColorModeValue,
 } from '@chakra-ui/react'
 import { useBlockDnd } from '@/features/graph/providers/GraphDndProvider'
 import React, { useState } from 'react'
 import { BlockCard } from './BlockCard'
-import { LockedIcon, UnlockedIcon } from '@/components/icons'
 import { BlockCardOverlay } from './BlockCardOverlay'
 import { headerHeight } from '../constants'
 import { useTranslate } from '@tolgee/react'
@@ -27,10 +24,7 @@ import { useDebouncedCallback } from 'use-debounce'
 import { forgedBlockIds } from '@typebot.io/forge-repository/constants'
 
 // Integration blocks migrated to forged blocks
-const legacyIntegrationBlocks = [
-  IntegrationBlockType.OPEN_AI,
-  IntegrationBlockType.ZEMANTIC_AI,
-]
+const legacyIntegrationBlocks = [IntegrationBlockType.OPEN_AI]
 
 export const BlocksSideBar = () => {
   const { t } = useTranslate()
@@ -40,7 +34,6 @@ export const BlocksSideBar = () => {
     y: 0,
   })
   const [relativeCoordinates, setRelativeCoordinates] = useState({ x: 0, y: 0 })
-  const [isLocked, setIsLocked] = useState(true)
   const [isExtended, setIsExtended] = useState(true)
 
   const closeSideBar = useDebouncedCallback(() => setIsExtended(false), 200)
@@ -76,16 +69,9 @@ export const BlocksSideBar = () => {
   }
   useEventListener('mouseup', handleMouseUp)
 
-  const handleLockClick = () => setIsLocked(!isLocked)
-
   const handleDockBarEnter = () => {
     closeSideBar.flush()
     setIsExtended(true)
-  }
-
-  const handleMouseLeave = () => {
-    if (isLocked) return
-    closeSideBar()
   }
 
   return (
@@ -97,7 +83,6 @@ export const BlocksSideBar = () => {
       zIndex="2"
       pl="4"
       py="4"
-      onMouseLeave={handleMouseLeave}
       transform={isExtended ? 'translateX(0)' : 'translateX(-350px)'}
       transition="transform 350ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s"
     >
@@ -106,35 +91,27 @@ export const BlocksSideBar = () => {
         rounded="lg"
         shadow="xl"
         borderWidth="1px"
-        pt="2"
+        pt="4"
         pb="10"
         px="4"
         bgColor={useColorModeValue('white', 'gray.900')}
         spacing={6}
         userSelect="none"
         overflowY="auto"
+        sx={{
+          '&::-webkit-scrollbar': {
+            width: '10px',
+          },
+          '&::-webkit-scrollbar-track': {
+            background: useColorModeValue('gray.300', 'gray.800'),
+            borderRadius: '8px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: useColorModeValue('gray.400', 'gray.600'),
+            borderRadius: '8px',
+          },
+        }}
       >
-        <Flex justifyContent="flex-end">
-          <Tooltip
-            label={
-              isLocked
-                ? t('editor.sidebarBlocks.sidebar.unlock.label')
-                : t('editor.sidebarBlocks.sidebar.lock.label')
-            }
-          >
-            <IconButton
-              icon={isLocked ? <LockedIcon /> : <UnlockedIcon />}
-              aria-label={
-                isLocked
-                  ? t('editor.sidebarBlocks.sidebar.icon.unlock.label')
-                  : t('editor.sidebarBlocks.sidebar.icon.lock.label')
-              }
-              size="sm"
-              onClick={handleLockClick}
-            />
-          </Tooltip>
-        </Flex>
-
         <Stack>
           <Text fontSize="sm" fontWeight="semibold">
             {t('editor.sidebarBlocks.blockType.bubbles.heading')}
@@ -201,7 +178,7 @@ export const BlocksSideBar = () => {
           </Portal>
         )}
       </Stack>
-      <Fade in={!isLocked} unmountOnExit>
+      <Fade unmountOnExit>
         <Flex
           pos="absolute"
           h="100%"

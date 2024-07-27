@@ -16,7 +16,7 @@ test.describe('Redirect block', () => {
 
     await page.goto(`/typebots/${typebotId}/edit`)
     await page.click('text=Configure...')
-    await page.fill('input[placeholder="Type a URL..."]', 'google.com')
+    await page.fill('input[placeholder="Digite uma URL.."]', 'google.com')
 
     await page.click('text=Test')
     await page.locator('typebot-standard').locator('text=Go to URL').click()

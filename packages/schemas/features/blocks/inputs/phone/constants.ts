@@ -4,8 +4,8 @@ import { PhoneNumberInputBlock } from './schema'
 export const defaultPhoneInputOptions = {
   labels: {
     button: defaultButtonLabel,
-    placeholder: 'Type your phone number...',
+    placeholder: 'Digite um número de telefone..',
   },
   retryMessageContent:
-    "This phone number doesn't seem to be valid. Can you type it again?",
+    "Este número de telefone não parece ser válido. Você pode digitá-lo novamente?",
 } as const satisfies PhoneNumberInputBlock['options']

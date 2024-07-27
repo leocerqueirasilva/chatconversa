@@ -246,3 +246,4 @@ export const TemplatesModal = ({
     </Modal>
   )
 }
+

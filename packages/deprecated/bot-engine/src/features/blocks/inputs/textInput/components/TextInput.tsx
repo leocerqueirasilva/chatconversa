@@ -55,7 +55,7 @@ export const TextInput = ({
           onChange={handleChange}
           value={inputValue}
           placeholder={
-            block.options?.labels?.placeholder ?? 'Type your answer...'
+            block.options?.labels?.placeholder ?? 'Digite sua pergunta..'
           }
         />
       ) : (
@@ -64,13 +64,13 @@ export const TextInput = ({
           onChange={handleChange}
           value={inputValue}
           placeholder={
-            block.options?.labels?.placeholder ?? 'Type your answer...'
+            block.options?.labels?.placeholder ?? 'Digite sua pergunta..'
           }
         />
       )}
       <SendButton
         type="button"
-        label={block.options?.labels?.button ?? 'Send'}
+        label={block.options?.labels?.button ?? 'Enviar'}
         isDisabled={inputValue === ''}
         className="my-2 ml-2"
         onClick={submit}

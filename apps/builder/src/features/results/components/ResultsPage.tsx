@@ -1,5 +1,4 @@
 import { Seo } from '@/components/Seo'
-import { AnalyticsGraphContainer } from '@/features/analytics/components/AnalyticsGraphContainer'
 import { TypebotHeader } from '@/features/editor/components/TypebotHeader'
 import { useTypebot } from '@/features/editor/providers/TypebotProvider'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
@@ -11,6 +10,9 @@ import {
   Tag,
   Text,
   useColorModeValue,
+  Box,
+  Heading,
+  VStack,
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -20,9 +22,16 @@ import { ResultsTableContainer } from './ResultsTableContainer'
 import { TypebotNotFoundPage } from '@/features/editor/components/TypebotNotFoundPage'
 import { trpc } from '@/lib/trpc'
 import {
+  TimeFilter,
   defaultTimeFilter,
+  timeFilterLabels,
   timeFilterValues,
 } from '@/features/analytics/constants'
+import { DropdownList } from '@/components/DropdownList'
+import { Area, AreaChart, ResponsiveContainer, Tooltip } from 'recharts'
+import { useTranslate } from '@tolgee/react'
+import { StatsCard } from './StatsCard'
+import { parseChartData } from '../helpers/parseChartData'
 
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
@@ -110,30 +119,138 @@ export const ResultsPage = () => {
             </Button>
           </HStack>
         </Flex>
-        <Flex pt={['10px', '60px']} w="full" justify="center">
-          {workspace &&
-            publishedTypebot &&
-            (isAnalytics ? (
-              <AnalyticsGraphContainer
-                stats={stats}
-                timeFilter={timeFilter}
-                onTimeFilterChange={setTimeFilter}
-              />
-            ) : (
-              <ResultsProvider
-                timeFilter={timeFilter}
-                typebotId={publishedTypebot.typebotId}
-                totalResults={stats?.totalStarts ?? 0}
-                onDeleteResults={handleDeletedResults}
-              >
-                <ResultsTableContainer
+        <Flex h="full" w="full" bgColor={bgColor}>
+          <Flex
+            pt={['10px', '60px']}
+            w="full"
+            justify="center"
+            h="550px"
+            gap={10}
+            maxW="1600px"
+            px="4"
+            mx="auto"
+          >
+            {workspace &&
+              publishedTypebot &&
+              (isAnalytics ? (
+                <>
+                  <Chart
+                    timeFilter={timeFilter}
+                    setTimeFilter={setTimeFilter}
+                    typebotId={publishedTypebot?.typebotId as string}
+                  />
+                  <StatsCard stats={stats} />
+                </>
+              ) : (
+                <ResultsProvider
                   timeFilter={timeFilter}
-                  onTimeFilterChange={setTimeFilter}
-                />
-              </ResultsProvider>
-            ))}
+                  typebotId={publishedTypebot.typebotId}
+                  totalResults={stats?.totalStarts ?? 0}
+                  onDeleteResults={handleDeletedResults}
+                >
+                  <ResultsTableContainer
+                    timeFilter={timeFilter}
+                    onTimeFilterChange={setTimeFilter}
+                  />
+                </ResultsProvider>
+              ))}
+          </Flex>
         </Flex>
       </Flex>
     </Flex>
   )
+}
+
+const Chart = ({
+  timeFilter,
+  setTimeFilter,
+  typebotId,
+}: {
+  timeFilter: TimeFilter
+  setTimeFilter: (val: TimeFilter) => void
+  typebotId: string
+}) => {
+  const { t } = useTranslate()
+
+  const { data } = trpc.results.getResults.useQuery({
+    typebotId: typebotId as string,
+    timeFilter,
+    timeZone,
+  })
+
+  const chartData = parseChartData(data?.results || [], timeFilter)
+
+  return (
+    <Box
+      w="70%"
+      bg={useColorModeValue('gray.100', 'gray.800')}
+      p={10}
+      borderRadius="lg"
+      border="1px"
+      borderColor={useColorModeValue('gray.300', 'gray.600')}
+    >
+      <HStack justifyContent="space-between" mb="10">
+        <Heading fontSize="2xl" as="h1">
+          {t('results.graph.label')}
+        </Heading>
+        <HStack>
+          <DropdownList
+            items={Object.entries(timeFilterLabels).map(([value, label]) => ({
+              label,
+              value,
+            }))}
+            currentItem={timeFilter}
+            onItemSelect={(val) => setTimeFilter(val as TimeFilter)}
+          />
+        </HStack>
+      </HStack>
+
+      <Box w="full" h="full">
+        <ResponsiveContainer width="100%" height="100%">
+          <AreaChart
+            width={500}
+            height={400}
+            data={chartData.reverse()}
+            margin={{
+              top: 10,
+              right: 30,
+              left: 0,
+              bottom: 80,
+            }}
+          >
+            <defs>
+              <linearGradient id="blueShade" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#5800AF" stopOpacity={0.5} />
+                <stop offset="95%" stopColor="#FFFFFF" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <Tooltip content={<CustomTooltip payload={chartData} />} />
+            <Area
+              type="monotone"
+              dataKey="hasStarted"
+              stroke="#944CDC"
+              strokeWidth={2}
+              fill="url(#blueShade)"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </Box>
+    </Box>
+  )
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    const item = payload[0]?.payload
+
+    return (
+      <VStack alignItems="start">
+        <h4>{item.createdAt}</h4>
+        <Heading as="h1" fontSize="4xl" fontWeight="bold">
+          {item.hasStarted} Contatos
+        </Heading>
+      </VStack>
+    )
+  }
 }

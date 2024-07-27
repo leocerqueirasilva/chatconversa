@@ -23,7 +23,9 @@ describe('initPopup', () => {
     initPopup({ url: 'https://chatresponde.site/typebot-id2' })
     const elements = document.getElementsByTagName('iframe')
     expect(elements).toHaveLength(1)
-    expect(elements[0].dataset.src).toBe('https://chatresponde.site/typebot-id2')
+    expect(elements[0].dataset.src).toBe(
+      'https://chatresponde.site/typebot-id2'
+    )
   })
 
   it("shouldn't have opened classname if no delay", () => {

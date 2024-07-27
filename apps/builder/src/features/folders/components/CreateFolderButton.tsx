@@ -1,10 +1,8 @@
 import { Button, HStack, useDisclosure, Text } from '@chakra-ui/react'
-import { FolderPlusIcon } from '@/components/icons'
+import { FolderIcon } from '@/components/icons'
 import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
-import { Plan } from '@typebot.io/prisma'
 import React from 'react'
 import { ChangePlanModal } from '@/features/billing/components/ChangePlanModal'
-import { LockTag } from '@/features/billing/components/LockTag'
 import { isFreePlan } from '@/features/billing/helpers/isFreePlan'
 import { useTranslate } from '@tolgee/react'
 
@@ -21,13 +19,13 @@ export const CreateFolderButton = ({ isLoading, onClick }: Props) => {
   }
   return (
     <Button
-      leftIcon={<FolderPlusIcon />}
+      leftIcon={<FolderIcon />}
       onClick={handleClick}
       isLoading={isLoading}
+      width="225px"
     >
       <HStack>
         <Text>{t('folders.createFolderButton.label')}</Text>
-        {isFreePlan(workspace) && <LockTag plan={Plan.STARTER} />}
       </HStack>
       <ChangePlanModal
         isOpen={isOpen}

@@ -124,7 +124,7 @@ export const HttpRequestAdvancedConfigForm = ({
   return (
     <>
       <SwitchWithRelatedSettings
-        label="Advanced configuration"
+        label="Configuração avançada"
         initialValue={
           options?.isAdvancedConfig ??
           defaultWebhookBlockOptions.isAdvancedConfig

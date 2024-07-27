@@ -33,7 +33,7 @@ export const ConditionContent = ({
               <Text fontSize={size}>{condition.logicalOperator ?? ''}</Text>
             )}
             {variable?.name && (
-              <Tag bgColor="orange.400" color="white" size="sm">
+              <Tag bgColor="blue.100" color="white" size="sm">
                 {variable.name}
               </Tag>
             )}

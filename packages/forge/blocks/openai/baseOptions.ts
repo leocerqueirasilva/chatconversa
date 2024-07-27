@@ -5,7 +5,7 @@ export const baseOptions = option
   .object({
     baseUrl: option.string.layout({
       accordion: 'Customize provider',
-      label: 'Base URL',
+      label: 'URL de base',
       defaultValue: defaultOpenAIOptions.baseUrl,
     }),
     apiVersion: option.string.layout({

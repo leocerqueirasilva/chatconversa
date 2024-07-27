@@ -37,15 +37,14 @@ import { FlutterFlowLogo } from './logos/FlutterFlowLogo'
 import { FlutterFlowModal } from './modals/FlutterFlowModal'
 import { NextjsLogo } from './logos/NextjsLogo'
 import { NextjsModal } from './modals/Nextjs/NextjsModal'
-/*import {
+import {
   WhatsAppLogo,
   whatsAppBrandColor,
-} from '@/components/logos/WhatsAppLogo' */
-//import { WhatsAppModal } from './modals/WhatsAppModal/WhatsAppModal'
-//import { ParentModalProvider } from '@/features/graph/providers/ParentModalProvider'
-//import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
-//import { hasProPerks } from '@/features/billing/helpers/hasProPerks'
-import { LockTag } from '@/features/billing/components/LockTag'
+} from '@/components/logos/WhatsAppLogo'
+import { WhatsAppModal } from './modals/WhatsAppModal/WhatsAppModal'
+import { ParentModalProvider } from '@/features/graph/providers/ParentModalProvider'
+import { useWorkspace } from '@/features/workspace/WorkspaceProvider'
+import { hasProPerks } from '@/features/billing/helpers/hasProPerks'
 import { Plan } from '@typebot.io/prisma'
 import { FramerModal } from './modals/FramerModal'
 import { FramerLogo } from './logos/FramerLogo'
@@ -68,7 +67,6 @@ export const EmbedButton = ({
   logo,
   label,
   modal,
-  lockTagPlan,
   ...modalProps
 }: EmbedButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -76,22 +74,16 @@ export const EmbedButton = ({
     <WrapItem
       as={Button}
       alignItems="center"
+      colorScheme="gray"
+      bg={useColorModeValue('gray.200', 'gray.800')}
       variant="outline"
-      style={{ width: '225px', height: '270px' }}
+      style={{ width: '200px', height: '200px' }}
       onClick={onOpen}
       whiteSpace={'normal'}
     >
       <VStack>
         {logo}
-        <Text>
-          {label}
-          {lockTagPlan && (
-            <>
-              {' '}
-              <LockTag plan={lockTagPlan} />
-            </>
-          )}
-        </Text>
+        <Text>{label}</Text>
       </VStack>
       {modal({ isOpen, onClose, ...modalProps })}
     </WrapItem>
@@ -99,7 +91,7 @@ export const EmbedButton = ({
 }
 
 export const integrationsList = [
-  /* (props: Pick<ModalProps, 'publicId' | 'isPublished'>) => {
+  (props: Pick<ModalProps, 'publicId' | 'isPublished'>) => {
     const { workspace } = useWorkspace()
 
     return (
@@ -121,7 +113,7 @@ export const integrationsList = [
         />
       </ParentModalProvider>
     )
-  }, */
+  },
   (props: Pick<ModalProps, 'publicId' | 'isPublished'>) => (
     <EmbedButton
       logo={<WordpressLogo height={100} width="70px" />}

@@ -2,5 +2,5 @@ import { defaultButtonLabel } from '../constants'
 import { NumberInputBlock } from './schema'
 
 export const defaultNumberInputOptions = {
-  labels: { button: defaultButtonLabel, placeholder: 'Type a number...' },
+  labels: { button: defaultButtonLabel, placeholder: 'Digite um número..' },
 } as const satisfies NumberInputBlock['options']

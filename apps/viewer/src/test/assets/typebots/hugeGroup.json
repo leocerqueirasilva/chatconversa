@@ -28,7 +28,7 @@
           "groupId": "2Vrpgk5VP9BUo3vKtM5kws",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Hi what's your name?" }] }
+              { "type": "p", "children": [{ "text": "Hi Qual o seu nome?" }] }
             ]
           }
         },
@@ -40,7 +40,7 @@
             "isLong": false,
             "labels": {
               "button": "Send",
-              "placeholder": "Type your answer..."
+              "placeholder": "Digite sua pergunta.."
             },
             "variableId": "93BD32WVM5JEQ1nmWtr2S5"
           }
@@ -60,7 +60,7 @@
           "type": "number input",
           "groupId": "2Vrpgk5VP9BUo3vKtM5kws",
           "options": {
-            "labels": { "button": "Send", "placeholder": "Type a number..." }
+            "labels": { "button": "Send", "placeholder": "Escreva seu número..." }
           }
         },
         {

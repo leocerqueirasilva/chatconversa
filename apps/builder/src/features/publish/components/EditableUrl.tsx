@@ -5,11 +5,7 @@ import {
   EditableInput,
   Text,
   Editable,
-  Button,
-  ButtonProps,
-  useEditableControls,
 } from '@chakra-ui/react'
-import { EditIcon } from '@/components/icons'
 import { CopyButton } from '@/components/CopyButton'
 import React, { useState } from 'react'
 
@@ -59,19 +55,8 @@ export const EditableUrl = ({
       </HStack>
 
       <HStack>
-        <EditButton size="xs" />
         <CopyButton size="xs" textToCopy={`${hostname}/${value ?? ''}`} />
       </HStack>
     </Editable>
-  )
-}
-
-const EditButton = (props: ButtonProps) => {
-  const { isEditing, getEditButtonProps } = useEditableControls()
-
-  return isEditing ? null : (
-    <Button leftIcon={<EditIcon />} {...props} {...getEditButtonProps()}>
-      Edit
-    </Button>
   )
 }

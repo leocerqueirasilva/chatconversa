@@ -41,7 +41,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "Qual o seu nome?" }] }
             ]
           }
         },
@@ -51,7 +51,7 @@
           "type": "text input",
           "options": {
             "isLong": false,
-            "labels": { "button": "Send", "placeholder": "Type your answer..." }
+            "labels": { "button": "Send", "placeholder": "Digite sua pergunta.." }
           }
         }
       ]
@@ -77,7 +77,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "Qual o seu nome?" }] }
             ]
           }
         },
@@ -87,7 +87,7 @@
           "type": "text input",
           "options": {
             "isLong": false,
-            "labels": { "button": "Send", "placeholder": "Type your answer..." }
+            "labels": { "button": "Send", "placeholder": "Digite sua pergunta.." }
           }
         }
       ]
@@ -113,7 +113,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "What's your name?" }] }
+              { "type": "p", "children": [{ "text": "Qual o seu nome?" }] }
             ]
           }
         },
@@ -123,7 +123,7 @@
           "type": "text input",
           "options": {
             "isLong": false,
-            "labels": { "button": "Send", "placeholder": "Type your answer..." }
+            "labels": { "button": "Send", "placeholder": "Digite sua pergunta.." }
           }
         }
       ]

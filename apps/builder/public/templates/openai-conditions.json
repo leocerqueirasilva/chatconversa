@@ -175,7 +175,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "You need to add your OpenAI credentials to make this bot work. 🪄\n"
+                    "text": "Você precisa adicionar suas credenciais OpenAI para fazer este bot funcionar.\n"
                   }
                 ]
               }
@@ -191,10 +191,10 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "Once it's done, delete this group and connect the "
+                    "text": "Quando terminar, exclua este grupo e conecte o "
                   },
                   { "bold": true, "text": "Start" },
-                  { "text": " event with " },
+                  { "text": " evento com " },
                   { "bold": true, "text": "Intro" },
                   { "text": " 🚀\n" }
                 ]
@@ -249,8 +249,16 @@
     }
   ],
   "variables": [
-    { "id": "vni6kwbch8zlq92dclgcivzyr", "name": "Assistant Message" },
-    { "id": "vudksu3zyrat6s1bq6qne0rx3", "name": "User Message" }
+    {
+      "id": "vni6kwbch8zlq92dclgcivzyr",
+      "name": "Assistant Message",
+      "isSessionVariable": true
+    },
+    {
+      "id": "vudksu3zyrat6s1bq6qne0rx3",
+      "name": "User Message",
+      "isSessionVariable": true
+    }
   ],
   "theme": {},
   "selectedThemeTemplateId": null,

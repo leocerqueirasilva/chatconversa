@@ -116,7 +116,7 @@ export const SendEmailSettings = ({ options, onOptionsChange }: Props) => {
   return (
     <Stack spacing={4}>
       <Stack>
-        <Text>From: </Text>
+        <Text>Para: </Text>
         {workspace && (
           <CredentialsDropdown
             type="smtp"
@@ -134,7 +134,7 @@ export const SendEmailSettings = ({ options, onOptionsChange }: Props) => {
         )}
       </Stack>
       <TextInput
-        label="To:"
+        label="Para:"
         onChange={handleToChange}
         defaultValue={options?.recipients?.join(', ')}
         placeholder="email1@gmail.com, email2@gmail.com"
@@ -171,12 +171,12 @@ export const SendEmailSettings = ({ options, onOptionsChange }: Props) => {
       </Accordion>
 
       <TextInput
-        label="Subject:"
+        label="Assunto:"
         onChange={handleSubjectChange}
         defaultValue={options?.subject ?? ''}
       />
       <SwitchWithLabel
-        label={'Custom content?'}
+        label={'Conteúdo personalizado?'}
         moreInfoContent="By default, the email body will be a recap of what has been collected so far. You can override it with this option."
         initialValue={
           options?.isCustomBody ?? defaultSendEmailOptions.isCustomBody

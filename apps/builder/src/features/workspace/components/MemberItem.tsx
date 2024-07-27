@@ -93,7 +93,7 @@ export const MemberIdentityContent = ({
   return (
     <HStack justifyContent="space-between" maxW="full" p="2">
       <HStack minW={0} spacing="4">
-        <Avatar name={name} src={image} size="sm" />
+        <Avatar name={name} src={image} size="md" />
         <Stack spacing={0} minW="0">
           {name && (
             <Text textAlign="left" fontSize="15px">
@@ -111,11 +111,13 @@ export const MemberIdentityContent = ({
       </HStack>
       <HStack flexShrink={0}>
         {isGuest && (
-          <Tag color="gray.400" data-testid="tag">
+          <Tag color="gray.400" data-testid="tag" size="lg">
             {t('pending')}
           </Tag>
         )}
-        <Tag data-testid="tag">{tag}</Tag>
+        <Tag data-testid="tag" colorScheme="blue" variant="solid" size="lg">
+          {tag}
+        </Tag>
       </HStack>
     </HStack>
   )

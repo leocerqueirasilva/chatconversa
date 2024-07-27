@@ -69,7 +69,6 @@ export const AddMemberForm = ({
         />
       )}
       <Button
-        colorScheme={'blue'}
         isLoading={isSendingInvitation}
         flexShrink={0}
         type="submit"

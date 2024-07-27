@@ -25,7 +25,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "If you have a question about our product, you're in the right place 😊"
+                    "text": "Se você tiver alguma dúvida sobre nosso produto, você está no lugar certo 😊"
                   }
                 ]
               }
@@ -39,22 +39,22 @@
             {
               "id": "cl96nv877000c3b6idyepv694",
               "outgoingEdgeId": "cl96o2u6h000t3b6izmh4pguj",
-              "content": "What's Analyzr?"
+              "content": "O que é o Analisador?"
             },
             {
               "id": "cl96nvcwi000d3b6ipyfzcyaw",
               "outgoingEdgeId": "cl96o6hxh00173b6ix83nn581",
-              "content": "Can I use your tool for free?"
+              "content": "Posso usar sua ferramenta gratuitamente?"
             },
             {
               "id": "cl96obwgy001k3b6ir1a8qk5w",
               "outgoingEdgeId": "cl96ofn4s001q3b6i482xx6jp",
-              "content": "Tell me about the company"
+              "content": "Conte-me sobre a empresa"
             },
             {
               "id": "cl96nvstv000e3b6itm8cj1s5",
               "outgoingEdgeId": "cl96ogaa0001x3b6izae2alxq",
-              "content": "I have another question"
+              "content": "Eu tenho outra pergunta"
             }
           ]
         }
@@ -70,7 +70,7 @@
           "type": "text",
           "content": {
             "richText": [
-              { "type": "p", "children": [{ "text": "Hey there 👋" }] }
+              { "type": "p", "children": [{ "text": "Olá 👋" }] }
             ]
           }
         },
@@ -84,7 +84,7 @@
                 "type": "p",
                 "children": [
                   {
-                    "text": "I'm John, head of the customer success Team at Analyzr"
+                    "text": "Sou John, chefe da equipe de sucesso do cliente da Analyzr"
                   }
                 ]
               }
