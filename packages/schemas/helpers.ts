@@ -69,9 +69,9 @@ export const isIntegrationBlock = (block: Block): block is IntegrationBlock =>
 export const isWebhookBlock = (block: Block): block is HttpRequestBlock =>
   [
     IntegrationBlockType.WEBHOOK,
-    IntegrationBlockType.PABBLY_CONNECT,
-    IntegrationBlockType.ZAPIER,
-    IntegrationBlockType.MAKE_COM,
+    // IntegrationBlockType.PABBLY_CONNECT,
+    // IntegrationBlockType.ZAPIER,
+    // IntegrationBlockType.MAKE_COM,
   ].includes(block.type as IntegrationBlockType)
 
 export const isBubbleBlockType = (
