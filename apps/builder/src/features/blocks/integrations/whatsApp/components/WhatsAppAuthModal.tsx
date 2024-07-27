@@ -28,49 +28,44 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
   const [isLogedIn, setIsLogedIn] = useState(false)
   const { showToast } = useToast()
 
-
   const getAuth = async () => {
     try {
-      const res = await ky.get('https://api.chatresponde.site/auth', {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).json();
-    
-     
-      setQrCode(res?.qrCode);
-      setIsLogedIn(res?.isLoggedIn);
-      setIsLoading(false);
-    
-      
-    
+      const res = await ky
+        .get('https://api.chatresponde.site/auth', {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+        .json()
+
+      setQrCode(res?.qrCode)
+      setIsLogedIn(res?.isLoggedIn)
+      setIsLoading(false)
     } catch (error) {
-      let errorMessage = 'Failed to get Wwebjs auth:';
+      let errorMessage = 'Failed to get Wwebjs auth:'
       if (error.name) {
-        errorMessage += ` Name: ${error.name}`;
+        errorMessage += ` Name: ${error.name}`
       }
       if (error.message) {
-        errorMessage += ` Message: ${error.message}`;
+        errorMessage += ` Message: ${error.message}`
       }
       if (error.stack) {
-        errorMessage += ` Stack: ${error.stack}`;
+        errorMessage += ` Stack: ${error.stack}`
       }
       if (error.response) {
-        const errorResponseText = await error.response.text();
-        errorMessage += ` Response: ${errorResponseText}`;
+        const errorResponseText = await error.response.text()
+        errorMessage += ` Response: ${errorResponseText}`
       }
-  
+
       showToast({
         title: 'Error',
         description: errorMessage,
         status: 'error',
-      });
-    
-      console.error('Error details:', error);
+      })
+
+      console.error('Error details:', error)
     }
-  };
-  
-  
+  }
 
   const handleLogOut = async () => {
     try {
@@ -133,11 +128,7 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
             display={isLoading ? 'block' : 'none'}
           />
           {qrCode && !isLogedIn && <img src={qrCode} alt="qr code" />}
-          {isLogedIn && (
-            <p>
-              Você já está conectado ao seu whatsapp.
-            </p>
-          )}
+          {isLogedIn && <p>Você já está conectado ao seu whatsapp.</p>}
         </ModalBody>
 
         <ModalFooter>

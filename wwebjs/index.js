@@ -152,8 +152,8 @@ app.post('/send-message', async (req, res) => {
     }
 
     let number =
-      numbers[0]?.charAt(0) === '+' ? numbers[0].substring(1) : numbers[0];
-    number = number + '@c.us';
+      numbers[0]?.charAt(0) === '+' ? numbers[0].substring(1) : numbers[0]
+    number = number + '@c.us'
     const client = await whatsAppClient.getClient()
 
     if (text) {
@@ -169,13 +169,14 @@ app.post('/send-message', async (req, res) => {
       const mediaDataBase64 = Buffer.from(media.data, 'binary').toString(
         'base64'
       )
+      const isVideo = mimeType?.includes('video')
       const mediaMessage = new MessageMedia(
         mimeType,
         mediaDataBase64,
         mediaFilename
       )
       await client.sendMessage(number, mediaMessage, {
-        sendMediaAsDocument: true,
+        sendMediaAsDocument: isVideo,
       })
     }
 
