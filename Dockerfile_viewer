@@ -41,12 +41,12 @@ FROM base AS runner
 WORKDIR /app
 
 # Certifique-se de que o usuário nextjs e nodejs existem
-RUN useradd -r -g nextjs nextjs || true
+RUN groupadd -r nextjs && useradd -r -g nextjs nextjs
 RUN groupadd -r nodejs || true
 
 COPY --from=builder --chown=node:node /app/apps/viewer/.next/standalone ./
 COPY --from=builder --chown=node:node /app/apps/viewer/.next/static ./apps/viewer/.next/static
-COPY --from=builder --chown=nextjs:nodejs /app/apps/viewer/public ./apps/viewer/public
+COPY --from=builder --chown=nextjs:nextjs /app/apps/viewer/public ./apps/viewer/public
 
 # Copiar as dependências do next-runtime-env para a injeção de variáveis de ambiente em runtime
 COPY --from=builder /app/node_modules/.pnpm/chalk@4.1.2/node_modules/chalk ./node_modules/chalk
