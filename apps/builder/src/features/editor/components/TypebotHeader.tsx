@@ -14,7 +14,6 @@ import {
 import {
   ChevronLeftIcon,
   CopyIcon,
-  DownloadIcon,
   PlayIcon,
   RedoIcon,
   UndoIcon,
@@ -34,8 +33,6 @@ import { SupportBubble } from '@/components/SupportBubble'
 import { useTranslate } from '@tolgee/react'
 import { GuestTypebotHeader } from './UnauthenticatedTypebotHeader'
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts'
-import assert from 'assert'
-import { parseDefaultPublicId } from '@/features/publish/helpers/parseDefaultPublicId'
 
 export const TypebotHeader = () => {
   const { typebot, publishedTypebot, currentUserMode } = useTypebot()
@@ -239,30 +236,11 @@ const RightElements = ({
     setStartPreviewAtEvent,
   } = useEditor()
 
-  const [isDownloading, setIsDownloading] = useState(false)
-
   const handlePreviewClick = async () => {
     setStartPreviewAtGroup(undefined)
     setStartPreviewAtEvent(undefined)
     await save()
     setRightPanel(RightPanel.PREVIEW)
-  }
-
-  const downloadFlow = () => {
-    assert(typebot)
-    setIsDownloading(true)
-    const data =
-      'data:application/json;charset=utf-8,' +
-      encodeURIComponent(JSON.stringify(typebot))
-    const fileName = `typebot-export-${parseDefaultPublicId(
-      typebot.name,
-      typebot.id
-    )}.json`
-    const linkElement = document.createElement('a')
-    linkElement.setAttribute('href', data)
-    linkElement.setAttribute('download', fileName)
-    linkElement.click()
-    setIsDownloading(false)
   }
 
   return (
@@ -286,14 +264,14 @@ const RightElements = ({
       {router.pathname.includes('/edit') && isNotDefined(rightPanel) && (
         <Button
           colorScheme="gray"
-          onClick={downloadFlow}
-          isLoading={isDownloading}
-          leftIcon={<DownloadIcon />}
+          onClick={handlePreviewClick}
+          isLoading={isNotDefined(typebot)}
+          leftIcon={<PlayIcon />}
           size="sm"
           iconSpacing={{ base: 0, xl: 2 }}
         >
           <chakra.span display={{ base: 'none', xl: 'inline' }}>
-            {t('editor.header.exportFlowButton.label')}
+            {t('editor.header.previewButton.label')}
           </chakra.span>
         </Button>
       )}

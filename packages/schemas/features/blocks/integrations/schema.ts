@@ -25,6 +25,7 @@ export const integrationBlockSchemas = {
     pixelBlockSchema,
   ],
   v6: [
+    whatsAppBlockSchema,
     chatwootBlockSchema,
     googleAnalyticsBlockSchema,
     googleSheetsBlockSchemas.v6,
