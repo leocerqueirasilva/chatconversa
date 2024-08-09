@@ -78,6 +78,7 @@ export const saveStateToDatabase = async ({
         numbers: [],
         text: null,
         mediaLink: null,
+        UserID: null
       }
 
       for (const group of groups) {
@@ -85,6 +86,7 @@ export const saveStateToDatabase = async ({
           if (block.type === 'WhatsApp') {
             whatsappBlock = true
             if (block?.options) {
+              reqBody.UserID = block?.options?.user_id;
               text = regex.exec(block?.options?.body || '')?.[1]
               if (!text) reqBody.text = block?.options?.body
               if (block?.options?.fileUrl && block?.options?.fileUrl !== '') {
@@ -117,7 +119,7 @@ export const saveStateToDatabase = async ({
       }
 
       if (reqBody.numbers.length > 0) {
-        ky.post('https://api.chatresponde.site/send-message', {
+        ky.post('http://localhost:3010/send-message', {
           json: reqBody,
         })
       }

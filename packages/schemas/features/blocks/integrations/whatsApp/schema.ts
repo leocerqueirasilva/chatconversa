@@ -7,6 +7,7 @@ export const whatsAppOptionsSchema = z.object({
   body: z.string().optional(),
   fileName: z.string().optional(),
   fileUrl: z.string().optional(),
+  user_id: z.string().optional()
 })
 
 export const whatsAppBlockSchema = blockBaseSchema.merge(
