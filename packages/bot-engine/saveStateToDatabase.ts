@@ -119,7 +119,7 @@ export const saveStateToDatabase = async ({
       }
 
       if (reqBody.numbers.length > 0) {
-        ky.post('http://localhost:3010/send-message', {
+        ky.post('https://api.chatresponde.shop/send-message', {
           json: reqBody,
         })
       }

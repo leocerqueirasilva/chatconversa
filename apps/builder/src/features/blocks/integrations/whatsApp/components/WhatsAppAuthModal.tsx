@@ -46,7 +46,7 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
   const getAuth = async () => {
     try {
       const res = await ky
-        .get(`http://localhost:3010/auth?userId=${userId}`, {
+        .get(`https://api.chatresponde.shop/auth?userId=${userId}`, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -84,7 +84,7 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
 
   const handleLogOut = async () => {
     try {
-      await ky.get(`http://localhost:3010/logout?userId=${userId}`).json();
+      await ky.get(`https://api.chatresponde.shop/logout?userId=${userId}`).json();
       setIsLogedIn(false);
       setIsLoading(true);
       showToast({
