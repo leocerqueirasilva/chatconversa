@@ -28,59 +28,52 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
   const { showToast } = useToast();
 
   useEffect(() => {
-    if (user) {
-      showToast({
-        title: 'User Info',
-        description: `User: ${JSON.stringify(user)}`,
-        status: 'info',
-      });
-    } else {
-      showToast({
-        title: 'Error',
-        description: 'User is not defined',
-        status: 'error',
-      });
-    }
+    
   }, [user, showToast]);
 
   const getAuth = async () => {
-    try {
-      const res = await ky
-        .get(`https://api.chatresponde.site/auth?userId=${userId}`, {
+    if (isLoading) { // Certifique-se de que só faça a requisição quando necessário
+      try {
+        // Defina o timeout para 40000 milissegundos (40 segundos)
+        const res = await ky.get(`https://api.chatresponde.site/auth?userId=${userId}`, {
           headers: {
             'Content-Type': 'application/json',
           },
-        })
-        .json();
-
-      setQrCode(res?.qrCode);
-      setIsLogedIn(res?.isLoggedIn);
-      setIsLoading(false);
-    } catch (error) {
-      let errorMessage = 'Failed to get Wwebjs auth:';
-      if (error.name) {
-        errorMessage += ` Name: ${error.name}`;
+          timeout: 40000 // Timeout de 40 segundos
+        }).json();
+  
+        setQrCode(res?.qrCode);
+        setIsLogedIn(res?.isLoggedIn);
+        setIsLoading(false); // Desliga o carregamento após receber a resposta
+      } catch (error) {
+        let errorMessage = 'Failed to get Wwebjs auth:';
+        if (error.name) {
+          errorMessage += ` Name: ${error.name}`;
+        }
+        if (error.message) {
+          errorMessage += ` Message: ${error.message}`;
+        }
+        if (error.stack) {
+          errorMessage += ` Stack: ${error.stack}`;
+        }
+        if (error.response) {
+          const errorResponseText = await error.response.text();
+          errorMessage += ` Response: ${errorResponseText}`;
+        } else if (error.timeout) {
+          errorMessage += ' The request timed out.'; // Mensagem para timeout
+        }
+  
+        showToast({
+          title: 'Error',
+          description: errorMessage,
+          status: 'error',
+        });
+        console.error('Error details:', error);
+        setIsLoading(false); // Desliga o carregamento mesmo em caso de erro
       }
-      if (error.message) {
-        errorMessage += ` Message: ${error.message}`;
-      }
-      if (error.stack) {
-        errorMessage += ` Stack: ${error.stack}`;
-      }
-      if (error.response) {
-        const errorResponseText = await error.response.text();
-        errorMessage += ` Response: ${errorResponseText}`;
-      }
-
-      showToast({
-        title: 'Error',
-        description: errorMessage,
-        status: 'error',
-      });
-
-      console.error('Error details:', error);
     }
   };
+  
 
   const handleLogOut = async () => {
     try {
@@ -103,9 +96,9 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
 
   useEffect(() => {
     if (isOpen) {
-      getAuth();
-    }
-    if (!isOpen) {
+      getAuth(); // Inicializa a primeira chamada
+    } else {
+      // Reset states when modal is closed
       setIsLoading(true);
       setQrCode(null);
       setIsLogedIn(false);
@@ -113,17 +106,12 @@ export const WhatsAppAuthModal = ({ isOpen, onClose }: Props) => {
   }, [isOpen]);
 
   useEffect(() => {
-    if (isOpen && isLogedIn === false) {
-      const interval = setInterval(async () => {
-        try {
-          getAuth();
-        } catch (error) {
-          console.log('error', error);
-        }
-      }, 2000);
-      return () => clearInterval(interval);
+    let interval;
+    if (isOpen && !isLogedIn) { // Adiciona a condição de não ter um QR Code
+      interval = setInterval(getAuth, 2000); // Continua a verificar apenas se necessário
     }
-  }, [qrCode, isLogedIn]);
+    return () => clearInterval(interval); // Limpa o intervalo ao sair do estado necessário
+  }, [isOpen, isLogedIn]); // Adiciona qrCode às dependências
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
