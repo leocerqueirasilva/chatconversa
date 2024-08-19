@@ -89,7 +89,8 @@ export const ProPlanPricingCard = ({
           <Stack spacing="8">
             <Stack spacing="4">
               <Heading>
-                {formatPrice(prices.PRO, { currency })}
+                R${prices.PRO}
+
                 <chakra.span fontSize="md">
                   {t('billing.pricingCard.perMonth')}
                 </chakra.span>
@@ -110,10 +111,10 @@ export const ProPlanPricingCard = ({
                   placement="top"
                 >
                   <chakra.span textDecoration="underline" cursor="pointer">
-                    {t('billing.pricingCard.pro.everythingFromStarter')}
+                   
                   </chakra.span>
                 </Tooltip>
-                {t('billing.pricingCard.plus')}
+               
               </Text>
               <FeaturesList
                 features={[
@@ -131,10 +132,7 @@ export const ProPlanPricingCard = ({
                       fontSize="sm"
                       color={useColorModeValue('gray.500', 'gray.400')}
                     >
-                      Extra chats:{' '}
-                      <Button size="xs" variant="outline" onClick={onOpen}>
-                        See tiers
-                      </Button>
+                      Extra chats: $10 per 500
                     </Text>
                   </Stack>,
                   t('billing.pricingCard.pro.whatsAppIntegration'),
@@ -147,7 +145,7 @@ export const ProPlanPricingCard = ({
             <Button
               colorScheme="blue"
               variant="outline"
-              onClick={onPayClick}
+              onClick={() => window.open('https://checkout.doppus.app/94475985/', '_blank')}
               isLoading={isLoading}
               isDisabled={currentPlan === Plan.PRO}
             >

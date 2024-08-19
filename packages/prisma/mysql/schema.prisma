@@ -405,6 +405,15 @@ model BannedIp {
   @@index([userId])
 }
 
+model Order {
+  id           String   @id @default(uuid())    // ID único gerado automaticamente
+  created    DateTime @default(now())  // Data de criação
+  expire       DateTime  // Data de expiração do pedido
+  status       String    // Status do pedido (por exemplo, 'pending', 'completed', etc.)
+  email       String    // ID do usuário relacionado ao pedido
+
+}
+
 enum WorkspaceRole {
   ADMIN
   MEMBER

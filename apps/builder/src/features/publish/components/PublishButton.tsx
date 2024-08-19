@@ -108,21 +108,33 @@ export const PublishButton = ({
     .flatMap((g) => g.blocks)
     .some((b) => b.type === InputBlockType.FILE)
 
-  const handlePublishClick = async () => {
-    if (!typebot?.id) return
-    if (isFreePlan(workspace) && hasInputFile) return onOpen()
-    if (!typebot.publicId) {
-      await updateTypebot({
-        updates: {
-          publicId: parseDefaultPublicId(typebot.name, typebot.id),
-        },
-        save: true,
+    const handlePublishClick = async () => {
+      if (!typebot?.id) return
+    
+      // Verifica se o plano do workspace é FREE
+      if (isFreePlan(workspace)) {
+        // Bloqueia a publicação, independentemente de haver um bloco de arquivo ou não
+        onOpen()  // Exibe o modal pedindo para atualizar o plano
+        return
+      }
+    
+      // Se não for plano FREE, continua com a lógica de publicação normal
+      if (!typebot.publicId) {
+        await updateTypebot({
+          updates: {
+            publicId: parseDefaultPublicId(typebot.name, typebot.id),
+          },
+          save: true,
+        })
+      } else {
+        await save()
+      }
+      
+      publishTypebotMutate({
+        typebotId: typebot.id,
       })
-    } else await save()
-    publishTypebotMutate({
-      typebotId: typebot.id,
-    })
-  }
+    }
+    
 
   const unpublishTypebot = async () => {
     if (!typebot?.id) return
