@@ -135,9 +135,11 @@ export const ProPlanPricingCard = ({
                       Extra chats: $10 per 500
                     </Text>
                   </Stack>,
-                  t('billing.pricingCard.pro.whatsAppIntegration'),
-                  t('billing.pricingCard.pro.customDomains'),
+                  t('billing.pricingCard.starter.brandingRemoved'),
+                  'WhatsApp conectado',
+            
                   t('billing.pricingCard.pro.analytics'),
+                  'Suporte e área de membros',
                 ]}
               />
             </Stack>
