@@ -174,7 +174,7 @@ export const BlockLabel = ({ type, ...props }: Props): JSX.Element => {
     case IntegrationBlockType.WEBHOOK:
       return (
         <Text fontSize="sm" {...props}>
-          HTTP request
+          Webhook
         </Text>
       )
     case IntegrationBlockType.ZAPIER:

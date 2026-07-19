@@ -33,6 +33,32 @@ export const DashboardPage = () => {
     })
 
   useEffect(() => {
+    const checkOrderAndUpdatePlan = async () => {
+      if (user?.email && workspace) {
+        try {
+          const response = await fetch('/api/auth/checkplan', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email: user.email }),
+          })
+
+          const result = await response.json()
+
+          if (result.shouldUpdatePlan) {
+           
+            setPreCheckoutPlan(undefined)
+            // Recarregar ou invalidar o cache do workspace, se necessário
+          }
+        } catch (error) {
+          console.error('Erro ao verificar o pedido:', error)
+        }
+      }
+    }
+
+    checkOrderAndUpdatePlan()
+
     const { subscribePlan, claimCustomPlan } = router.query as {
       subscribePlan: Plan | undefined
       chats: string | undefined

@@ -40,6 +40,7 @@ import { OpenAILogo } from '@/features/blocks/integrations/openai/components/Ope
 import { ForgedBlockIcon } from '@/features/forge/ForgedBlockIcon'
 import { SendEmailIcon } from '@/features/blocks/integrations/sendEmail/components/SendEmailIcon'
 import { FlagIcon, ThunderIcon } from '@/components/icons'
+import { WhatsAppIcon } from '@/features/blocks/integrations/whatsApp/components/WhatsAppIcon'
 
 type BlockIconProps = { type: Block['type'] } & IconProps
 
@@ -98,6 +99,8 @@ export const BlockIcon = ({ type, ...props }: BlockIconProps): JSX.Element => {
       return <TypebotLinkIcon color={purple} {...props} />
     case LogicBlockType.AB_TEST:
       return <AbTestIcon color={purple} {...props} />
+    case IntegrationBlockType.WHATSAPP:
+      return <WhatsAppIcon {...props} />
     case IntegrationBlockType.GOOGLE_SHEETS:
       return <GoogleSheetsLogo {...props} />
     case IntegrationBlockType.GOOGLE_ANALYTICS:

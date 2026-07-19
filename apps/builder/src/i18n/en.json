@@ -110,7 +110,7 @@
   "billing.tiersModal.heading": "Chats pricing table",
   "billing.updateSuccessToast.description": "Workspace {plan} plan successfully updated",
   "billing.upgradeAlert.buttonDefaultLabel": "More info",
-  "billing.upgradeLimitLabel": "You need to upgrade your plan in order to {type}",
+  "billing.upgradeLimitLabel": "You need to upgrade your plan",
   "billing.usage.chats.alert.soonReach": "Your typebots are popular! You will soon reach your plan's chats limit.",
   "billing.usage.chats.alert.updatePlan": "Make sure to update your plan to increase this limit and continue chatting with your users.",
   "billing.usage.chats.heading": "Chats",

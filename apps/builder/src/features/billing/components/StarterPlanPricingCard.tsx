@@ -54,14 +54,14 @@ export const StarterPlanPricingCard = ({
               <T
                 keyName="billing.pricingCard.heading"
                 params={{
-                  strong: <chakra.span color="orange.400">Starter</chakra.span>,
+                  strong: <chakra.span color="orange.400">Pro</chakra.span>,
                 }}
               />
             </Heading>
-            <Text>{t('billing.pricingCard.starter.description')}</Text>
+            <Text>{t('billing.pricingCard.pro.description')}</Text>
           </Stack>
           <Heading>
-            {formatPrice(prices.STARTER, { currency })}
+            R${prices.STARTER}
             <chakra.span fontSize="md">
               {t('billing.pricingCard.perMonth')}
             </chakra.span>
@@ -70,10 +70,10 @@ export const StarterPlanPricingCard = ({
 
         <FeaturesList
           features={[
-            t('billing.pricingCard.starter.includedSeats'),
-            <Stack key="starter-chats" spacing={0}>
+            t('billing.pricingCard.pro.includedSeats'),
+            <Stack key="pro-chats" spacing={0}>
               <HStack>
-                <Text>2,000 {t('billing.pricingCard.chatsPerMonth')}</Text>
+                <Text>10,000 {t('billing.pricingCard.chatsPerMonth')}</Text>
                 <MoreInfoTooltip>
                   {t('billing.pricingCard.chatsTooltip')}
                 </MoreInfoTooltip>
@@ -88,19 +88,20 @@ export const StarterPlanPricingCard = ({
             t('billing.pricingCard.starter.brandingRemoved'),
             t('billing.pricingCard.starter.fileUploadBlock'),
             t('billing.pricingCard.starter.createFolders'),
-            'Direct priority support',
+           
           ]}
         />
       </Stack>
       <Button
         colorScheme="orange"
         variant="outline"
-        onClick={onPayClick}
+        onClick={() => window.open('https://checkout.doppus.app/77899393/', '_blank')}
         isLoading={isLoading}
         isDisabled={currentPlan === Plan.STARTER}
       >
         {getButtonLabel()}
       </Button>
+
     </Stack>
   )
 }

@@ -18,6 +18,8 @@ import { UploadIcon, CloseIcon } from '@/components/icons'
 import { trpc } from '@/lib/trpc'
 import { useToast } from '@/hooks/useToast'
 import { usePathname } from 'next/navigation'
+import { useUser } from '@/features/account/hooks/useUser'; // Importe o hook useUser
+
 
 type Props = {
   options: whatsAppBlock['options']
@@ -29,6 +31,12 @@ export const WhatsAppSettings = ({ options, onOptionsChange }: Props) => {
   const [isUploading, setIsUploading] = useState(false)
   const { showToast } = useToast()
   const [file, setFile] = useState<File>()
+  const { user } = useUser(); // Obtenha o valor de user
+  const userId = user?.id; // Pegue o userId do usuário
+
+
+  
+  
 
   // get typebot by pathname,
   const typebotId = usePathname().split('/')[2]
@@ -113,7 +121,19 @@ export const WhatsAppSettings = ({ options, onOptionsChange }: Props) => {
   useEffect(() => {
     console.log('currentTypeBot', currentTypeBot)
   }, [currentTypeBot])
-
+  
+  useEffect(() => {
+    
+    if (!options?.user_id) { // O "?" protege contra `options` ser `undefined`
+      onOptionsChange({
+        ...options,
+        user_id: userId
+      });
+    }
+  }, [options]); // Adicione options como dependência para reagir a mudanças
+  
+  
+ 
   return (
     <Stack spacing={4}>
       <WhatsAppAuthModal isOpen={isOpen} onClose={onClose} />
